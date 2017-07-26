@@ -12,7 +12,7 @@
 /**
  *  Xoops Form Class Elements
  *
- * @copyright       XOOPS Project (http://xoops.org)
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package         kernel
  * @subpackage      form
@@ -34,7 +34,7 @@ xoops_load('XoopsFormButton');
  *
  * @author      Kazumi Ono <onokazu@xoops.org>
  * @author      John Neill <catzwolf@xoops.org>
- * @copyright   {@link http://xoops.org/ XOOPS Project}
+ * @copyright   {@link https://xoops.org/ XOOPS Project}
  * @package     kernel
  * @subpackage  form
  * @access      public
