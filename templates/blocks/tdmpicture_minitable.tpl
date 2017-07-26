@@ -24,7 +24,7 @@
                                 <div style="width:<{$smarty.const.TDMPICTURE_THUMB_WIDTH}>px;height:<{$smarty.const.TDMPICTURE_THUMB_HEIGTH}>px;">
                                     <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$blocks.id}>"><img
                                                 src="<{$blocks.img}>" title="<{$blocks.title}>"
-                                                alt="<{$blocks.title}>"/></a>
+                                                alt="<{$blocks.title}>"></a>
                                 </div>
                             </div>
                         </li>
@@ -46,7 +46,7 @@
                                 <div style="width:<{$smarty.const.TDMPICTURE_THUMB_WIDTH}>px;height:<{$smarty.const.TDMPICTURE_THUMB_HEIGTH}>px;">
                                     <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$blocks.id}>"><img
                                                 src="<{$blocks.img}>" title="<{$blocks.title}>"
-                                                alt="<{$blocks.title}>"/></a>
+                                                alt="<{$blocks.title}>"></a>
                                 </div>
                             </div>
 
@@ -57,10 +57,10 @@
                                     </h2>
 
                                     <div class="switch_in"><{$smarty.const._MD_TDMPICTURE_BY}>: <a
-                                                href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$blocks.uid}>"/><{$blocks.postername}></a>
+                                                href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$blocks.uid}>"><{$blocks.postername}></a>
                                         ,
                                         <{$smarty.const._MD_TDMPICTURE_IN}>: <a
-                                                href="<{$smarty.const.TDMPICTURE_URL}>/viewcat.php?ct=<{$blocks.file_cat_id}>"/><{$blocks.cat}></a>
+                                                href="<{$smarty.const.TDMPICTURE_URL}>/viewcat.php?ct=<{$blocks.file_cat_id}>"><{$blocks.cat}></a>
                                         ,
                                         <{$smarty.const._MD_TDMPICTURE_LE}>: <{$blocks.indate}>
                                     </div>
@@ -71,7 +71,7 @@
 
                             <div id="tdmpicture_num" class="switch_info odd">
                                 <span><{$blocks.comments}></span>
-                                <hr/>
+                                <hr>
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$file.id}>"><{$smarty.const._MD_TDMPICTURE_COMMENT}></a>
                             </div>
 
@@ -82,7 +82,7 @@
                                        title="<{$smarty.const._MD_TDMPICTURE_VOTEADD}>"></a>
                                 <{/if}>
                                 <span><{$blocks.counts}></span>/<span><{$blocks.votes}></span>
-                                <hr/>
+                                <hr>
                                 <{if $perm_vote}>
                                     <a id="tdmpicture_votedown" href="javascript:;"
                                        onclick="RemoveVote(<{$file.id}>);return false;"
@@ -152,7 +152,7 @@
                                 <div style="width:<{$smarty.const.TDMPICTURE_THUMB_WIDTH}>px;height:<{$smarty.const.TDMPICTURE_THUMB_HEIGTH}>px;">
                                     <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$blocks.id}>"><img
                                                 src="<{$blocks.img}>" alt="<{$blocks.title}>"
-                                                title="<{$blocks.title}>"/></a>
+                                                title="<{$blocks.title}>"></a>
                         </li>
                         </div></div>
 
@@ -175,7 +175,7 @@
                                     <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$blocks.id}>"><img
                                                 style="width:<{$block.block_minwidth}>px;heigth:<{$block.block_minheigth}>px;margin:0;padding:0;border: none;"
                                                 src="<{$blocks.img}>"
-                                                alt="<{$blocks.title}>" title="<{$blocks.title}>"/></a>
+                                                alt="<{$blocks.title}>" title="<{$blocks.title}>"></a>
                         </li>
                         </div></div>
 
@@ -191,4 +191,4 @@
 <{/if}>
 
 
-<br class="clear"/>
+<br class="clear">

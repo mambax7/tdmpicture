@@ -22,10 +22,10 @@ use Xmf\Request;
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 
-include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
-include_once __DIR__ . '/../class/calendargrouppermform.php';
-//include_once XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->dirname().'/class/mygrouppermform.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
+require_once __DIR__ . '/../class/calendargrouppermform.php';
+//require_once XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->dirname().'/class/mygrouppermform.php';
 
 if (Request::hasVar('submit', 'POST')) { //!empty($_POST['submit'])) {
     redirect_header(XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/admin/permissions.php', 1, _AM_XD_GPERMUPDATED);
@@ -58,8 +58,7 @@ $permform = new CalendarGroupPermForm('', $module_id, $perm_name, '', '');
 
 foreach ($global_perms_array as $perm_id => $perm_name) {
     if ($perm_name == _AM_TDMPICTURE_PERM_2 || $perm_name == _AM_TDMPICTURE_PERM_32
-        || $perm_name == _AM_TDMPICTURE_PERM_64
-    ) {
+        || $perm_name == _AM_TDMPICTURE_PERM_64) {
         $permform->addItem($perm_id, $perm_name);
     } else {
         $permform->addItem($perm_id, $perm_name, 0, true);

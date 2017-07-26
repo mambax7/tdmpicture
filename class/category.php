@@ -70,7 +70,7 @@ class TdmpictureCategory extends XoopsObject
         }
         $title = $this->isNew() ? sprintf(_MD_TDMPICTURE_ADD) : sprintf(_MD_TDMPICTURE_EDIT);
 
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');
@@ -96,7 +96,7 @@ class TdmpictureCategory extends XoopsObject
 
         $arr    = $catHandler->getall($criteriaUser);
         $mytree = new XoopsObjectTree($arr, 'cat_id', 'cat_pid');
-        if (TdmpictureUtility::checkXoopsVersion('2', '5', '9', '>=')) {
+        if (TdmpictureUtility::checkVerXoops($module, '2.5.9')) {
             $catSelect = new XoopsFormLabel(_MD_TDMPICTURE_PARENT, $mytree->makeSelectElement('cat_pid', 'cat_title', '-', $this->getVar('cat_pid'), true, 0, '', ''));
             $form->addElement($catSelect);
         } else {
@@ -126,7 +126,7 @@ class TdmpictureCategory extends XoopsObject
         }
         $imageselect->setExtra("onchange='showImgSelected(\"image3\", \"img\", \"" . $uploadirectory . '", "", "' . XOOPS_URL . "\")'");
         $imgtray->addElement($imageselect, false);
-        $imgtray->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadirectory . '/' . $img . "' name='image3' id='image3' alt='' />"));
+        $imgtray->addElement(new XoopsFormLabel('', "<br><img src='" . XOOPS_URL . '/' . $uploadirectory . '/' . $img . "' name='image3' id='image3' alt=''>"));
 
         $fileseltray = new XoopsFormElementTray('', '<br>');
         $fileseltray->addElement(new XoopsFormFile(_MD_TDMPICTURE_UPLOAD, 'attachedfile', $moduleHelper->getConfig('tdmpicture_mimemax')), false);

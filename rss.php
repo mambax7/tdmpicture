@@ -16,8 +16,8 @@
  *
  * ****************************************************************************
  */
-include __DIR__ . '/../../mainfile.php';
-include_once $GLOBALS['xoops']->path('class/template.php');
+require_once __DIR__ . '/../../mainfile.php';
+require_once $GLOBALS['xoops']->path('class/template.php');
 
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
 $catHandler  = xoops_getModuleHandler('category', $moduleDirName);

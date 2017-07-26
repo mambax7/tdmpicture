@@ -126,6 +126,7 @@ define('_MI_TDMPICTURE_DIRNAME', basename(dirname(dirname(__DIR__))));
 define('_MI_TDMPICTURE_HELP_HEADER', __DIR__ . '/help/helpheader.html');
 define('_MI_TDMPICTURE_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_TDMPICTURE_HELP_OVERVIEW', 'Overview');
+define('_MI_TDMPICTURE_OVERVIEW', 'Overview');
 
 //define('_MI_TDMPICTURE_HELP_DIR', __DIR__);
 

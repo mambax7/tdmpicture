@@ -415,7 +415,8 @@ class Thumbnail
             $this->workingImage = imagecreate($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
         }
 
-        imagecopyresampled($this->workingImage, $this->oldImage, 0, 0, 0, 0, $this->newDimensions['newWidth'], $this->newDimensions['newHeight'], $this->currentDimensions['width'], $this->currentDimensions['height']);
+        imagecopyresampled($this->workingImage, $this->oldImage, 0, 0, 0, 0, $this->newDimensions['newWidth'], $this->newDimensions['newHeight'], $this->currentDimensions['width'],
+                           $this->currentDimensions['height']);
 
         $this->oldImage                    = $this->workingImage;
         $this->newImage                    = $this->workingImage;
@@ -440,7 +441,8 @@ class Thumbnail
             $this->workingImage = imagecreate($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
         }
 
-        imagecopyresampled($this->workingImage, $this->oldImage, 0, 0, 0, 0, $this->newDimensions['newWidth'], $this->newDimensions['newHeight'], $this->currentDimensions['width'], $this->currentDimensions['height']);
+        imagecopyresampled($this->workingImage, $this->oldImage, 0, 0, 0, 0, $this->newDimensions['newWidth'], $this->newDimensions['newHeight'], $this->currentDimensions['width'],
+                           $this->currentDimensions['height']);
 
         $this->oldImage                    = $this->workingImage;
         $this->newImage                    = $this->workingImage;

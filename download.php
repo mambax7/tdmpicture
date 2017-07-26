@@ -17,8 +17,8 @@
  * ****************************************************************************
  */
 
-include_once __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 $myts        = MyTextSanitizer::getInstance();
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
 

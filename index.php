@@ -20,11 +20,11 @@
 
 use Xmf\Request;
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 $myts = MyTextSanitizer::getInstance();
 
 $GLOBALS['xoopsOption']['template_main'] = 'tdmpicture_index.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoopsTpl->assign('dirname', $moduleDirName);
 
@@ -61,7 +61,7 @@ switch ($op) {
 
         $xoopsTpl->assign('cat_id', true);
         $xoopsTpl->assign('cat_view', true);
-        $xoopsTpl->assign('nav', "<a href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "'/>" . $xoopsModule->name() . '</a>');
+        $xoopsTpl->assign('nav', "<a href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "'>" . $xoopsModule->name() . '</a>');
         // ************************************************************
         // Liste des Categories
         // ************************************************************
@@ -73,7 +73,7 @@ switch ($op) {
         //$criteria->setOrder('DESC');
         //$criteria->add(new Criteria('cat_display', 1));
         //$cat_arr = $catHandler->getall($criteria);
-        //$mytree = new TDMObjectTree($cat_arr, 'cat_id', 'cat_pid');
+        //$mytree = new TdmObjectTree($cat_arr, 'cat_id', 'cat_pid');
         //asigne les URL
         //define("TDM_CAT_URL", TDMPICTURE_CAT_URL);
         //define("TDM_CAT_PATH", TDMPICTURE_CAT_PATH);
@@ -176,18 +176,18 @@ switch ($op) {
                 if (@$moyen == 0) {
                     $file['moyen'] = '';
                 } else {
-                    $file['moyen'] = "<img src='" . TDMPICTURE_IMAGES_URL . '/rate' . $moyen . ".png'/>";
+                    $file['moyen'] = "<img src='" . TDMPICTURE_IMAGES_URL . '/rate' . $moyen . ".png'>";
                 }
 
                 //favorie
                 if ($file['counts'] >= $moduleHelper->getConfig('tdmpicture_favourite')) {
-                    $file['favourite'] = "<img src='" . TDMPICTURE_IMAGES_URL . "/flag.png'/>";
+                    $file['favourite'] = "<img src='" . TDMPICTURE_IMAGES_URL . "/flag.png'>";
                 } else {
                     $file['favourite'] = '';
                 }
 
                 if (!empty($xoopsUser)) {
-                    if ($xoopsUser->getVar('uid') == $file_arr[$f]->getVar('file_uid') || $xoopsUser->isAdmin()) {
+                    if ($xoopsUser->isAdmin() || $xoopsUser->getVar('uid') == $file_arr[$f]->getVar('file_uid')) {
                         if (!$gpermHandler->checkRight('tdmpicture_view', 128, $groups, $xoopsModule->getVar('mid'))) {
                             $file['menu'] = false;
                             $file['edit'] = false;
@@ -230,4 +230,4 @@ if (isset($xoTheme) && is_object($xoTheme)) {
     $xoopsTpl->assign('xoops_meta_description', $moduleHelper->getConfig('tdmpicture_description'));
 }
 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

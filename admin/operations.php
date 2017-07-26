@@ -71,7 +71,7 @@ if (!empty($_POST['submit'])) {
     $record_counter = 0;
     while (list($lid, $ext, $w, $h) = $xoopsDB->fetchRow($result)) {
         ++$record_counter;
-        echo ($record_counter + $start - 1) . ') ';
+        echo($record_counter + $start - 1) . ') ';
         printf(_AM_FMT_CHECKING, "$lid.$ext");
 
         // Check if the main image exists
@@ -175,7 +175,7 @@ if (isset($record_counter) && $record_counter < $size) {
 
 // Render forms
 xoops_cp_header();
-include __DIR__ . '/mymenu.php';
+require_once __DIR__ . '/mymenu.php';
 
 // check $xoopsModule
 if (!is_object($xoopsModule)) {

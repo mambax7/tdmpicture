@@ -39,7 +39,7 @@ function xoops_module_pre_install_tdmpicture(XoopsModule $module)
         return false;
     }
 
-    $mod_tables =& $module->getInfo('tables');
+    $mod_tables = $module->getInfo('tables');
     foreach ($mod_tables as $table) {
         $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
     }
@@ -56,7 +56,7 @@ function xoops_module_pre_install_tdmpicture(XoopsModule $module)
  */
 function xoops_module_install_tdmpicture(XoopsModule $xoopsModule)
 {
-    include_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+    require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 
     //    $moduleDirName = $xoopsModule->getVar('dirname');
     $moduleDirName = basename(dirname(__DIR__));
@@ -87,8 +87,8 @@ function xoops_module_install_tdmpicture(XoopsModule $xoopsModule)
     }
 
     //delete .html entries from the tpl table
-    $sql = 'DELETE FROM ' . $xoopsDB->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
-    $xoopsDB->queryF($sql);
+    $sql = 'DELETE FROM ' . $GLOBALS['xoops']->prefix('tplfile') . " WHERE `tpl_module` = '" . $xoopsModule->getVar('dirname', 'n') . "' AND `tpl_file` LIKE '%.html%'";
+    $GLOBALS['xoops']->queryF($sql);
 
     return true;
 }

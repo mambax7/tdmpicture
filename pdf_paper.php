@@ -3,7 +3,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                  Copyright (c) 2000-2016 XOOPS.org                        //
-//                       <https://xoops.org/>                             //
+//                       <https://xoops.org>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -31,8 +31,8 @@
 
 error_reporting(0);
 
-include_once __DIR__ . '/header.php';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once __DIR__ . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 $myts = MyTextSanitizer::getInstance();
 //2.5.8
 require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
@@ -44,9 +44,9 @@ if (empty($_REQUEST['st'])) {
 }
 
 if (file_exists(TDMPICTURE_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/admin.php')) {
-    include_once TDMPICTURE_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/admin.php';
+    require_once TDMPICTURE_ROOT_PATH . '/language/' . $xoopsConfig['language'] . '/admin.php';
 } else {
-    include_once TDMPICTURE_ROOT_PATH . '/language/english/admin.php';
+    require_once TDMPICTURE_ROOT_PATH . '/language/english/admin.php';
 }
 $myts = MyTextSanitizer:: getInstance(); // MyTextSanitizer object
 
@@ -306,7 +306,7 @@ function Chars($text)
                             '/&#232;/i',
                             '/&#224;/i',
                             '/&quot;/i',
-                            '/<br \/>/i',
+                            '/<br \>/i',
                             '/&agrave;/i',
                             '/&#8364;/i'
                         ), array(

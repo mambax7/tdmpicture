@@ -64,7 +64,7 @@ class TdmpicturePlaylist extends XoopsObject
         }
         $title = $this->isNew() ? sprintf(_AM_TDMPICTURE_ADD) : sprintf(_AM_TDMPICTURE_EDIT);
 
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
         $form = new XoopsThemeForm($title, 'form', $action, 'post', true);
         $form->setExtra('enctype="multipart/form-data"');

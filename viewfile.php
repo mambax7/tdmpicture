@@ -20,9 +20,9 @@
 
 use Xmf\Request;
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 $GLOBALS['xoopsOption']['template_main'] = 'tdmpicture_viewfile.tpl';
-require XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 $moduleDirName = basename(__DIR__);
 $xoopsTpl->assign('dirname', $moduleDirName);
 
@@ -90,25 +90,21 @@ switch ($op) {
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('cat_display', 1));
 
-
-
         $cat_arr = $catHandler->getall($criteria);
-        $mytree = new TDMObjectTree($cat_arr, 'cat_id', 'cat_pid');
-//        asigne les URL
+        $mytree  = new TdmObjectTree($cat_arr, 'cat_id', 'cat_pid');
+        //        asigne les URL
         define('TDM_CAT_URL', TDMPICTURE_CAT_URL);
         define('TDM_CAT_PATH', TDMPICTURE_CAT_PATH);
         $GLOBALS['scat_display'] = false;
-        $cat_display = $moduleHelper->getConfig('tdmpicture_cat_display');
-        $cat_cel = $moduleHelper->getConfig('tdmpicture_cat_cel');
-        $display_cat = $mytree->makeCatBox($fileHandler, 'cat_title','-', $ct);
+        $cat_display             = $moduleHelper->getConfig('tdmpicture_cat_display');
+        $cat_cel                 = $moduleHelper->getConfig('tdmpicture_cat_cel');
+        $display_cat             = $mytree->makeCatBox($fileHandler, 'cat_title', '-', $ct);
         $xoopsTpl->assign('display_cat', $display_cat);
 
-//        news categorie
+        //        news categorie
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('cat_display', 1));
         $criteria->add(new Criteria('cat_index', 1));
-
-
 
         $criteria->setSort('cat_weight');
         $criteria->setOrder('DESC');
@@ -177,9 +173,11 @@ switch ($op) {
             if (file_exists($array_thumbs_path[$pos - 1])) {
                 $previmg = '<img src=' . $array_thumbs[$pos - 1] . " class='detail_img'>";
                 if (!empty($post_ut)) {
-                    $prev_page = "<a title='" . $array_titles[$pos - 1] . "' href='viewfile.php?st=" . $array_ids[$pos - 1] . '&ut=' . $array_uts[$pos - 1] . '&tris=' . $tris . '&order=' . $order . "'>" . $previmg . '</a>';
+                    $prev_page = "<a title='" . $array_titles[$pos - 1] . "' href='viewfile.php?st=" . $array_ids[$pos - 1] . '&ut=' . $array_uts[$pos - 1] . '&tris=' . $tris . '&order=' . $order
+                                 . "'>" . $previmg . '</a>';
                 } else {
-                    $prev_page = "<a title='" . $array_titles[$pos - 1] . "' href='viewfile.php?st=" . $array_ids[$pos - 1] . '&ct=' . $array_cats[$pos - 1] . '&tris=' . $tris . '&order=' . $order . "'>" . $previmg . '</a>';
+                    $prev_page = "<a title='" . $array_titles[$pos - 1] . "' href='viewfile.php?st=" . $array_ids[$pos - 1] . '&ct=' . $array_cats[$pos - 1] . '&tris=' . $tris . '&order=' . $order
+                                 . "'>" . $previmg . '</a>';
                 }
                 $xoopsTpl->assign('prev_page', $prev_page);
             }
@@ -189,9 +187,11 @@ switch ($op) {
             if (file_exists($array_thumbs_path[$pos + 1])) {
                 $nextimg = '<img src=' . $array_thumbs[$pos + 1] . " class='detail_img'>";
                 if (!empty($post_ut)) {
-                    $next_page = "<a title='" . $array_titles[$pos + 1] . "' href='viewfile.php?st=" . $array_ids[$pos + 1] . '&ut=' . $array_uts[$pos + 1] . '&tris=' . $tris . '&order=' . $order . "'>" . $nextimg . '</a>';
+                    $next_page = "<a title='" . $array_titles[$pos + 1] . "' href='viewfile.php?st=" . $array_ids[$pos + 1] . '&ut=' . $array_uts[$pos + 1] . '&tris=' . $tris . '&order=' . $order
+                                 . "'>" . $nextimg . '</a>';
                 } else {
-                    $next_page = "<a title='" . $array_titles[$pos + 1] . "' href='viewfile.php?st=" . $array_ids[$pos + 1] . '&ct=' . $array_cats[$pos + 1] . '&tris=' . $tris . '&order=' . $order . "'>" . $nextimg . '</a>';
+                    $next_page = "<a title='" . $array_titles[$pos + 1] . "' href='viewfile.php?st=" . $array_ids[$pos + 1] . '&ct=' . $array_cats[$pos + 1] . '&tris=' . $tris . '&order=' . $order
+                                 . "'>" . $nextimg . '</a>';
                 }
                 $xoopsTpl->assign('next_page', $next_page);
             }
@@ -260,9 +260,9 @@ switch ($op) {
             $poster       = new XoopsUser($file_arr[$f]->getVar('file_uid'));
             $poster_image = XOOPS_ROOT_PATH . '/uploads/' . $poster->getVar('user_avatar');
             if (file_exists($poster_image) && $poster->getVar('user_avatar') != ''
-                && $poster->getVar('user_avatar') !== 'blank.png'
-            ) {
-                $file['userimg'] = "<img class='img'src='" . XOOPS_URL . '/uploads/' . $poster->getVar('user_avatar') . "' height='60px' title=" . $poster->getVar('uname'). " style='border: 1px solid #CCC;' alt=" . $poster->getVar('uname') . '>';
+                && $poster->getVar('user_avatar') !== 'blank.png') {
+                $file['userimg'] = "<img class='img'src='" . XOOPS_URL . '/uploads/' . $poster->getVar('user_avatar') . "' height='60px' title=" . $poster->getVar('uname')
+                                   . " style='border: 1px solid #CCC;' alt=" . $poster->getVar('uname') . '>';
             } else {
                 $file['userimg'] = "<img class='img' src='" . TDMPICTURE_IMAGES_URL . "/user.gif'  height='60px' style='border: 1px solid #CCC' title='Anonyme' alt='Anonyme'>";
             }
@@ -287,17 +287,17 @@ switch ($op) {
             //if (@$moyen == 0) {
             //$file['moyen'] = "";
             //} else {
-            //echo $file['moyen'] = "<img src='".TDMPICTURE_IMAGES_URL."rate".$moyen.".png'/>";
+            //echo $file['moyen'] = "<img src='".TDMPICTURE_IMAGES_URL."rate".$moyen.".png'>";
             //}
             //favorie
             if ($file['counts'] >= $moduleHelper->getConfig('tdmpicture_favourite')) {
-                $file['favourite'] = "<img src='" . TDMPICTURE_IMAGES_URL . "/flag.png'/>";
+                $file['favourite'] = "<img src='" . TDMPICTURE_IMAGES_URL . "/flag.png'>";
             } else {
                 $file['favourite'] = '';
             }
 
             if (!empty($xoopsUser)) {
-                if ($xoopsUser->getVar('uid') == $file_arr[$f]->getVar('file_uid') || $xoopsUser->isAdmin()) {
+                if ($xoopsUser->isAdmin() || $xoopsUser->getVar('uid') == $file_arr[$f]->getVar('file_uid')) {
                     if (!$gpermHandler->checkRight('tdmpicture_view', 128, $groups, $xoopsModule->getVar('mid'))) {
                         $file['menu'] = false;
                         $file['edit'] = false;
@@ -333,6 +333,6 @@ if (isset($xoTheme) && is_object($xoTheme)) {
     $xoopsTpl->assign('xoops_meta_description', $moduleHelper->getConfig('tdmpicture_description'));
 }
 //fonction commentaire
-include XOOPS_ROOT_PATH . '/include/comment_view.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_view.php';
 //
-include XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

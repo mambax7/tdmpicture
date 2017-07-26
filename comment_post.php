@@ -34,4 +34,4 @@ if ($moduleHelper->getConfig(['com_anonpost'] == 0 && !is_object($xoopsUser))) {
     die();
 }
 // ****************************************************************************
-include_once XOOPS_ROOT_PATH . '/include/comment_post.php';
+require_once XOOPS_ROOT_PATH . '/include/comment_post.php';

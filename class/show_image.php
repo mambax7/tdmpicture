@@ -8,7 +8,7 @@
  */
 
 //reference thumbnail class
-include_once __DIR__ . '/thumbnail.inc.php';
+require_once __DIR__ . '/thumbnail.inc.php';
 
 $thumb = new Thumbnail($_GET['filename']);
 $thumb->resize($_GET['width'], $_GET['height']);

@@ -18,7 +18,7 @@
 
     <!--nav -->
     <div class="TDMNavl"><h1><{$tree_title}></h1></div>
-    <br class="clear"/>
+    <br class="clear">
     <div class="TDMNav TDMNav outer odd">
         <{if $xoops_userid}><a href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$xoops_userid}>"><img
                     src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/photo.png"
@@ -32,7 +32,7 @@
                     title="<{$smarty.const._MD_TDMPICTURE_UPLOADCAT}>">
             </a><{/if}>
     </div>
-    <br class="clear"/>
+    <br class="clear">
     <{$tree_display}>
 
     <hr>
@@ -64,7 +64,7 @@
             <{/foreach}>
         </ul>
 
-        <br class="clear"/>
+        <br class="clear">
     </div>
     <br>
 
@@ -72,5 +72,5 @@
         <br>
         <div align="center"><{$pagenav}></div>
     <{/if}>
-    <br class="clear"/> <br>
+    <br class="clear"> <br>
 </div>

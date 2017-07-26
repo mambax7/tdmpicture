@@ -2,12 +2,12 @@
 
 use Xmf\Request;
 
-//include
-include_once __DIR__ . '/header.php';
+//require_once
+require_once __DIR__ . '/header.php';
 $myts = MyTextSanitizer::getInstance();
 //$GLOBALS['xoopsOption']['template_main'] = 'tdmmovie_movie.html';
-include_once XOOPS_ROOT_PATH . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/include/common.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/include/common.php';
 
 $gpermHandler = xoops_getHandler('groupperm');
 //permission
@@ -21,15 +21,14 @@ if (is_object($xoopsUser)) {
 
 //perm
 if (!$gpermHandler->checkRight('tdmpicture_view', 8, $groups, $xoopsModule->getVar('mid'))
-    && !$gpermHandler->checkRight('tdmpicture_view', 16, $groups, $xoopsModule->getVar('mid'))
-) {
+    && !$gpermHandler->checkRight('tdmpicture_view', 16, $groups, $xoopsModule->getVar('mid'))) {
     redirect_header(XOOPS_URL, 2, _MD_TDMPICTURE_NOPERM);
 }
 //load class
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
 $catHandler  = xoops_getModuleHandler('category', $moduleDirName);
 
-$op   = Request::getVar('op', 'upload'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'upload';
+$op = Request::getVar('op', 'upload'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'upload';
 
 global $xoopsUser, $xoopsModule;
 
@@ -39,8 +38,7 @@ switch ($op) {
 
         //perm
         if (!$gpermHandler->checkRight('tdmpicture_view', 8, $groups, $xoopsModule->getVar('mid'))
-            && !$gpermHandler->checkRight('tdmpicture_view', 16, $groups, $xoopsModule->getVar('mid'))
-        ) {
+            && !$gpermHandler->checkRight('tdmpicture_view', 16, $groups, $xoopsModule->getVar('mid'))) {
             redirect_header(XOOPS_URL, 2, _MD_TDMPICTURE_NOPERM);
         } else {
             // Affichage du formulaire de cr?ation de cat?gories
@@ -54,8 +52,7 @@ switch ($op) {
 
         //perm
         if (!$gpermHandler->checkRight('tdmpicture_view', 1024, $groups, $xoopsModule->getVar('mid'))
-            && !$gpermHandler->checkRight('tdmpicture_view', 1048, $groups, $xoopsModule->getVar('mid'))
-        ) {
+            && !$gpermHandler->checkRight('tdmpicture_view', 1048, $groups, $xoopsModule->getVar('mid'))) {
             redirect_header(XOOPS_URL, 2, _MD_TDMPICTURE_NOPERM);
         } else {
             // Affichage du formulaire de cr?ation de cat?gories
@@ -77,7 +74,7 @@ switch ($op) {
         }
 
         //upload
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         $uploaddir = TDMPICTURE_CAT_PATH;
         $mimetype  = explode('|', $moduleHelper->getConfig('tdmpicture_mimetype'));
         $uploader  = new XoopsMediaUploader($uploaddir, $mimetype, $moduleHelper->getConfig('tdmpicture_mimemax'));
@@ -122,7 +119,7 @@ switch ($op) {
 
             redirect_header('submit.php', 2, _MD_TDMPICTURE_BASE);
         }
-        //include_once(__DIR__ . '/../include/forms.php');
+        //require_once(__DIR__ . '/../include/forms.php');
         echo $obj->getHtmlErrors() . $errors;
         $form = $obj->getForm();
         $form->display();
@@ -140,9 +137,9 @@ switch ($op) {
             $obj = $fileHandler->create();
         }
 
-        //include
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        include_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
+        //require_once
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
         $erreur = false;
         //prepare l'upload
         $path = $obj->getFilePath();
@@ -204,7 +201,7 @@ switch ($op) {
         } else {
             $errors = $uploader->getErrors();
         }
-        //include_once(__DIR__ . '/../include/forms.php');
+        //require_once(__DIR__ . '/../include/forms.php');
         echo $obj->getHtmlErrors() . $errors;
         $form = $obj->getForm();
         $form->display();
@@ -216,4 +213,4 @@ switch ($op) {
 
 }
 TdmpictureUtility::getHeader();
-include_once __DIR__ . '/../../footer.php';
+require_once __DIR__ . '/../../footer.php';

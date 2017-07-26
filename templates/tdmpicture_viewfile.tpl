@@ -23,7 +23,7 @@
 
         <!--nav -->
         <div class="TDMNavl"><h1><{$tree_title}></h1></div>
-        <br class="clear"/>
+        <br class="clear">
         <{foreach item=file from=$file}>
             <div class="TDMNav TDMNav outer odd">
                 <{if $perm_dl }><a href="<{$smarty.const.TDMPICTURE_URL}>/download.php?st=<{$file.id}>" ><img
@@ -31,12 +31,12 @@
                             title="<{$smarty.const._MD_TDMPICTURE_DL}>"></a><{/if}>
                 <a href="javascript:;" slide="<{$file.img_popup}>" class="group1" title="<{$file.title}>"
                    alt="<{$file.title}>"><img src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/zoom.png"
-                                              title="<{$smarty.const._MD_TDMPICTURE_SCREEN}>"/></a>
+                                              title="<{$smarty.const._MD_TDMPICTURE_SCREEN}>"></a>
                 <a href="<{$smarty.const.TDMPICTURE_URL}>/get.php?st=<{$file.id}>&size=full" target="_blank"><img
                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/fullscreen.png"
                             title="<{$smarty.const._MD_TDMPICTURE_FULLSCREEN}>"></a>
                 <a href="javascript:masque('1');"><img src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/link.png"
-                                                       title="<{$smarty.const._MD_TDMPICTURE_LINK}>"/></a>
+                                                       title="<{$smarty.const._MD_TDMPICTURE_LINK}>"></a>
                 <{if $file.useralb }><a href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$file.uid}>" ><img src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/photo.png"
                             title="<{$smarty.const._MD_TDMPICTURE_VIEWALBUM}> <{$file.postername}>"></a><{/if}>
                 <{if $perm_submit}><a href="<{$smarty.const.TDMPICTURE_URL}>/submit.php" ><img
@@ -47,7 +47,7 @@
                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/uploadcat.png"
                             title="<{$smarty.const._MD_TDMPICTURE_UPLOADCAT}>"></a><{/if}>
             </div>
-            <br class="clear"/>
+            <br class="clear">
             <{$tree_display}>
             <hr>
             <div class="even outer">
@@ -57,7 +57,7 @@
                            alt="<{$file.title}>">
                             <img style="max-width:<{$smarty.const.TDMPICTURE_WIDTH}>px; max-height:<{$smarty.const.TDMPICTURE_HEIGHT}>px;"
                                  src="<{$file.img}>" slide="<{$file.img_popup}>" rel="group1"
-                                 title="<{$file.title}>" alt="<{$file.title}>"/>
+                                 title="<{$file.title}>" alt="<{$file.title}>">
                         </a>
                     </div>
 
@@ -74,7 +74,7 @@
                 <div style="float:right; width:40%; margin:20px; display:inline-block;">
                     <div id="tdmpicture_num" class="switch_info odd">
                         <span><{$file.comments}></span>
-                        <hr/>
+                        <hr>
                         <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$file.id}>&<{$file.cat_nav}>&tris=<{$tris}>"><{$smarty.const._MD_TDMPICTURE_COMMENT}></a>
                     </div>
                     <div id="tdmpicture_num" class="switch_info odd">
@@ -83,7 +83,7 @@
                                title="<{$smarty.const._MD_TDMPICTURE_VOTEADD}>"></a>
                         <{/if}>
                         <span><{$file.counts}></span>/<span><{$file.votes}></span>
-                        <hr/>
+                        <hr>
                         <{if $perm_vote}>
                             <a id="tdmpicture_votedown" href="javascript:;"
                                onclick="RemoveVote(<{$file.id}>);return false;"
@@ -95,7 +95,7 @@
                     <{if $file.favourite}>
                         <div id="tdmpicture_num" class="switch_info odd">
                             <{$file.favourite}>
-                            <hr/>
+                            <hr>
                             <{$smarty.const._MD_TDMPICTURE_POPULAR}>
                         </div>
                     <{/if}>
@@ -104,10 +104,10 @@
                     <br>
                     <div id="tdmpicture_num" class="switch_large odd">
                         <div class="switch_mediuml">
-                            <{$smarty.const._MD_TDMPICTURE_BY}>: <a href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$file.uid}>"/><{$file.postername}></a>
+                            <{$smarty.const._MD_TDMPICTURE_BY}>: <a href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$file.uid}>"><{$file.postername}></a>
                             <br>
                             <{$smarty.const._MD_TDMPICTURE_IN}>: <a
-                                    href="<{$smarty.const.TDMPICTURE_URL}>/viewcat.php?ct=<{$file.file_cat_id}>"/><{$file.cat}></a>
+                                    href="<{$smarty.const.TDMPICTURE_URL}>/viewcat.php?ct=<{$file.file_cat_id}>"><{$file.cat}></a>
                             <br>
                             <{$smarty.const._MD_TDMPICTURE_LE}>: <{$file.indate}>
                         </div>
@@ -156,23 +156,23 @@
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/pdf_paper.php?option=auto&st=<{$file.id}>"><img
                                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/pdf_mini.png"
                                             title="<{$smarty.const._MD_TDMPICTURE_PDFAUTO}>"
-                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFAUTO}>"/></a>
+                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFAUTO}>"></a>
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/pdf_paper.php?option=A4&st=<{$file.id}>"><img
                                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/pdf_A4.png"
                                             title="<{$smarty.const._MD_TDMPICTURE_PDFA4}>"
-                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA4}>"/></a>
+                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA4}>"></a>
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/pdf_paper.php?option=A3&st=<{$file.id}>"><img
                                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/pdf_A3.png"
                                             title="<{$smarty.const._MD_TDMPICTURE_PDFA3}>"
-                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA3}>"/></a>
+                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA3}>"></a>
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/pdf_paper.php?option=A2&st=<{$file.id}>"><img
                                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/pdf_A2.png"
                                             title="<{$smarty.const._MD_TDMPICTURE_PDFA2}>"
-                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA2}>"/></a>
+                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA2}>"></a>
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/pdf_paper.php?option=A1&st=<{$file.id}>"><img
                                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/pdf_A1.png"
                                             title="<{$smarty.const._MD_TDMPICTURE_PDFA1}>"
-                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA1}>"/></a>
+                                            alt="<{$smarty.const._MD_TDMPICTURE_PDFA1}>"></a>
                             </div>
                         </div>
                     <{/if}>
@@ -195,7 +195,7 @@
 
                 </div>
 
-                <br class="clear"/>
+                <br class="clear">
             </div>
             <!--end-->
 
@@ -217,7 +217,7 @@
                 </div>
             </div>
         <{/if}>
-        <br class="clear"/>
+        <br class="clear">
         <br>
         <br>
         <!-- AddThis Button BEGIN -->
@@ -225,7 +225,7 @@
             <div style="float:left;"><a class="addthis_button"
                                         href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4ac5feea790b0936"><img
                             src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16"
-                            alt="Bookmark and Share" style="border:0;"/></a>
+                            alt="Bookmark and Share" style="border:0;"></a>
                 <script type="text/javascript"
                         src="http://s7.addthis.com/js/250/addthis_widget.js#pub=xa-4ac5feea790b0936"></script>
             </div>
@@ -238,10 +238,10 @@
                                          alt="<{$smarty.const._MD_TDMPICTURE_RSS}>"><img
                             src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/rss.png"
                             title="<{$smarty.const._MD_TDMPICTURE_RSS}>"
-                            alt="<{$smarty.const._MD_TDMPICTURE_RSS}>"/></a></div>
+                            alt="<{$smarty.const._MD_TDMPICTURE_RSS}>"></a></div>
         <{/if}>
         <!-- Button RSS END-->
-        <br class="clear"/>
+        <br class="clear">
         <br>
         <div style="text-align: center; padding: 3px; margin: 3px;">
             <{$commentsnav}>
@@ -259,6 +259,6 @@
         </div>
     <{/if}>
 
-    <br class="clear"/><br>
+    <br class="clear"><br>
 
 </div>

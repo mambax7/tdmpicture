@@ -17,8 +17,8 @@
  * @author         XOOPS Development Team
  */
 
-include __DIR__ . '/../../mainfile.php';
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../../mainfile.php';
+require_once __DIR__ . '/header.php';
 
 // We verify that the user can post comments **********************************
 if (!isset($GLOBALS['xoopsModuleConfig'])) {
@@ -29,7 +29,7 @@ if ($moduleHelper->getConfig('com_rule') == 0) {    // Comments are deactivate
     die();
 }
 
-if ($moduleHelper->getConfig('com_anonpost') == 0 && !is_object($xoopsUser)) {    // Anonymous users can't post
+if (!is_object($xoopsUser) && $moduleHelper->getConfig('com_anonpost') == 0) {    // Anonymous users can't post
     die();
 }
 // ****************************************************************************
@@ -44,7 +44,7 @@ if ($com_itemid > 0) {
     //  $com_replytext .= '<br><br>'.$bodytext.'';
     //}
     //$com_replytitle = $article->title();
-    include_once XOOPS_ROOT_PATH . '/include/comment_new.php';
+    require_once XOOPS_ROOT_PATH . '/include/comment_new.php';
 } else {
     exit;
 }

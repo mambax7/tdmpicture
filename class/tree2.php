@@ -18,7 +18,7 @@
  * ***************************************************************************/
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/class/tree.php';
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
 /**
  * Class TdmCatObjectTree
@@ -84,14 +84,13 @@ class TdmCatObjectTree extends XoopsObjectTree
         //$GLOBALS['navbar'] .= "";
 
         if ($key > 0
-            && $gpermHandler->checkRight('tdmpicture_catview', $this->tree[$key]['obj']->getVar('cat_id'), $groups, $xoopsModule->getVar('mid'))
-        ) {
+            && $gpermHandler->checkRight('tdmpicture_catview', $this->tree[$key]['obj']->getVar('cat_id'), $groups, $xoopsModule->getVar('mid'))) {
             $value    = $this->tree[$key]['obj']->getVar($this->myId);
             $criteria = new CriteriaCompo();
             $criteria->add(new Criteria('file_cat', $this->tree[$key]['obj']->getVar('cat_id')));
             $criteria->add(new Criteria('file_display', 1));
             $GLOBALS['count'] = $count = $itemHandler->getCount($criteria);
-            //$cat_link = tdmspot_seo_genUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
+            //$cat_link = tdmspot_generateSeoUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
             //$cat_link = TDMPICTURE_URL."/viewcat.php?ct=".$this->tree[$key]['obj']->getVar('cat_id')."&tris=".$tris."&order=".$order;
             $cat_link = TDMPICTURE_URL . '/viewcat.php?ct=' . $this->tree[$key]['obj']->getVar('cat_id');
             //recherche image
@@ -179,7 +178,7 @@ class TdmCatObjectTree extends XoopsObjectTree
         if ($key > 0) {
             $value = $this->tree[$key]['obj']->getVar($this->myId);
             //$url = "viewcat.php?ct=".$this->tree[$key]['obj']->getVar($this->myId)."&tris=".$tris."&limit=".$limit;
-            //$value = tdmspot_seo_genUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
+            //$value = tdmspot_generateSeoUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
 
             if (!empty($perm) && $gpermHandler->checkRight($perm, $value, $groups, $xoopsModule->getVar('mid'))) {
                 $ret .= '<option value="' . $value . '"';
@@ -224,7 +223,7 @@ class TdmCatObjectTree extends XoopsObjectTree
         if ($key > 0 && $this->tree[$key]['obj']->getVar('cat_pid') != 0) {
             $value = $this->tree[$key]['obj']->getVar($this->myId);
             $url   = 'viewcat.php?ct=' . $this->tree[$key]['obj']->getVar($this->myId) . '&tris=' . $tris . '&limit=' . $limit;
-            //$value = tdmspot_seo_genUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
+            //$value = tdmspot_generateSeoUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
 
             if ($value == $selected) {
                 //$ret .=  '<li class=last><a href ="'.$cat_link.'" title="('.$count.')">'. $cat_title. '</a></li>';
@@ -234,8 +233,7 @@ class TdmCatObjectTree extends XoopsObjectTree
             }
 
             if ($key > 0
-                && $gpermHandler->checkRight('tdmpicture_catview', $this->tree[$key]['obj']->getVar('cat_id'), $groups, $xoopsModule->getVar('mid'))
-            ) {
+                && $gpermHandler->checkRight('tdmpicture_catview', $this->tree[$key]['obj']->getVar('cat_id'), $groups, $xoopsModule->getVar('mid'))) {
 
                 //if ($value == $selected) {
                 //  $ret .= ' selected';

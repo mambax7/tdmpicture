@@ -16,6 +16,7 @@
  *
  * ****************************************************************************
  */
+
 //class XoopsPersistableObjectHandler extends XoopsObjectHandler
 class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
 {
@@ -31,13 +32,13 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
 
     /**
      * Constructor - called from child classes
-     * @param XoopsDatabase $db        {@link XoopsDatabase}
+     * @param XoopsDatabase $db               {@link XoopsDatabase}
      *                                        object
-     * @param string               $tablename Name of database table
-     * @param string               $classname Name of Class, this handler is managing
-     * @param string               $keyname   Name of the property, holding the key
+     * @param string        $tablename        Name of database table
+     * @param string        $classname        Name of Class, this handler is managing
+     * @param string        $keyname          Name of the property, holding the key
      *
-     * @param bool                 $idenfierName
+     * @param bool          $idenfierName
      */
     public function __construct(XoopsDatabase $db, $tablename, $classname, $keyname, $idenfierName = false)
     {
@@ -99,8 +100,8 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
      * retrieve objects from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the ID as key for the array?
-     * @param bool   $as_object return an array of objects?
+     * @param bool            $id_as_key use the ID as key for the array?
+     * @param bool            $as_object return an array of objects?
      *
      * @return array
      */
@@ -219,7 +220,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
      * count objects matching a condition
      *
      * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return int    count of objects
+     * @return array|int count of objects
      */
     public function getCount($criteria = null)
     {
@@ -343,8 +344,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
             foreach ($cleanvars as $key => $value) {
                 if ((!is_array($this->keyName) && $key == $this->keyName)
                     || (is_array($this->keyName)
-                        && in_array($key, $this->keyName))
-                ) {
+                        && in_array($key, $this->keyName))) {
                     continue;
                 }
                 if (isset($notfirst)) {
@@ -374,7 +374,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         if (!$result) {
             return false;
         }
-        if ($obj->isNew() && !is_array($this->keyName)) {
+        if (!is_array($this->keyName) && $obj->isNew()) {
             $obj->assignVar($this->keyName, $this->db->getInsertId());
         }
 

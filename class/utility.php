@@ -34,56 +34,19 @@ use Xmf\Module\Helper;
 
 //namespace Xoopsmodules/Tdmpicture;
 
-if (!isset($moduleDirName)) {
-    $moduleDirName = basename(dirname(__DIR__));
-}
+$moduleDirName = basename(dirname(__DIR__));
 
 if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
 } else {
     $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
-$myts          = MyTextSanitizer::getInstance();
-
+$myts = MyTextSanitizer::getInstance();
 
 /**
  * Class TdmpictureUtility
  */
 class TdmpictureUtility
 {
-    /**
-     * Check Xoops Version against a provided version
-     *
-     * @param int    $x
-     * @param int    $y
-     * @param int    $z
-     * @param string $signal
-     * @return bool
-     */
-    public static function checkXoopsVersion($x, $y, $z, $signal = '==')
-    {
-        $xv = explode('-', str_replace('XOOPS ', '', XOOPS_VERSION));
-
-        list($a, $b, $c) = explode('.', $xv[0]);
-        $xv = $a * 10000 + $b * 100 + $c;
-        $mv = $x * 10000 + $y * 100 + $z;
-        if ($signal === '>') {
-            return $xv > $mv;
-        }
-        if ($signal === '>=') {
-            return $xv >= $mv;
-        }
-        if ($signal === '<') {
-            return $xv < $mv;
-        }
-        if ($signal === '<=') {
-            return $xv <= $mv;
-        }
-        if ($signal === '==') {
-            return $xv == $mv;
-        }
-
-        return false;
-    }
 
     /**
      * @param string $caption
@@ -183,7 +146,7 @@ class TdmpictureUtility
                 }
             }
         } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n", '<br/>';
+            echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
         }
     }
 
@@ -202,7 +165,7 @@ class TdmpictureUtility
         //                return copy($file, $folder);
         //            }
         //        } catch (Exception $e) {
-        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br/>";
+        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br>";
         //        }
         //        return false;
     }
@@ -233,15 +196,22 @@ class TdmpictureUtility
      * @static
      * @param XoopsModule $module
      *
+     * @param null|string $requiredVer
      * @return bool true if meets requirements, false if not
      */
-    public static function checkVerXoops(XoopsModule $module)
+    public static function checkVerXoops(XoopsModule $module = null, $requiredVer = null)
     {
-        xoops_loadLanguage('admin', $module->dirname());
+        $moduleDirName = basename(dirname(__DIR__));
+        if (null === $module) {
+            $module = XoopsModule::getByDirname($moduleDirName);
+        }
+        xoops_loadLanguage('admin', $moduleDirName);
         //check for minimum XOOPS version
         $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
         $currArray   = explode('.', $currentVer);
+        if (null === $requiredVer) {
         $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
+        }
         $reqArray    = explode('.', $requiredVer);
         $success     = true;
         foreach ($reqArray as $k => $v) {
@@ -282,8 +252,8 @@ class TdmpictureUtility
         xoops_loadLanguage('admin', $module->dirname());
         // check for minimum PHP version
         $success = true;
-        $verNum  = phpversion();
-        $reqVer  =& $module->getInfo('min_php');
+        $verNum  = PHP_VERSION;
+        $reqVer  = $module->getInfo('min_php');
         if (false !== $reqVer && '' !== $reqVer) {
             if (version_compare($verNum, $reqVer, '<')) {
                 $module->setErrors(sprintf(_AM_TDMPICTURE_ERROR_BAD_PHP, $reqVer, $verNum));
@@ -310,7 +280,7 @@ class TdmpictureUtility
 
             $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/assets/css/tdmpicture.css');
         } else {
-            $mp_module_header = "<link rel='stylesheet' type='text/css' href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/css/tdmpicture.css'/>
+            $mp_module_header = "<link rel='stylesheet' type='text/css' href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/css/tdmpicture.css'>
 <script type='text/javascript' src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/js/jquery-1.4.4.js'></script>
 <script type='text/javascript' src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/js/jquery-ui-1.7.1.custom.min.js'></script>
 <script type='text/javascript' src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/js/AudioPlayer.js'></script>
@@ -332,7 +302,7 @@ class TdmpictureUtility
 
             $xoTheme->addStylesheet(XOOPS_URL . '/modules/' . $xoopsModule->dirname() . '/assets/css/jquery.Jcrop.css');
         } else {
-            $mp_module_header = "<link rel='stylesheet' type='text/css' href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/css/jquery.Jcrop.css'/>
+            $mp_module_header = "<link rel='stylesheet' type='text/css' href='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/css/jquery.Jcrop.css'>
 <script type='text/javascript' src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/js/jquery-1.4.4.js'></script>
 <script type='text/javascript' src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/js/AudioPlayer.js'></script>
 <script type='text/javascript' src='" . XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/assets/js/jquery.Jcrop.js'></script>
@@ -343,7 +313,7 @@ class TdmpictureUtility
 
     //** function copie
     //function CopyDir($origine, $destination) {
-    //    $test = scandir($origine);
+    //    $test = scandir($origine, SCANDIR_SORT_NONE);
 
     //    $file = 0;
     //    $file_tot = 0;
@@ -451,7 +421,7 @@ class TdmpictureUtility
         $keywords        = array_unique($keywords);
 
         foreach ($keywords as $keyword) {
-            if (strlen($keyword) >= $limit && !is_numeric($keyword)) {
+            if (!is_numeric($keyword) && strlen($keyword) >= $limit) {
                 $tmp[] = $keyword;
             }
         }
@@ -483,10 +453,8 @@ class TdmpictureUtility
             $sel1 = 'asc.png';
             $sel2 = 'desc.png';
         }
-        $select_view .= '  <a href="' . $_SERVER['PHP_SELF'] . '?file_cat=' . $file_cat . '&start=' . $start . '&sort=' . $form_sort . '&order=asc" /><img src="' . TDMPICTURE_IMAGES_URL . '/decos/'
-                        . $sel1 . '" title="ASC" alt="ASC"></a>';
-        $select_view .= '<a href="' . $_SERVER['PHP_SELF'] . '?file_cat=' . $file_cat . '&start=' . $start . '&sort=' . $form_sort . '&order=desc" /><img src="' . TDMPICTURE_IMAGES_URL . '/decos/'
-                        . $sel2 . '" title="DESC" alt="DESC"></a>';
+        $select_view .= '  <a href="' . $_SERVER['PHP_SELF'] . '?file_cat=' . $file_cat . '&start=' . $start . '&sort=' . $form_sort . '&order=asc"><img src="' . TDMPICTURE_IMAGES_URL . '/decos/' . $sel1 . '" title="ASC" alt="ASC"></a>';
+        $select_view .= '<a href="' . $_SERVER['PHP_SELF'] . '?file_cat=' . $file_cat . '&start=' . $start . '&sort=' . $form_sort . '&order=desc"><img src="' . TDMPICTURE_IMAGES_URL . '/decos/' . $sel2 . '" title="DESC" alt="DESC"></a>';
         $select_view .= '</form>';
 
         return $select_view;
@@ -593,7 +561,7 @@ class TdmpictureUtility
      */
     public static function selectCat($mytree, $cat)
     {
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
         global $xoopsTpl, $start, $tris, $limit, $groups, $xoopsUser, $xoopsModule;
         //perm
@@ -607,12 +575,11 @@ class TdmpictureUtility
         //$criteria->setOrder('DESC');
         //$arr = $catHandler->getall($criteria);
         //$mytree = new XoopsObjectTree($arr, 'id', 'pid');
-        //$mytree = new TDMObjectTree($arr, 'cat_id', 'cat_pid');
+        //$mytree = new TdmObjectTree($arr, 'cat_id', 'cat_pid');
 
         $form = new XoopsThemeForm('', 'catform', $_SERVER['REQUEST_URI'], 'post', true);
         //$form->setExtra('enctype="multipart/form-data"');
-        $tagchannel_select = new XoopsFormLabel('', $mytree->makeSelBox('cat_pid', 'cat_title', '-', $cat, '-- ' . _MD_TDMPICTURE_CAT, 0,
-                                                                        "OnChange='window.document.location=this.options[this.selectedIndex].value;'", 'tdmpicture_catview'), 'pid');
+        $tagchannel_select = new XoopsFormLabel('', $mytree->makeSelBox('cat_pid', 'cat_title', '-', $cat, '-- ' . _MD_TDMPICTURE_CAT, 0, "OnChange='window.document.location=this.options[this.selectedIndex].value;'", 'tdmpicture_catview'), 'pid');
         $form->addElement($tagchannel_select);
 
         //$form->display();
@@ -728,9 +695,9 @@ class TdmpictureUtility
         $tblColors[0]              = $tblColors[1] = $tblColors[2] = $tblColors[3] = $tblColors[4] = $tblColors[5] = $tblColors[6] = $tblColors[7] = $tblColors[8] = '';
         $tblColors[$currentoption] = 'current';
         if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-            include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
+            require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
         } else {
-            include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/english/modinfo.php';
+            require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/english/modinfo.php';
         }
 
         echo "<div id='buttontop'>";
@@ -750,15 +717,11 @@ class TdmpictureUtility
         echo "<li id='" . $tblColors[2] . "'><a href=\"" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/artiste.php"><span>' . _MI_TDMPICTURE_ADMENUARTISTE . '</span></a></li>';
         echo "<li id='" . $tblColors[3] . "'><a href=\"" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/album.php"><span>' . _MI_TDMPICTURE_ADMENUALBUM . '</span></a></li>';
         echo "<li id='" . $tblColors[4] . "'><a href=\"" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/files.php"><span>' . _MI_TDMPICTURE_ADMENUFILE . '</span></a></li>';
-        echo "<li id='" . $tblColors[5] . "'><a href=\"" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/permissions.php"><span>' . _MI_TDMPICTURE_ADMENUPERMISSIONS
-             . '</span></a></li>';
+        echo "<li id='" . $tblColors[5] . "'><a href=\"" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/permissions.php"><span>' . _MI_TDMPICTURE_ADMENUPERMISSIONS . '</span></a></li>';
         echo "<li id='" . $tblColors[6] . "'><a href=\"" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/about.php"><span>' . _MI_TDMPICTURE_ADMENUABOUT . '</span></a></li>';
-        echo "<li id='" . $tblColors[7] . "'><a href='../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "'><span>" . _MI_TDMPICTURE_ADMENUPREF
-             . '</span></a></li>';
+        echo "<li id='" . $tblColors[7] . "'><a href='../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=" . $xoopsModule->getVar('mid') . "'><span>" . _MI_TDMPICTURE_ADMENUPREF . '</span></a></li>';
         echo '</ul></div>&nbsp;';
     }
-
-
 
     /**
      * Do some basic file checks and stuff.
@@ -770,8 +733,8 @@ class TdmpictureUtility
 
         //??????
 
-        // includes
-        //include_once('header.php');
+        // require_onces
+        //require_once('header.php');
 
         //        $helper = Xoopsmodules\amreviews\Helper::getInstance();
         if (!isset($moduleDirName)) {
@@ -868,8 +831,6 @@ class TdmpictureUtility
         echo '</fieldset>';
     } // end function
 
-
-
     /**
      * serverStats()
      *
@@ -885,7 +846,7 @@ class TdmpictureUtility
         //??????
 
         // includes
-        //include_once('header.php');
+        //require_once('header.php');
 
         //        $helper = Xoopsmodules\amreviews\Helper::getInstance();
         if (!isset($moduleDirName)) {
@@ -899,19 +860,19 @@ class TdmpictureUtility
         //        $adminLang = '_AM_' . strtoupper($moduleDirName);
 
         // Load language files
-        $html  = '';
-//        $sql   = 'SELECT metavalue';
-//        $sql   .= ' FROM ' . $GLOBALS['xoopsDB']->prefix('TDMPICTURE_META');
-//        $sql   .= " WHERE metakey='version' LIMIT 1";
-//        $query = $GLOBALS['xoopsDB']->query($sql);
-//        list($meta) = $GLOBALS['xoopsDB']->fetchRow($query);
-//        $html .= "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_TDMPICTURE_DOWN_IMAGEINFO . "</legend>\n";
-//        $html .= "<div style='padding: 8px;'>\n";
-//        $html .= '<div>' . _AM_TDMPICTURE_DOWN_METAVERSION . $meta . "</div>\n";
-//        $html .= "<br>\n";
-//        $html .= "<br>\n";
-//        $html .= '<div>' . _AM_TDMPICTURE_DOWN_SPHPINI . "</div>\n";
-//        $html .= "<ul>\n";
+        $html = '';
+        //        $sql   = 'SELECT metavalue';
+        //        $sql   .= ' FROM ' . $GLOBALS['xoopsDB']->prefix('TDMPICTURE_META');
+        //        $sql   .= " WHERE metakey='version' LIMIT 1";
+        //        $query = $GLOBALS['xoopsDB']->query($sql);
+        //        list($meta) = $GLOBALS['xoopsDB']->fetchRow($query);
+        //        $html .= "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_TDMPICTURE_DOWN_IMAGEINFO . "</legend>\n";
+        //        $html .= "<div style='padding: 8px;'>\n";
+        //        $html .= '<div>' . _AM_TDMPICTURE_DOWN_METAVERSION . $meta . "</div>\n";
+        //        $html .= "<br>\n";
+        //        $html .= "<br>\n";
+        //        $html .= '<div>' . _AM_TDMPICTURE_DOWN_SPHPINI . "</div>\n";
+        //        $html .= "<ul>\n";
         //
         $gdlib = function_exists('gd_info') ? '<span style="color: green;">' . _AM_TDMPICTURE_DOWN_GDON . '</span>' : '<span style="color: red;">' . _AM_TDMPICTURE_DOWN_GDOFF . '</span>';
         $html  .= '<li>' . _AM_TDMPICTURE_DOWN_GDLIBSTATUS . $gdlib;
@@ -945,7 +906,6 @@ class TdmpictureUtility
         //        return $html;
     }
 
-
     /**
      * serverStats()
      *
@@ -954,19 +914,19 @@ class TdmpictureUtility
     public static function serverStats()
     {
         //mb    $TDMPICTURE = TDMPICTURETDMPICTURE::getInstance();
-        $html  = '';
-//        $sql   = 'SELECT metavalue';
-//        $sql   .= ' FROM ' . $GLOBALS['xoopsDB']->prefix('TDMPICTURE_META');
-//        $sql   .= " WHERE metakey='version' LIMIT 1";
-//        $query = $GLOBALS['xoopsDB']->query($sql);
-//        list($meta) = $GLOBALS['xoopsDB']->fetchRow($query);
-//        $html .= "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_TDMPICTURE_DOWN_IMAGEINFO . "</legend>\n";
-//        $html .= "<div style='padding: 8px;'>\n";
-//        $html .= '<div>' . _AM_TDMPICTURE_DOWN_METAVERSION . $meta . "</div>\n";
-//        $html .= "<br>\n";
-//        $html .= "<br>\n";
-//        $html .= '<div>' . _AM_TDMPICTURE_DOWN_SPHPINI . "</div>\n";
-//        $html .= "<ul>\n";
+        $html = '';
+        //        $sql   = 'SELECT metavalue';
+        //        $sql   .= ' FROM ' . $GLOBALS['xoopsDB']->prefix('TDMPICTURE_META');
+        //        $sql   .= " WHERE metakey='version' LIMIT 1";
+        //        $query = $GLOBALS['xoopsDB']->query($sql);
+        //        list($meta) = $GLOBALS['xoopsDB']->fetchRow($query);
+        //        $html .= "<fieldset><legend style='font-weight: bold; color: #900;'>" . _AM_TDMPICTURE_DOWN_IMAGEINFO . "</legend>\n";
+        //        $html .= "<div style='padding: 8px;'>\n";
+        //        $html .= '<div>' . _AM_TDMPICTURE_DOWN_METAVERSION . $meta . "</div>\n";
+        //        $html .= "<br>\n";
+        //        $html .= "<br>\n";
+        //        $html .= '<div>' . _AM_TDMPICTURE_DOWN_SPHPINI . "</div>\n";
+        //        $html .= "<ul>\n";
         //
         $gdlib = function_exists('gd_info') ? '<span style="color: green;">' . _AM_TDMPICTURE_DOWN_GDON . '</span>' : '<span style="color: red;">' . _AM_TDMPICTURE_DOWN_GDOFF . '</span>';
         $html  .= '<li>' . _AM_TDMPICTURE_DOWN_GDLIBSTATUS . $gdlib;

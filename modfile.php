@@ -19,15 +19,15 @@
 
 use Xmf\Request;
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 $myts = MyTextSanitizer::getInstance();
 
-include_once XOOPS_ROOT_PATH . '/header.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/include/common.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/include/common.php';
 
 $xoopsTpl->assign('dirname', $moduleDirName);
 
-$op   = Request::getVar('op', 'list'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'list';
+$op = Request::getVar('op', 'list'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'list';
 
 //load class
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
@@ -43,7 +43,7 @@ switch ($op) {
         }
 
         $obj = $fileHandler->get($_REQUEST['file_id']);
-        if (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid') || $xoopsUser->isAdmin()) {
+        if ($xoopsUser->isAdmin() || (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid'))) {
             $form = $obj->getForm();
             $form->display();
         } else {
@@ -67,7 +67,7 @@ switch ($op) {
             $obj = $fileHandler->create();
         }
 
-        if (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid') || $xoopsUser->isAdmin()) {
+        if ($xoopsUser->isAdmin() || (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid'))) {
             //fichier commun
             $obj->setVar('file_title', $_REQUEST['file_title']);
             $obj->setVar('file_display', $_REQUEST['file_display']);
@@ -102,7 +102,7 @@ switch ($op) {
                 redirect_header('index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
 
-            if (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid') || $xoopsUser->isAdmin()) {
+            if ($xoopsUser->isAdmin() || (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid'))) {
                 if ($fileHandler->delete($_REQUEST['file_id'])) {
                     redirect_header('javascript:history.go(-2)', 2, _AM_TDMPICTURE_BASE);
                 } else {
@@ -127,4 +127,4 @@ switch ($op) {
 
 }
 TdmpictureUtility::getHeader();
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

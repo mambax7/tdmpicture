@@ -46,7 +46,7 @@ $modversion = array(
     'manual_file'         => XOOPS_URL . "/modules/$moduleDirName/docs/install.txt",
     // ------------------- Min Requirements -------------------
     'min_php'             => '5.5',
-    'min_xoops'           => '2.5.8',
+    'min_xoops'           => '2.5.9',
     'min_admin'           => '1.2',
     'min_db'              => array('mysql' => '5.5'),
     // images
@@ -77,14 +77,14 @@ $modversion = array(
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
     'sub'                 => array(
-//        array(
-//            'name' => _MI_TDMPICTURE_SUB_SMNAME1,
-//            'url'  => 'movies.php'
-//        ),
-//        array(
-//            'name' => _MI_TDMPICTURE_SUB_SMNAME2,
-//            'url'  => 'clips.php'
-//        ),
+        //        array(
+        //            'name' => _MI_TDMPICTURE_SUB_SMNAME1,
+        //            'url'  => 'movies.php'
+        //        ),
+        //        array(
+        //            'name' => _MI_TDMPICTURE_SUB_SMNAME2,
+        //            'url'  => 'clips.php'
+        //        ),
         array(
             'name' => _MI_TDMPICTURE_VIEWALBUM,
             'url'  => 'search.php'
@@ -134,11 +134,11 @@ $modversion = array(
 // ------------------- Help files ------------------- //
 $modversion['helpsection'] = array(
     array(
-        'name' => _MI_TDMPICTURE_HELP_OVERVIEW,
+        'name' => _MI_TDMPICTURE_OVERVIEW,
         'link' => 'page=help'
     ),
     array(
-        'name' => _MI_TDMPICTURE_HELP_OVERVIEW,
+        'name' => _MI_TDMPICTURE_DISCLAIMER,
         'link' => 'page=disclaimer'
     ),
     array(
@@ -188,6 +188,7 @@ $modversion['templates'] = array(
         'file'        => 'tdmpicture_rss.tpl',
         'description' => 'RSS'
     ),
+
 );
 
 // ------------------- Blocks ------------------- //
@@ -396,7 +397,7 @@ $modversion['config'][] = array(
 //'default' => 400);
 
 $modversion['config'][] = array(
-    include_once XOOPS_ROOT_PATH . '/class/xoopslists.php',
+    require_once XOOPS_ROOT_PATH . '/class/xoopslists.php',
     'name'        => 'tdmpicture_editor',
     'title'       => '_MI_TDMPICTURE_EDITOR',
     'description' => '',

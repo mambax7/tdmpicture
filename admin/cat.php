@@ -54,7 +54,7 @@ switch ($op) {
         }
 
         //upload
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
         //        $uploaddir = constant($modir . '_UPLOAD_PATH') . '/cat/';
         $uploaddir = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/upload/cat/';
         $mimetype  = explode('|', $moduleHelper->getConfig('tdmpicture_mimetype'));
@@ -100,7 +100,7 @@ switch ($op) {
 
             redirect_header('cat.php', 2, _AM_TDMPICTURE_BASE);
         }
-        //include_once(__DIR__ . '/../include/forms.php');
+        //require_once(__DIR__ . '/../include/forms.php');
         echo $obj->getHtmlErrors();
         $form = $obj->getForm();
         $form->display();
@@ -221,7 +221,7 @@ switch ($op) {
             echo '<th align="center">' . _AM_TDMPICTURE_ACTION . '</th>';
             echo '</tr>';
             $class              = 'odd';
-            $mytree             = new TDMObjectTree($assoc_cat, 'cat_id', 'cat_pid');
+            $mytree             = new TdmObjectTree($assoc_cat, 'cat_id', 'cat_pid');
             $category_ArrayTree = $mytree->makeArrayTree('', '<img src="' . TDMPICTURE_IMAGES_URL . '/decos/arrow.gif">');
             foreach (array_keys($category_ArrayTree) as $i) {
                 $class     = ($class === 'even') ? 'odd' : 'even';

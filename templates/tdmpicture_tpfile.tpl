@@ -10,7 +10,7 @@
                                     <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$file.id}>&<{$file.cat_nav}>&tris=<{$tris}>&order=<{$order}>"><img
                                                 src="<{$file.img}>" slide="<{$file.img_popup}>" rel="group1"
                                                 title="<{$file.title}>"
-                                                alt="<{$file.title}>"/></a>
+                                                alt="<{$file.title}>"></a>
                                 </div>
                             </div>
 
@@ -21,10 +21,10 @@
                                     </h2>
 
                                     <div class="switch_in"><{$smarty.const._MD_TDMPICTURE_BY}>: <a
-                                                href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$file.uid}>"/><{$file.postername}></a>
+                                                href="<{$smarty.const.TDMPICTURE_URL}>/user.php?ut=<{$file.uid}>"><{$file.postername}></a>
                                         ,
                                         <{$smarty.const._MD_TDMPICTURE_IN}>: <a
-                                                href="<{$smarty.const.TDMPICTURE_URL}>/viewcat.php?ct=<{$file.file_cat_id}>"/><{$file.file_cat}></a>
+                                                href="<{$smarty.const.TDMPICTURE_URL}>/viewcat.php?ct=<{$file.file_cat_id}>"><{$file.file_cat}></a>
                                         ,
                                         <{$smarty.const._MD_TDMPICTURE_LE}>: <{$file.indate}>
                                     </div>
@@ -33,12 +33,12 @@
                             </div>
 
 
-                            <div id="tdmpicture_text" class="switch_desc"><{$file.text}><br class="clear"/></div>
+                            <div id="tdmpicture_text" class="switch_desc"><{$file.text}><br class="clear"></div>
 
 
                             <div id="tdmpicture_num" class="switch_info odd">
                                 <span><{$file.comments}></span>
-                                <hr/>
+                                <hr>
                                 <a href="<{$smarty.const.TDMPICTURE_URL}>/viewfile.php?st=<{$file.id}>&<{$file.cat_nav}>&tris=<{$tris}>"><{$smarty.const._MD_TDMPICTURE_COMMENT}></a>
                             </div>
 
@@ -49,7 +49,7 @@
                                        title="<{$smarty.const._MD_TDMPICTURE_VOTEADD}>"></a>
                                 <{/if}>
                                 <span><{$file.counts}></span>/<span><{$file.votes}></span>
-                                <hr/>
+                                <hr>
                                 <{if $perm_vote}>
                                     <a id="tdmpicture_votedown" href="javascript:;"
                                        onclick="RemoveVote(<{$file.id}>);return false;"
@@ -61,7 +61,7 @@
                             <{if $file.favourite}>
                                 <div id="tdmpicture_num" class="switch_info odd">
                                     <{$file.favourite}>
-                                    <hr/>
+                                    <hr>
                                     <{$smarty.const._MD_TDMPICTURE_POPULAR}>
                                 </div>
                             <{/if}>
@@ -76,4 +76,4 @@
         </td>
     </tr>
 </table>
-<br class="clear"/>
+<br class="clear">

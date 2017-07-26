@@ -1,45 +1,30 @@
 <?php
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-//
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                  Copyright (c) 2000-2016 XOOPS.org                        //
-//                       <https://xoops.org/>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, https://xoops.org/, http://jp.xoops.org/ //
-// Project: XOOPS Project                                                    //
-// ------------------------------------------------------------------------- //
-
-use Xmf\Module\Helper;
+/**
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
+ */
 
 error_reporting(0);
 
-include_once __DIR__ . '/../../../mainfile.php';
-include_once __DIR__ . '/../../../include/cp_header.php';
+require_once __DIR__ . '/../../../mainfile.php';
+require_once __DIR__ . '/../../../include/cp_header.php';
 //require __DIR__ . '/../fpdf/fpdf.php';
 require_once XOOPS_ROOT_PATH . '/class/libraries/vendor/tecnickcom/tcpdf/tcpdf.php';
-//include_once XOOPS_ROOT_PATH.'/modules/tdmpicture/class/tdmassoc_pdf_table.php';
-include_once XOOPS_ROOT_PATH . '/modules/tdmpicture/class/utility.php';
+//require_once XOOPS_ROOT_PATH.'/modules/tdmpicture/class/tdmassoc_pdf_table.php';
+require_once XOOPS_ROOT_PATH . '/modules/tdmpicture/class/utility.php';
 
 global $xoopsDB, $xoopsConfig;
 
@@ -47,9 +32,9 @@ $moduleDirName = basename(dirname(__DIR__));
 $moduleHelper  = Helper::getHelper($moduleDirName);
 
 if (file_exists(XOOPS_ROOT_PATH . '/modules/tdmpicture/language/' . $xoopsConfig['language'] . '/admin.php')) {
-    include_once XOOPS_ROOT_PATH . '/modules/tdmpicture/language/' . $xoopsConfig['language'] . '/admin.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tdmpicture/language/' . $xoopsConfig['language'] . '/admin.php';
 } else {
-    include_once XOOPS_ROOT_PATH . '/modules/tdmpicture/language/english/admin.php';
+    require_once XOOPS_ROOT_PATH . '/modules/tdmpicture/language/english/admin.php';
 }
 $myts = MyTextSanitizer:: getInstance(); // MyTextSanitizer object
 
@@ -118,7 +103,7 @@ switch ($option) {
         );
 
         $pdf->Table('SELECT M.member_name, M.member_firstname, M.member_adress, M.member_zipcode, M.member_town, M.member_phone, S.status_name FROM ' . $xoopsDB->prefix('tdmassoc_member') . ' M, '
-                    . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status AND M.member_office = "1" ORDER BY S.status_order limit 0,10', $prop);
+                    . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status AND M.member_office = "1" ORDER BY S.status_order LIMIT 0,10', $prop);
 
         $pdf->TitreChapitre($myts->displayTarea($pdf_data['composition_list_admin']));
 
@@ -153,7 +138,7 @@ switch ($option) {
         $criteria->setOrder('ASC');
         $assoc_arr = $memberHandler->getObjects($criteria);*/
         $pdf->Table('SELECT M.member_name, M.member_firstname, M.member_adress, M.member_zipcode, M.member_town, M.member_phone, S.status_name FROM ' . $xoopsDB->prefix('tdmassoc_member') . ' M, '
-                    . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status AND M.member_office = "0" ORDER BY S.status_order limit 0,10', $prop);
+                    . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status AND M.member_office = "0" ORDER BY S.status_order LIMIT 0,10', $prop);
         $pdf->Output();
 
         break;
@@ -195,7 +180,7 @@ switch ($option) {
         );
 
         $pdf->Table('SELECT M.member_name, M.member_firstname, M.member_adress, M.member_zipcode, M.member_town, M.member_phone, S.status_name FROM ' . $xoopsDB->prefix('tdmassoc_member') . ' M, '
-                    . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status ORDER BY S.status_order limit 0,10', $prop);
+                    . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status ORDER BY S.status_order LIMIT 0,10', $prop);
         $pdf->Output();
 
         break;
@@ -466,7 +451,7 @@ switch ($option) {
         $criteria->add(new Criteria('member_waiting', 1,'='));
         $criteria->setOrder('ASC');
         $assoc_arr = $memberHandler->getObjects($criteria);*/
-        $pdf->Table('SELECT newsletter_head FROM ' . $xoopsDB->prefix('tdmassoc_newsletter') . ' WHERE newsletter_id = ' . $_REQUEST['newsletter_id'] . ' limit 0,10', $prop);
+        $pdf->Table('SELECT newsletter_head FROM ' . $xoopsDB->prefix('tdmassoc_newsletter') . ' WHERE newsletter_id = ' . $_REQUEST['newsletter_id'] . ' LIMIT 0,10', $prop);
         $pdf->Output();
 
         break;
@@ -843,7 +828,7 @@ function Chars($text)
                             '/&#232;/i',
                             '/&#224;/i',
                             '/&quot;/i',
-                            '/<br \/>/i',
+                            '/<br>/i',
                             '/&agrave;/i',
                             '/&#8364;/i'
                         ), array(

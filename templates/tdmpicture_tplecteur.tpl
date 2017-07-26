@@ -59,7 +59,7 @@
                 <div id="lecteur">
                     <object type="application/x-shockwave-flash" data="audioPlayer.swf" id="audioPlayer" width="1"
                             height="1">
-                        <param name="allowScriptAccess" value="always"/>
+                        <param name="allowScriptAccess" value="always">
                         <param name="movie" value="audioPlayer.swf">
                         <embed type="application/x-shockwave-flash" src="audioPlayer.swf" style="" id="audioPlayer"
                                name="audioPlayer" bgcolor="#FFFFFF" quality="autohigh" wmode="transparent"
@@ -87,7 +87,7 @@
         });
     </script>
 
-    <br class="clear"/> <br>
+    <br class="clear"> <br>
 
 
     <div id="tabs">
@@ -105,7 +105,7 @@
             </li>
 
         </ul>
-        <br class="clear"/>
+        <br class="clear">
 
 
         <!-- fichier les plus vue -->

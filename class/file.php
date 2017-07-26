@@ -129,7 +129,8 @@ class TdmpictureFile extends XoopsObject
         $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKDHUMB, '', 100, 255, TDMPICTURE_URL . '/get.php?st=' . $this->getVar('file_id')));
         $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKFORUM, '', 100, 255, '[url=' . $url . '][img]' . $file_path . '[/img][/url]'));
         $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKFORUM1, '', 100, 255, '[url=' . $url . '][img=' . $file_path . '][/url]'));
-        $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKHTML, '', 100, 255, '<a href="' . $url . '" target="_blank"><img src="' . $file_path . '" border="0" alt="' . $this->getVar('file_title') . '"/></a>'));
+        $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKHTML, '', 100, 255,
+                                            '<a href="' . $url . '" target="_blank"><img src="' . $file_path . '" border="0" alt="' . $this->getVar('file_title') . '"></a>'));
 
         return $form;
     }
@@ -149,7 +150,7 @@ class TdmpictureFile extends XoopsObject
         }
         $title = $this->isNew() ? sprintf(_MD_TDMPICTURE_ADD) : sprintf(_MD_TDMPICTURE_EDIT);
 
-        include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
         $gpermHandler = xoops_getHandler('groupperm');
         //permission
@@ -190,8 +191,8 @@ class TdmpictureFile extends XoopsObject
             $criteriaUser->add(new Criteria('cat_uid', $uid));
 
             $arr    = $catHandler->getall($criteriaUser);
-            $mytree = new TDMObjectTree($arr, 'cat_id', 'cat_pid');
-            if (TdmpictureUtility::checkXoopsVersion('2', '5', '9', '>=')) {
+            $mytree = new TdmObjectTree($arr, 'cat_id', 'cat_pid');
+            if (TdmpictureUtility::checkVerXoops($module, '2.5.9')) {
                 $catSelect = new XoopsFormLabel(_MD_TDMPICTURE_CAT, $mytree->makeSelectElement('file_cat', 'cat_title', '-', $this->getVar('file_cat'), true, 0, '', 'tdmpicture_catview'));
                 $form->addElement($catSelect);
             } else {
@@ -258,8 +259,8 @@ class TdmpictureFile extends XoopsObject
             //$mytree = new XoopsObjectTree($arr, 'cat_id', 'cat_pid');
             //$form->addElement(new XoopsFormLabel(_MD_TDMPICTURE_CAT, $mytree->makeSelBox('file_cat', 'cat_title','-', $this->getVar('cat_pid'), true)), true);
 
-            $mytree = new TDMObjectTree($arr, 'cat_id', 'cat_pid');
-            if (TdmpictureUtility::checkXoopsVersion('2', '5', '9', '>=')) {
+            $mytree = new TdmObjectTree($arr, 'cat_id', 'cat_pid');
+            if (TdmpictureUtility::checkVerXoops($module, '2.5.9')) {
                 $catSelect = new XoopsFormLabel(_MD_TDMPICTURE_CAT, $mytree->makeSelectElement('file_cat', 'cat_title', '-', $this->getVar('cat_pid'), true, 0, '', 'tdmpicture_catview'));
                 $form->addElement($catSelect);
             } else {
@@ -310,17 +311,17 @@ class TdmpictureFile extends XoopsObject
             //           archive="'.TDMPICTURE_URL.'/jupload/wjhk.jupload.jar" width="'.$moduleHelper->getConfig('tdmpicture_java_width').'" height="'.$moduleHelper->getConfig('tdmpicture_java_heigth').'" alt=""
             //            mayscript>
             //            <param name="postURL"
-            //                value="'.TDMPICTURE_URL.'/include/jquery.php?op=upload&file_cat='.$_REQUEST['file_cat'].'&file_display='.$_REQUEST['file_display'].'" />
-            //           <param name="maxChunkSize" value="'.$moduleHelper->getConfig('tdmpicture_mimemax').'" />
-            //           <param name="uploadPolicy" value="PictureUploadPolicy" />
-            //            <param name="nbFilesPerRequest" value="1" />
+            //                value="'.TDMPICTURE_URL.'/include/jquery.php?op=upload&file_cat='.$_REQUEST['file_cat'].'&file_display='.$_REQUEST['file_display'].'">
+            //           <param name="maxChunkSize" value="'.$moduleHelper->getConfig('tdmpicture_mimemax').'">
+            //           <param name="uploadPolicy" value="PictureUploadPolicy">
+            //            <param name="nbFilesPerRequest" value="1">
             //            <!-- Optionnal, see code comments -->
-            //           <param name="maxPicHeight" value="'.$moduleHelper->getConfig('tdmpicture_full_heigth').'" />
+            //           <param name="maxPicHeight" value="'.$moduleHelper->getConfig('tdmpicture_full_heigth').'">
             //           <!-- Optionnal, see code comments -->
-            //           <param name="maxPicWidth" value="'.$moduleHelper->getConfig('tdmpicture_full_width').'" />
+            //           <param name="maxPicWidth" value="'.$moduleHelper->getConfig('tdmpicture_full_width').'">
             //           <!-- Optionnal, see code comments -->
-            //           <param name="debugLevel" value="0" />
-            //          <param name="showLogWindow" value="false" />
+            //           <param name="debugLevel" value="0">
+            //          <param name="showLogWindow" value="false">
             //           <!-- Optionnal, see code comments --> Java 1.5 or higher
             //           plugin required. </applet> <br>
 
@@ -383,6 +384,16 @@ $tdmpicture(document).ready( function() {
 class TdmpictureFileHandler extends XoopsPersistableObjectHandler
 {
     /**
+     * TdmpictureFileHandler constructor.
+     * @param XoopsDatabase $db
+     */
+    public function __construct(XoopsDatabase $db)
+    {
+        $this->_dirname = basename(dirname(__DIR__));
+        parent::__construct($db, 'tdmpicture_file', 'TdmpictureFile', 'file_id', 'file_title');
+    }
+
+    /**
      * @param null       $criteria
      * @param null|array $fields
      * @param bool       $asObject
@@ -444,16 +455,6 @@ class TdmpictureFileHandler extends XoopsPersistableObjectHandler
         }
 
         return $ret;
-    }
-
-    /**
-     * TdmpictureFileHandler constructor.
-     * @param XoopsDatabase $db
-     */
-    public function __construct(XoopsDatabase $db)
-    {
-        $this->_dirname = basename(dirname(__DIR__));
-        parent::__construct($db, 'tdmpicture_file', 'TdmpictureFile', 'file_id', 'file_title');
     }
 
     /**

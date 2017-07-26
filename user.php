@@ -20,15 +20,15 @@
 
 use Xmf\Request;
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 $myts = MyTextSanitizer::getInstance();
 
 $GLOBALS['xoopsOption']['template_main'] = 'tdmpicture_index.tpl';
-include_once XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoopsTpl->assign('dirname', $moduleDirName);
 
-$op   = Request::getVar('op', 'list'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'list';
+$op    = Request::getVar('op', 'list'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'list';
 $start = isset($_REQUEST['start']) ? $_REQUEST['start'] : 0;
 $tris  = isset($_REQUEST['tris']) ? $_REQUEST['tris'] : 'file_indate';
 $order = isset($_REQUEST['order']) ? $_REQUEST['order'] : 'desc';
@@ -163,18 +163,18 @@ switch ($op) {
                 if (@$moyen == 0) {
                     $file['moyen'] = '';
                 } else {
-                    $file['moyen'] = "<img src='" . TDMPICTURE_IMAGES_URL . '/rate' . $moyen . ".png'/>";
+                    $file['moyen'] = "<img src='" . TDMPICTURE_IMAGES_URL . '/rate' . $moyen . ".png'>";
                 }
 
                 //favorie
                 if ($file['counts'] >= $moduleHelper->getConfig('tdmpicture_favourite')) {
-                    $file['favourite'] = "<img src='" . TDMPICTURE_IMAGES_URL . "/flag.png'/>";
+                    $file['favourite'] = "<img src='" . TDMPICTURE_IMAGES_URL . "/flag.png'>";
                 } else {
                     $file['favourite'] = '';
                 }
 
                 if (!empty($xoopsUser)) {
-                    if ($xoopsUser->getVar('uid') == $file_arr[$f]->getVar('file_uid') || $xoopsUser->isAdmin()) {
+                    if ($xoopsUser->isAdmin() || $xoopsUser->getVar('uid') == $file_arr[$f]->getVar('file_uid')) {
                         if (!$gpermHandler->checkRight('tdmpicture_view', 128, $groups, $xoopsModule->getVar('mid'))) {
                             $file['menu'] = false;
                             $file['edit'] = false;
@@ -217,4 +217,4 @@ if (isset($xoTheme) && is_object($xoTheme)) {
     $xoopsTpl->assign('xoops_meta_description', $moduleHelper->getConfig('tdmpicture_description'));
 }
 
-include_once XOOPS_ROOT_PATH . '/footer.php';
+require_once XOOPS_ROOT_PATH . '/footer.php';

@@ -20,18 +20,18 @@ use Xmf\Module\Helper;
  * ****************************************************************************
  */
 
-include_once __DIR__ . '/../../include/cp_header.php';
-//include __DIR__ . '/../../mainfile.php';
+require_once __DIR__ . '/../../include/cp_header.php';
+//require_once __DIR__ . '/../../mainfile.php';
 
 $moduleDirName = basename(__DIR__);
 $moduleHelper  = Helper::getHelper($moduleDirName);
 
-/* Use XOOPS_ROOT_PATH for all include file */
-include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-include_once XOOPS_ROOT_PATH . '/class/tree.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once __DIR__ . '/include/common.php';
-//include_once XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->getVar("dirname").'/include/get_perms.php';
+/* Use XOOPS_ROOT_PATH for all require_once file */
+require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/include/common.php';
+//require_once XOOPS_ROOT_PATH.'/modules/'.$xoopsModule->getVar("dirname").'/include/get_perms.php';
 $gpermHandler = xoops_getHandler('groupperm');
 //permission
 if (is_object($xoopsUser)) {

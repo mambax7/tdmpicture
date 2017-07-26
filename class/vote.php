@@ -16,6 +16,7 @@
  *
  * ****************************************************************************
  */
+
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 class TdmpictureVote extends XoopsObject

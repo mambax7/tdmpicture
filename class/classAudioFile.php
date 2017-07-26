@@ -59,34 +59,200 @@ class AudioFile
     public function mp3info()
     {
         $byte             = array();
-        $version          = array('MPEG Version 2.5', false, 'MPEG Version 2', 'MPEG Version 1');
-        $version_bitrate  = array(1, false, 1, 0);
-        $version_sampling = array(2, false, 1, 0);
-        $layer            = array(false, 'Layer III', 'Layer II', 'Layer I');
-        $layer_bitrate    = array(false, 2, 1, 0);
-        $layer_lengt      = array(false, 1, 1, 0);
-        $protection       = array('Protected by CRC (16bit crc follows header)', 'Not protected');
+        $version          = array(
+            'MPEG Version 2.5',
+            false,
+            'MPEG Version 2',
+            'MPEG Version 1'
+        );
+        $version_bitrate  = array(
+            1,
+            false,
+            1,
+            0
+        );
+        $version_sampling = array(
+            2,
+            false,
+            1,
+            0
+        );
+        $layer            = array(
+            false,
+            'Layer III',
+            'Layer II',
+            'Layer I'
+        );
+        $layer_bitrate    = array(
+            false,
+            2,
+            1,
+            0
+        );
+        $layer_lengt      = array(
+            false,
+            1,
+            1,
+            0
+        );
+        $protection       = array(
+            'Protected by CRC (16bit crc follows header)',
+            'Not protected'
+        );
         $byterate         = array(
             array(
-                array('free', 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 'bad'),
-                array('free', 32, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 384, 'bad'),
-                array('free', 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 'bad')
+                array(
+                    'free',
+                    32,
+                    64,
+                    96,
+                    128,
+                    160,
+                    192,
+                    224,
+                    256,
+                    288,
+                    320,
+                    352,
+                    384,
+                    416,
+                    448,
+                    'bad'
+                ),
+                array(
+                    'free',
+                    32,
+                    48,
+                    56,
+                    64,
+                    80,
+                    96,
+                    112,
+                    128,
+                    160,
+                    192,
+                    224,
+                    256,
+                    320,
+                    384,
+                    'bad'
+                ),
+                array(
+                    'free',
+                    32,
+                    40,
+                    48,
+                    56,
+                    64,
+                    80,
+                    96,
+                    112,
+                    128,
+                    160,
+                    192,
+                    224,
+                    256,
+                    320,
+                    'bad'
+                )
             ),
             array(
-                array('free', 32, 48, 56, 64, 80, 96, 112, 128, 144, 160, 176, 192, 224, 256, 'bad'),
-                array('free', 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, 'bad'),
-                array('free', 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, 'bad')
+                array(
+                    'free',
+                    32,
+                    48,
+                    56,
+                    64,
+                    80,
+                    96,
+                    112,
+                    128,
+                    144,
+                    160,
+                    176,
+                    192,
+                    224,
+                    256,
+                    'bad'
+                ),
+                array(
+                    'free',
+                    8,
+                    16,
+                    24,
+                    32,
+                    40,
+                    48,
+                    56,
+                    64,
+                    80,
+                    96,
+                    112,
+                    128,
+                    144,
+                    160,
+                    'bad'
+            ),
+            array(
+                    'free',
+                    8,
+                    16,
+                    24,
+                    32,
+                    40,
+                    48,
+                    56,
+                    64,
+                    80,
+                    96,
+                    112,
+                    128,
+                    144,
+                    160,
+                    'bad'
+                )
             )
         );
         $samplingrate     = array(
-            array(44100, 48000, 32000, false),
-            array(22050, 24000, 16000, false),
-            array(11025, 12000, 8000, false)
+            array(
+                44100,
+                48000,
+                32000,
+                false
+            ),
+            array(
+                22050,
+                24000,
+                16000,
+                false
+            ),
+            array(
+                11025,
+                12000,
+                8000,
+                false
+            )
         );
-        $cannel_mode      = array('Stereo', 'Stereo', 'Stereo', 'Mono');
-        $copyright        = array('Audio is not copyrighted', 'Audio is copyrighted ');
-        $original         = array('Copy of original media', 'Original media');
-        $emphasis         = array('none', '50/15 ms', false, 'CCIT J.17 ');
+        $cannel_mode      = array(
+            'Stereo',
+            'Stereo',
+            'Stereo',
+            'Mono'
+        );
+        $copyright        = array(
+            'Audio is not copyrighted',
+            'Audio is copyrighted '
+        );
+        $original         = array(
+            'Copy of original media',
+            'Original media'
+        );
+        $emphasis         = array(
+            'none',
+            '50/15 ms',
+            false,
+            'CCIT J.17 '
+        );
 
         //id3-stuff
 
@@ -543,8 +709,7 @@ class AudioFile
         $height_channel = $height / $this->wave_channels;
         if ($this->wave_filename <> '' && $this->wave_id === 'RIFF' && $this->wave_type === 'WAVE'
             && ($this->wave_channels >= 1 && $this->wave_channels <= 2)
-            && $this->wave_bits % 8 == 0
-        ) {
+            && $this->wave_bits % 8 == 0) {
             $file = fopen($this->wave_filename, 'r');
 
             // read the first 12 bytes (RIFF- & WAVE-chunk)
@@ -616,11 +781,16 @@ class AudioFile
                     }
                     //$im = @ImageCreate ($width, (256*$this->wave_channels)+1) || die ("Cannot Initialize new GD image stream!");
                     $im               = @imagecreate($width, $height) || die('Cannot Initialize new GD image stream!');
-                    $background_color = imagecolorallocate($im, hexdec(substr($this->visual_background_color, 1, 2)), hexdec(substr($this->visual_background_color, 3, 2)), hexdec(substr($this->visual_background_color, 5, 2)));
-                    $cBlack           = imagecolorallocate($im, hexdec(substr($this->visual_background_color, 1, 2)), hexdec(substr($this->visual_background_color, 3, 2)), hexdec(substr($this->visual_background_color, 5, 2)));
-                    $cGreen           = imagecolorallocate($im, hexdec(substr($this->visual_graph_color, 1, 2)), hexdec(substr($this->visual_graph_color, 3, 2)), hexdec(substr($this->visual_graph_color, 5, 2)));
-                    $cRed             = imagecolorallocate($im, hexdec(substr($this->visual_border_color, 1, 2)), hexdec(substr($this->visual_border_color, 3, 2)), hexdec(substr($this->visual_border_color, 5, 2)));
-                    $cBlue            = imagecolorallocate($im, hexdec(substr($this->visual_grid_color, 1, 2)), hexdec(substr($this->visual_grid_color, 3, 2)), hexdec(substr($this->visual_grid_color, 5, 2)));
+                    $background_color = imagecolorallocate($im, hexdec(substr($this->visual_background_color, 1, 2)), hexdec(substr($this->visual_background_color, 3, 2)),
+                                                           hexdec(substr($this->visual_background_color, 5, 2)));
+                    $cBlack           = imagecolorallocate($im, hexdec(substr($this->visual_background_color, 1, 2)), hexdec(substr($this->visual_background_color, 3, 2)),
+                                                           hexdec(substr($this->visual_background_color, 5, 2)));
+                    $cGreen           = imagecolorallocate($im, hexdec(substr($this->visual_graph_color, 1, 2)), hexdec(substr($this->visual_graph_color, 3, 2)),
+                                                           hexdec(substr($this->visual_graph_color, 5, 2)));
+                    $cRed             = imagecolorallocate($im, hexdec(substr($this->visual_border_color, 1, 2)), hexdec(substr($this->visual_border_color, 3, 2)),
+                                                           hexdec(substr($this->visual_border_color, 5, 2)));
+                    $cBlue            = imagecolorallocate($im, hexdec(substr($this->visual_grid_color, 1, 2)), hexdec(substr($this->visual_grid_color, 3, 2)),
+                                                           hexdec(substr($this->visual_grid_color, 5, 2)));
                     if ($this->visual_border) {
                         imagerectangle($im, 0, 0, $width - 1, $height - 1, $cRed);
                         for ($i = 0; $i <= $this->wave_channels; ++$i) {
@@ -635,7 +805,7 @@ class AudioFile
 
                     // this for-loop draws a graph for every channel
 
-                    for ($j = 0, $iMax = count($visualData); $j < $iMax; ++$j) {
+                    for ($j = 0, $jMax = count($visualData); $j < $jMax; ++$j) {
                         $last_x = 1;
                         $last_y = $height_channel / 2;
 

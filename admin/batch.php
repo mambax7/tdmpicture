@@ -52,8 +52,7 @@ switch ($op) {
         while ($f = readdir($dir)) {
             if (is_file($batch_folder . $f)) {
                 if (preg_match('/.*gif/', strtolower($f)) || preg_match('/.*jpg/', strtolower($f))
-                    || preg_match('/.*png/', strtolower($f))
-                ) {
+                    || preg_match('/.*png/', strtolower($f))) {
                     $photos[] = $f;
                 }
             }
@@ -118,12 +117,12 @@ switch ($op) {
             $photoMore = count($photos) - $i;
             echo '<h4>' . sprintf(_AM_TDMPICTURE_BATCH_NEXT, $i + $nbPhotos, $photoMore) . '</h4>';
             echo '<form method="post" action="batch.php?op=batch">';
-            echo '<input type="hidden" name="file_cat" value="' . $_POST['file_cat'] . '" />';
-            echo '<input type="hidden" name="file_display" value="' . $_POST['file_display'] . '" />';
-            echo '<input type="hidden" name="photo_desc" value="' . $_POST['photo_desc'] . '" />';
-            echo '<input type="hidden" name="batch_folder" value="' . $_POST['batch_folder'] . '" />';
-            echo '<input type="hidden" name="nbPhotos" value="' . ($i + $nbPhotos) . '" />';
-            echo '<input type="submit" name="confirm_submit" value="Continue" />';
+            echo '<input type="hidden" name="file_cat" value="' . $_POST['file_cat'] . '">';
+            echo '<input type="hidden" name="file_display" value="' . $_POST['file_display'] . '">';
+            echo '<input type="hidden" name="photo_desc" value="' . $_POST['photo_desc'] . '">';
+            echo '<input type="hidden" name="batch_folder" value="' . $_POST['batch_folder'] . '">';
+            echo '<input type="hidden" name="nbPhotos" value="' . ($i + $nbPhotos) . '">';
+            echo '<input type="submit" name="confirm_submit" value="Continue">';
             echo '</form>';
             echo '</div>';
 

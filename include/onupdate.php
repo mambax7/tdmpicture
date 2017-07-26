@@ -20,8 +20,7 @@
 use Xmf\Language;
 
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
-    || !$GLOBALS['xoopsUser']->IsAdmin()
-) {
+    || !$GLOBALS['xoopsUser']->IsAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
 
@@ -34,7 +33,7 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0);
 }
 
 /**
@@ -110,7 +109,7 @@ function xoops_module_update_tdmpicture(XoopsModule $xoopsModule, $previousVersi
             foreach ($configurator['templateFolders'] as $folder) {
                 $templateFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $folder);
                 if (is_dir($templateFolder)) {
-                    $templateList = array_diff(scandir($templateFolder), array('..', '.'));
+                    $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), array('..', '.'));
                     foreach ($templateList as $k => $v) {
                         $fileInfo = new SplFileInfo($templateFolder . $v);
                         if ($fileInfo->getExtension() === 'html' && $fileInfo->getFilename() !== 'index.html') {

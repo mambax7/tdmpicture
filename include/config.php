@@ -36,7 +36,7 @@ if (!defined($upperDirName . '_DIRNAME')) {
 //$img_dir = $moduleHelper->getConfig('uploaddir');
 
 //define($upperDirName . '_UPLOAD_URL', XOOPS_UPLOAD_URL . '/' . $moduleDirName); // WITHOUT Trailing slash
-//define("ADSLIGHT_UPLOAD_PATH", $img_dir); // WITHOUT Trailing slash
+//define("TDMPICTURE_UPLOAD_PATH", $img_dir); // WITHOUT Trailing slash
 define($upperDirName . '_UPLOAD_PATH_CONFIG', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
 
 //Configurator
@@ -73,7 +73,7 @@ return array(
 // module information
 $modCopyright
     = "<a href='https://xoops.org' title='XOOPS Project' target='_blank'>
-                     <img src='" . constant($upperDirName . '_AUTHOR_LOGOIMG') . "' alt='XOOPS Project' /></a>";
+                     <img src='" . constant($upperDirName . '_AUTHOR_LOGOIMG') . "' alt='XOOPS Project'></a>";
 
 //
 //xoops_loadLanguage('common', $moduleDirName);

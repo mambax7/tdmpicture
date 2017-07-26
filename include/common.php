@@ -14,7 +14,7 @@
  *
  * @copyright       The XUUPS Project http://sourceforge.net/projects/xuups/
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
- * @package         Include
+ * @package         tdmpicture
  * @subpackage      Functions
  * @since           1.0
  * @author          trabis <lusopoemas@gmail.com>
@@ -54,12 +54,12 @@ define('TDMPICTURE_HEIGHT', $moduleHelper->getConfig('tdmpicture_heigth'));
 define('TDMPICTURE_THUMB_WIDTH', $moduleHelper->getConfig('tdmpicture_thumb_width'));
 define('TDMPICTURE_THUMB_HEIGTH', $moduleHelper->getConfig('tdmpicture_thumb_heigth'));
 
-include_once TDMPICTURE_ROOT_PATH . '/class/utility.php';
-include_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
-include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
-include_once XOOPS_ROOT_PATH . '/class/tree.php';
-include_once TDMPICTURE_ROOT_PATH . '/class/tree.php';
-include_once TDMPICTURE_ROOT_PATH . '/class/tree2.php';
+require_once TDMPICTURE_ROOT_PATH . '/class/utility.php';
+require_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
+require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+require_once XOOPS_ROOT_PATH . '/class/tree.php';
+require_once TDMPICTURE_ROOT_PATH . '/class/tree.php';
+require_once TDMPICTURE_ROOT_PATH . '/class/tree2.php';
 
 //enregistre le style de vue pour la session_cache_expire
 if (!isset($_SESSION['tdmpicture_display'])) {

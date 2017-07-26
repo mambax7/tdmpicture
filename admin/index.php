@@ -101,7 +101,7 @@ $adminObject->displayIndex();
 //if ( !is_readable(XOOPS_ROOT_PATH . "/Frameworks/art/functions.admin.php")) {
 //TdmpictureUtility::getAdminMenu(0, _AM_TDMPICTURE_INDEXDESC);
 //} else {
-//include_once XOOPS_ROOT_PATH.'/Frameworks/art/functions.admin.php';
+//require_once XOOPS_ROOT_PATH.'/Frameworks/art/functions.admin.php';
 //loadModuleAdminMenu (0, _AM_TDMPICTURE_INDEXDESC);
 //}
 

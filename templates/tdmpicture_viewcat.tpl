@@ -43,7 +43,7 @@
         </script>
         <!--nav -->
         <div class="TDMNavl"><h1><{$tree_title}></h1></div>
-        <br class="clear"/>
+        <br class="clear">
         <div class="TDMNav outer odd">
             <{$smarty.const._MD_TDMPICTURE_TRIBY}> <{$display_tris}> |
             <a href="javascript:swith();" class="switch_thumb"><img
@@ -62,7 +62,7 @@
                         src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/uploadcat.png"
                         title="<{$smarty.const._MD_TDMPICTURE_UPLOADCAT}>"></a><{/if}>
         </div>
-        <br class="clear"/>
+        <br class="clear">
         <{$tree_display}>
         <hr>
         <{include file="db:tdmpicture_tpfile.tpl"}>
@@ -77,7 +77,7 @@
                                     href="http://www.addthis.com/bookmark.php?v=250&amp;pub=xa-4ac5feea790b0936"><img
                         src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif"
                         width="125" height="16" alt="Bookmark and Share"
-                        style="border:0;"/></a>
+                        style="border:0;"></a>
             <script type="text/javascript"
                     src="http://s7.addthis.com/js/250/addthis_widget.js#pub=xa-4ac5feea790b0936"></script>
         </div>
@@ -89,11 +89,11 @@
                                      title="<{$smarty.const._MD_TDMPICTURE_RSS}>"
                                      alt="<{$smarty.const._MD_TDMPICTURE_RSS}>"><img
                         src="<{$smarty.const.TDMPICTURE_IMAGES_URL}>/rss.png"
-                        title="<{$smarty.const._MD_TDMPICTURE_RSS}>" alt="<{$smarty.const._MD_TDMPICTURE_RSS}>"/></a>
+                        title="<{$smarty.const._MD_TDMPICTURE_RSS}>" alt="<{$smarty.const._MD_TDMPICTURE_RSS}>"></a>
         </div>
     <{/if}>
         <!-- Button RSS END-->
-        <br class="clear"/>
+        <br class="clear">
         <br>
     <{/if}>
 </div>

@@ -28,7 +28,9 @@ $moduleDirName = basename(dirname(__DIR__));
 $moduleHelper  = Helper::getHelper($moduleDirName);
 
 TdmpictureUtility::getAdminHeader();
+/* @var $fileHandler TdmpictureFileHandler */
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
+/* @var $catHandler TdmpictureCategoryHandler */
 $catHandler  = xoops_getModuleHandler('category', $moduleDirName);
 
 $myts         = MyTextSanitizer::getInstance();
@@ -79,9 +81,9 @@ switch ($op) {
         } else {
             $obj = $fileHandler->create();
         }
-        //include
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
-        include_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
+        //require_once
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
         //prepare l'upload
         $path = $obj->getFilePath();
 
@@ -144,7 +146,7 @@ switch ($op) {
         } else {
             $uploader->getErrors();
         }
-        //include_once(__DIR__ . '/../include/forms.php');
+        //require_once(__DIR__ . '/../include/forms.php');
         echo $obj->getHtmlErrors();
         $form = $obj->getForm();
         $form->display();
@@ -211,7 +213,8 @@ switch ($op) {
             $adminObject = \Xmf\Module\Admin::getInstance();
             $adminObject->displayNavigation(basename(__FILE__));
 
-            xoops_confirm(array('ok'      => 1,
+            xoops_confirm(array(
+                              'ok'      => 1,
                                 'file_id' => $_REQUEST['file_id'],
                                 'op'      => 'delete'
                           ), $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDEL, $obj->getVar('file_title')));
@@ -392,7 +395,7 @@ switch ($op) {
         if ($numrows > 0) {
             echo '<form name="form" id="form" action="files.php" method="post"><table width="100%" cellspacing="1" class="outer">';
             echo '<tr>';
-            echo '<th align="center" width="5%"><input name="allbox" id="allbox" onclick="xoopsCheckAll(\'form\', \'allbox\');" type="checkbox" value="Check All" /></th>';
+            echo '<th align="center" width="5%"><input name="allbox" id="allbox" onclick="xoopsCheckAll(\'form\', \'allbox\');" type="checkbox" value="Check All"></th>';
             echo '<th align="center" width="10%">' . _AM_TDMPICTURE_IMG . '</th>';
             echo '<th align="center" width="10%">' . _AM_TDMPICTURE_CAT . '</th>';
             echo '<th align="center" width="25%">' . TdmpictureUtility::selectSorting(_AM_TDMPICTURE_TITLE, 'file_title') . '</th>';
@@ -441,7 +444,7 @@ switch ($op) {
                 $thumb_img .= '</a>';
 
                 echo '<tr class="' . $class . '">';
-                echo '<td align="center" style="vertical-align:middle;"><input type="checkbox" name="id[]" id="id[]" value="' . $arr[$i]->getVar('file_id') . '" /></td>';
+                echo '<td align="center" style="vertical-align:middle;"><input type="checkbox" name="id[]" id="id[]" value="' . $arr[$i]->getVar('file_id') . '"></td>';
                 echo '<td align="center" style="vertical-align:middle;"><img src="' . $file_img . '" alt="" title="" height="60"></td>';
                 echo '<td align="center" style="vertical-align:middle;">' . $file_cattitle . '</td>';
                 echo '<td align="center" style="vertical-align:middle;">' . $file_title . '</td>';
@@ -464,10 +467,10 @@ switch ($op) {
                 echo '</tr>';
             }
             echo '</table>';
-            echo '<input type="submit" name="op" value="' . _AM_TDMPICTURE_DISPLAY . '/' . _AM_TDMPICTURE_HIDDEN . '" />
-             <input type="submit" name="op" value="' . _AM_TDMPICTURE_UPDATE . '" />
-             <input type="submit" name="op" value="' . _AM_TDMPICTURE_THUMB . '" />
-             <input type="submit" name="op" value="' . _AM_TDMPICTURE_DELETE . '" />';
+            echo '<input type="submit" name="op" value="' . _AM_TDMPICTURE_DISPLAY . '/' . _AM_TDMPICTURE_HIDDEN . '">
+             <input type="submit" name="op" value="' . _AM_TDMPICTURE_UPDATE . '">
+             <input type="submit" name="op" value="' . _AM_TDMPICTURE_THUMB . '">
+             <input type="submit" name="op" value="' . _AM_TDMPICTURE_DELETE . '">';
 
             echo '</form><br><br>';
             echo '<div align=right>' . $pagenav . '</div><br>';

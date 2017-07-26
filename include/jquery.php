@@ -19,8 +19,8 @@
 
 use Xmf\Module\Helper;
 
-require __DIR__ . '/../../../mainfile.php';
-require XOOPS_ROOT_PATH . '/header.php';
+require_once __DIR__ . '/../../../mainfile.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
@@ -45,11 +45,11 @@ if (!isset($xoopsModuleConfig)) {
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 }
 
-include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/include/common.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/language/' . $xoopsConfig['language'] . '/main.php';
+require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/include/common.php';
+require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/language/' . $xoopsConfig['language'] . '/main.php';
 
 $moduleDirName = basename(__DIR__);
-require XOOPS_ROOT_PATH . '/header.php';
+require_once XOOPS_ROOT_PATH . '/header.php';
 
 $xoopsTpl->assign('dirname', $moduleDirName);
 
@@ -127,7 +127,7 @@ switch ($op) {
     case 'upload':
         global $xoopsDB, $xoopsTpl, $xoopsModule, $xoopsUser;
 
-        include_once XOOPS_ROOT_PATH . '/class/uploader.php';
+        require_once XOOPS_ROOT_PATH . '/class/uploader.php';
 
         $uploaddir = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->dirname() . '/upload/';
         $mimetype  = explode('|', $moduleHelper->getConfig('tdmpicture_mimetype'));
@@ -163,7 +163,7 @@ switch ($op) {
                     $obj->setVar('file_res_y', $dimensions[1]);
 
                     //thumb
-                    include_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
+                    require_once TDMPICTURE_ROOT_PATH . '/class/thumbnail.inc.php';
                     $thumb = new Thumbnail(TDMPICTURE_UPLOADS_PATH . $uploader->getSavedFileName());
                     $thumb->resize($moduleHelper->getConfig('tdmpicture_thumb_width'), $moduleHelper->getConfig('tdmpicture_thumb_heigth'));
                     $thumb->save(TDMPICTURE_THUMB_PATH . $uploader->getSavedFileName(), $moduleHelper->getConfig('tdmpicture_thumb_quality'));
