@@ -46,7 +46,7 @@ switch ($op) {
         $maxTime        = time() + $maxExecTime - 5;
         $maxTimeReached = false;
 
-        $photos = array();
+        $photos = [];
 
         $dir = opendir($batch_folder);
         while ($f = readdir($dir)) {
@@ -60,7 +60,6 @@ switch ($op) {
 
         if (count($photos) < 1) {
             redirect_header('batch.php', 2, _AM_TDMPICTURE_BASEERROR);
-            exit;
         }
 
         $i = 0;
@@ -185,7 +184,7 @@ switch ($op) {
         //
 
         //editor
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'file_text';
         $editor_configs['value']  = '';
         $editor_configs['rows']   = 20;
@@ -218,7 +217,7 @@ function import_liste($liste)
 {
     global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModule;
 
-    $import = array();
+    $import = [];
     switch ($liste) {
         default:
             $import = false;

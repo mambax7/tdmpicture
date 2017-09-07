@@ -31,7 +31,7 @@ TdmpictureUtility::getAdminHeader();
 /* @var $fileHandler TdmpictureFileHandler */
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
 /* @var $catHandler TdmpictureCategoryHandler */
-$catHandler  = xoops_getModuleHandler('category', $moduleDirName);
+$catHandler = xoops_getModuleHandler('category', $moduleDirName);
 
 $myts         = MyTextSanitizer::getInstance();
 $op           = Request::getVar('op', 'list'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'list';
@@ -201,9 +201,10 @@ switch ($op) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('files.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
+            $obj         = $fileHandler->get($_REQUEST['file_id']);
 
             //supprime de la base
-            if ($fileHandler->delete($_REQUEST['file_id'])) {
+            if ($fileHandler->delete($obj)) {
                 redirect_header('files.php', 2, _AM_TDMPICTURE_BASE);
             } else {
                 echo $obj->getHtmlErrors();
@@ -213,11 +214,11 @@ switch ($op) {
             $adminObject = \Xmf\Module\Admin::getInstance();
             $adminObject->displayNavigation(basename(__FILE__));
 
-            xoops_confirm(array(
+            xoops_confirm([
                               'ok'      => 1,
-                                'file_id' => $_REQUEST['file_id'],
-                                'op'      => 'delete'
-                          ), $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDEL, $obj->getVar('file_title')));
+                              'file_id' => $_REQUEST['file_id'],
+                              'op'      => 'delete'
+                          ], $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDEL, $obj->getVar('file_title')));
         }
         break;
 
@@ -229,7 +230,7 @@ switch ($op) {
             }
 
             $_POST['id'] = unserialize($_REQUEST['id']);
-            $erreur      =& $fileHandler->deletes($_POST['id']);
+            $erreur      = $fileHandler->deletes($_POST['id']);
 
             if (isset($erreur)) {
                 redirect_header('files.php', 2, _AM_TDMPICTURE_BASE);
@@ -239,13 +240,15 @@ switch ($op) {
         } else {
             $adminObject = \Xmf\Module\Admin::getInstance();
             $adminObject->displayNavigation(basename(__FILE__));
+            /** @var \TdmpictureFile $photoObj */
+            $photoObj = $fileHandler->get($_REQUEST['id'][0]);
 
-            xoops_confirm(array(
+            xoops_confirm([
                               'ok'      => 1,
                               'deletes' => 1,
                               'op'      => $_REQUEST['op'],
                               'id'      => serialize(array_map('intval', $_REQUEST['id']))
-                          ), $_SERVER['REQUEST_URI'], _AM_TDMPICTURE_FORMSUREDEL);
+                          ], $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDEL, $photoObj->getVar('file_title')));
         }
         break;
 
@@ -421,9 +424,15 @@ switch ($op) {
                 $file_size  = $arr[$i]->getVar('file_size');
                 $file_hits  = $arr[$i]->getVar('file_hits');
 
-                $display = $arr[$i]->getVar('file_display') == 1 ? "<a href='files.php?op=display&file_id=" . $file_id . "'><img src='" . $pathIcon16
-                                                                   . "/1.png' border='0'></a>" : "<a href='files.php?op=display&file_id=" . $file_id . "'><img alt='" . _AM_TDMPICTURE_DISPLAY
-                                                                                                 . "' title='" . _AM_TDMPICTURE_DISPLAY . "' src='" . $pathIcon16 . "/0.png' border='0'></a>";
+                $display = $arr[$i]->getVar('file_display') == 1 ? "<a href='files.php?op=display&file_id=" . $file_id . "'><img src='" . $pathIcon16 . "/1.png' border='0'></a>" : "<a href='files.php?op=display&file_id="
+                                                                                                                                                                                    . $file_id
+                                                                                                                                                                                    . "'><img alt='"
+                                                                                                                                                                                    . _AM_TDMPICTURE_DISPLAY
+                                                                                                                                                                                    . "' title='"
+                                                                                                                                                                                    . _AM_TDMPICTURE_DISPLAY
+                                                                                                                                                                                    . "' src='"
+                                                                                                                                                                                    . $pathIcon16
+                                                                                                                                                                                    . "/0.png' border='0'></a>";
 
                 //apelle lien image
                 $file_path = $arr[$i]->getFilePath($arr[$i]->getVar('file_file'));
@@ -456,12 +465,9 @@ switch ($op) {
                 echo '<td align="center" style="vertical-align:middle;">' . $thumb_img . '</td>';
                 echo '<td align="center" style="vertical-align:middle;">' . $display . '</td>';
                 echo '<td align="center" style="vertical-align:middle;">';
-                echo '<a href="files.php?op=update&file_id=' . $file_id . '"> <img src=' . $pathIcon16 . '/up.png border="0" alt="' . _AM_TDMPICTURE_UPDATE . '" title="' . _AM_TDMPICTURE_UPDATE
-                     . '"></a>';
-                echo '<a href="files.php?op=edit&file_id=' . $file_id . '"> <img src=' . $pathIcon16 . '/edit.png border="0" alt="' . _AM_TDMPICTURE_MODIFY . '" title="' . _AM_TDMPICTURE_MODIFY
-                     . '"></a>';
-                echo '<a href="files.php?op=delete&file_id=' . $file_id . '"><img src=' . $pathIcon16 . '/delete.png border="0" alt="' . _AM_TDMPICTURE_DELETE . '" title="' . _AM_TDMPICTURE_DELETE
-                     . '"></a>';
+                echo '<a href="files.php?op=update&file_id=' . $file_id . '"> <img src=' . $pathIcon16 . '/up.png border="0" alt="' . _AM_TDMPICTURE_UPDATE . '" title="' . _AM_TDMPICTURE_UPDATE . '"></a>';
+                echo '<a href="files.php?op=edit&file_id=' . $file_id . '"> <img src=' . $pathIcon16 . '/edit.png border="0" alt="' . _AM_TDMPICTURE_MODIFY . '" title="' . _AM_TDMPICTURE_MODIFY . '"></a>';
+                echo '<a href="files.php?op=delete&file_id=' . $file_id . '"><img src=' . $pathIcon16 . '/delete.png border="0" alt="' . _AM_TDMPICTURE_DELETE . '" title="' . _AM_TDMPICTURE_DELETE . '"></a>';
                 //echo '<a href="files.php?op=edit_img&file_id='.$file_id.'"><img src="./../assets/images/picture_edit.png" border="0" alt="'._AM_TDMPICTURE_EDITIMG.'" title="'._AM_TDMPICTURE_EDITIMG.'"></a>';
                 echo '</td>';
                 echo '</tr>';

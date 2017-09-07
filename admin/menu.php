@@ -17,7 +17,7 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $moduleDirName = basename(dirname(__DIR__));
 
@@ -25,7 +25,7 @@ if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
 } else {
     $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
-$adminObject = \Xmf\Module\Admin::getInstance();
+
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 //$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
@@ -35,45 +35,45 @@ $moduleHelper->loadLanguage('admin');
 $moduleHelper->loadLanguage('modinfo');
 $moduleHelper->loadLanguage('main');
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_HOME,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/home.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_TDMPICTURE_ADMENUCAT,
     'link'  => 'admin/cat.php',
     'icon'  => $pathIcon32 . '/category.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_TDMPICTURE_ADMENUFILE,
     'link'  => 'admin/files.php',
     //    'icon'  => $pathModIcon32 . '/decos/min_file.png'
     'icon'  => 'assets/images/decos/min_file.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_TDMPICTURE_ADMENUPERMISSIONS,
     'link'  => 'admin/permissions.php',
     'icon'  => $pathIcon32 . '/permissions.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_TDMPICTURE_ADMENUIMPORT,
     'link'  => 'admin/import.php',
     'icon'  => $pathIcon32 . '/compfile.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_TDMPICTURE_ADMENUBATCH,
     'link'  => 'admin/batch.php',
     'icon'  => $pathIcon32 . '/exec.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
-);
+];

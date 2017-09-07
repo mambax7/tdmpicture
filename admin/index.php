@@ -42,11 +42,11 @@ $file_waiting = $fileHandler->getCount($criteria);
 //apelle du menu admin
 //test dossier
 // dossier dans uploads
-$folder = array(
+$folder = [
     TDMPICTURE_UPLOADS_PATH,
     TDMPICTURE_THUMB_PATH,
     TDMPICTURE_CAT_PATH
-);
+];
 //test GD
 //if (!extension_loaded('gd')) {
 //    if (!dl('gd.so')) {
@@ -79,9 +79,10 @@ if ($file_waiting == 0) {
 //}
 //$adminObject->addConfigBoxLine($veriffile);
 
-$configurator = include __DIR__ . '/../include/config.php';
-$classUtility = ucfirst($moduleDirName) . 'Utility';
-if (!class_exists($classUtility)) {
+$configurator = include  __DIR__ . '/../include/config.php';
+/** @var TdmpictureUtility $utilityClass */
+$utilityClass = ucfirst($moduleDirName) . 'Utility';
+if (!class_exists($utilityClass)) {
     xoops_load('utility', $moduleDirName);
 }
 

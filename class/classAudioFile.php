@@ -58,50 +58,50 @@ class AudioFile
 
     public function mp3info()
     {
-        $byte             = array();
-        $version          = array(
+        $byte             = [];
+        $version          = [
             'MPEG Version 2.5',
             false,
             'MPEG Version 2',
             'MPEG Version 1'
-        );
-        $version_bitrate  = array(
+        ];
+        $version_bitrate  = [
             1,
             false,
             1,
             0
-        );
-        $version_sampling = array(
+        ];
+        $version_sampling = [
             2,
             false,
             1,
             0
-        );
-        $layer            = array(
+        ];
+        $layer            = [
             false,
             'Layer III',
             'Layer II',
             'Layer I'
-        );
-        $layer_bitrate    = array(
+        ];
+        $layer_bitrate    = [
             false,
             2,
             1,
             0
-        );
-        $layer_lengt      = array(
+        ];
+        $layer_lengt      = [
             false,
             1,
             1,
             0
-        );
-        $protection       = array(
+        ];
+        $protection       = [
             'Protected by CRC (16bit crc follows header)',
             'Not protected'
-        );
-        $byterate         = array(
-            array(
-                array(
+        ];
+        $byterate         = [
+            [
+                [
                     'free',
                     32,
                     64,
@@ -118,8 +118,8 @@ class AudioFile
                     416,
                     448,
                     'bad'
-                ),
-                array(
+                ],
+                [
                     'free',
                     32,
                     48,
@@ -136,8 +136,8 @@ class AudioFile
                     320,
                     384,
                     'bad'
-                ),
-                array(
+                ],
+                [
                     'free',
                     32,
                     40,
@@ -154,10 +154,10 @@ class AudioFile
                     256,
                     320,
                     'bad'
-                )
-            ),
-            array(
-                array(
+                ]
+            ],
+            [
+                [
                     'free',
                     32,
                     48,
@@ -174,8 +174,8 @@ class AudioFile
                     224,
                     256,
                     'bad'
-                ),
-                array(
+                ],
+                [
                     'free',
                     8,
                     16,
@@ -192,8 +192,8 @@ class AudioFile
                     144,
                     160,
                     'bad'
-            ),
-            array(
+                ],
+                [
                     'free',
                     8,
                     16,
@@ -210,53 +210,53 @@ class AudioFile
                     144,
                     160,
                     'bad'
-                )
-            )
-        );
-        $samplingrate     = array(
-            array(
+                ]
+            ]
+        ];
+        $samplingrate     = [
+            [
                 44100,
                 48000,
                 32000,
                 false
-            ),
-            array(
+            ],
+            [
                 22050,
                 24000,
                 16000,
                 false
-            ),
-            array(
+            ],
+            [
                 11025,
                 12000,
                 8000,
                 false
-            )
-        );
-        $cannel_mode      = array(
+            ]
+        ];
+        $cannel_mode      = [
             'Stereo',
             'Stereo',
             'Stereo',
             'Mono'
-        );
-        $copyright        = array(
+        ];
+        $copyright        = [
             'Audio is not copyrighted',
             'Audio is copyrighted '
-        );
-        $original         = array(
+        ];
+        $original         = [
             'Copy of original media',
             'Original media'
-        );
-        $emphasis         = array(
+        ];
+        $emphasis         = [
             'none',
             '50/15 ms',
             false,
             'CCIT J.17 '
-        );
+        ];
 
         //id3-stuff
 
-        $genre = array(
+        $genre = [
             'Blues',
             'Classic Rock',
             'Country',
@@ -405,7 +405,7 @@ class AudioFile
             'Anime',
             'Jpop',
             'Synthpop'
-        );
+        ];
 
         //id3v2 check----------------------------
         $footer = 0;
@@ -740,7 +740,7 @@ class AudioFile
                 }
                 if ($chunk_id_4 === 'data') {
                     $chunk_size_4      = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
-                    $visualData        = array();
+                    $visualData        = [];
                     $bytes_per_frame   = ($this->wave_bits / 8) * $this->wave_channels;
                     $bytes_per_channel = ($this->wave_bits / 8);
                     $frames            = $chunk_size_4 / $bytes_per_frame;
@@ -754,7 +754,7 @@ class AudioFile
                     while (!feof($file) && $currentindex < $chunk_size_4) {
                         $loopindex = 0;
                         for ($j = 0; $j < $this->wave_channels; ++$j) {
-                            $bytes = array();
+                            $bytes = [];
                             for ($i = 0; $i < $bytes_per_channel; ++$i) {
                                 $bytes[$i] = fgetc($file);
                                 ++$loopindex;
@@ -781,16 +781,36 @@ class AudioFile
                     }
                     //$im = @ImageCreate ($width, (256*$this->wave_channels)+1) || die ("Cannot Initialize new GD image stream!");
                     $im               = @imagecreate($width, $height) || die('Cannot Initialize new GD image stream!');
-                    $background_color = imagecolorallocate($im, hexdec(substr($this->visual_background_color, 1, 2)), hexdec(substr($this->visual_background_color, 3, 2)),
-                                                           hexdec(substr($this->visual_background_color, 5, 2)));
-                    $cBlack           = imagecolorallocate($im, hexdec(substr($this->visual_background_color, 1, 2)), hexdec(substr($this->visual_background_color, 3, 2)),
-                                                           hexdec(substr($this->visual_background_color, 5, 2)));
-                    $cGreen           = imagecolorallocate($im, hexdec(substr($this->visual_graph_color, 1, 2)), hexdec(substr($this->visual_graph_color, 3, 2)),
-                                                           hexdec(substr($this->visual_graph_color, 5, 2)));
-                    $cRed             = imagecolorallocate($im, hexdec(substr($this->visual_border_color, 1, 2)), hexdec(substr($this->visual_border_color, 3, 2)),
-                                                           hexdec(substr($this->visual_border_color, 5, 2)));
-                    $cBlue            = imagecolorallocate($im, hexdec(substr($this->visual_grid_color, 1, 2)), hexdec(substr($this->visual_grid_color, 3, 2)),
-                                                           hexdec(substr($this->visual_grid_color, 5, 2)));
+                    $background_color = imagecolorallocate(
+                        $im,
+                        hexdec(substr($this->visual_background_color, 1, 2)),
+                        hexdec(substr($this->visual_background_color, 3, 2)),
+                                                           hexdec(substr($this->visual_background_color, 5, 2))
+                    );
+                    $cBlack           = imagecolorallocate(
+                        $im,
+                        hexdec(substr($this->visual_background_color, 1, 2)),
+                        hexdec(substr($this->visual_background_color, 3, 2)),
+                                                           hexdec(substr($this->visual_background_color, 5, 2))
+                    );
+                    $cGreen           = imagecolorallocate(
+                        $im,
+                        hexdec(substr($this->visual_graph_color, 1, 2)),
+                        hexdec(substr($this->visual_graph_color, 3, 2)),
+                                                           hexdec(substr($this->visual_graph_color, 5, 2))
+                    );
+                    $cRed             = imagecolorallocate(
+                        $im,
+                        hexdec(substr($this->visual_border_color, 1, 2)),
+                        hexdec(substr($this->visual_border_color, 3, 2)),
+                                                           hexdec(substr($this->visual_border_color, 5, 2))
+                    );
+                    $cBlue            = imagecolorallocate(
+                        $im,
+                        hexdec(substr($this->visual_grid_color, 1, 2)),
+                        hexdec(substr($this->visual_grid_color, 3, 2)),
+                                                           hexdec(substr($this->visual_grid_color, 5, 2))
+                    );
                     if ($this->visual_border) {
                         imagerectangle($im, 0, 0, $width - 1, $height - 1, $cRed);
                         for ($i = 0; $i <= $this->wave_channels; ++$i) {

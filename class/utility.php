@@ -63,7 +63,7 @@ class TdmpictureUtility
         global $xoopsModule;
         $moduleDirName = basename(dirname(__DIR__));
         $moduleHelper  = Helper::getHelper($moduleDirName);
-        $options       = array();
+        $options       = [];
         $isAdmin       = $GLOBALS['xoopsUser']->isAdmin($xoopsModule->getVar('mid'));
 
         if (class_exists('XoopsFormEditor')) {
@@ -210,7 +210,7 @@ class TdmpictureUtility
         $currentVer  = substr(XOOPS_VERSION, 6); // get the numeric part of string
         $currArray   = explode('.', $currentVer);
         if (null === $requiredVer) {
-        $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
+            $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
         }
         $reqArray    = explode('.', $requiredVer);
         $success     = true;
@@ -225,14 +225,14 @@ class TdmpictureUtility
                     break;
                 }
             } else {
-                if ((int)$v > 0) { // handles things like x.x.x.0_RC2
+                if ((int)$v > 0) { // handles versions like x.x.x.0_RC2
                     $success = false;
                     break;
                 }
             }
         }
 
-        if (!$success) {
+        if (false === $success) {
             $module->setErrors(sprintf(_AM_TDMPICTURE_ERROR_BAD_XOOPS, $requiredVer, $currentVer));
         }
 
@@ -347,7 +347,7 @@ class TdmpictureUtility
 
     public static function getKeywords($content)
     {
-        $tmp = array();
+        $tmp = [];
         // Search for the "Minimum keyword length"
         $configHandler     = xoops_getHandler('config');
         $xoopsConfigSearch = $configHandler->getConfigsByCat(XOOPS_CONF_SEARCH);
@@ -358,7 +358,7 @@ class TdmpictureUtility
         $content         = $myts->undoHtmlSpecialChars($content);
         $content         = strip_tags($content);
         $content         = strtolower($content);
-        $search_pattern  = array(
+        $search_pattern  = [
             '&nbsp;',
             "\t",
             "\r\n",
@@ -386,8 +386,8 @@ class TdmpictureUtility
             '_',
             '\\',
             '*'
-        );
-        $replace_pattern = array(
+        ];
+        $replace_pattern = [
             ' ',
             ' ',
             ' ',
@@ -415,7 +415,7 @@ class TdmpictureUtility
             '',
             '',
             ''
-        );
+        ];
         $content         = str_replace($search_pattern, $replace_pattern, $content);
         $keywords        = explode(' ', $content);
         $keywords        = array_unique($keywords);
@@ -614,14 +614,14 @@ class TdmpictureUtility
     public static function selectView($cat, $limit)
     {
         global $start, $tris, $xoopsModule;
-        $option      = array(
+        $option      = [
             '10'  => 10,
             '20'  => 20,
             '30'  => 30,
             '40'  => 40,
             '50'  => 50,
             '100' => 100
-        );
+        ];
         $select_view = '<select name="limit" onchange="window.document.location=this.options[this.selectedIndex].value;">';
         //trouve le nom de la cat
         foreach (array_keys($option) as $i) {
@@ -691,7 +691,7 @@ class TdmpictureUtility
         global $xoopsModule, $xoopsConfig;
         $myts = MyTextSanitizer::getInstance();
 
-        $tblColors                 = array();
+        $tblColors                 = [];
         $tblColors[0]              = $tblColors[1] = $tblColors[2] = $tblColors[3] = $tblColors[4] = $tblColors[5] = $tblColors[6] = $tblColors[7] = $tblColors[8] = '';
         $tblColors[$currentoption] = 'current';
         if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {

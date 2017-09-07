@@ -217,7 +217,7 @@ function import_liste($liste)
 {
     global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModule;
 
-    $import = array();
+    $import = [];
     switch ($liste) {
         default:
             $import = false;

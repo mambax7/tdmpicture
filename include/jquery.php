@@ -22,7 +22,7 @@ use Xmf\Module\Helper;
 require_once __DIR__ . '/../../../mainfile.php';
 require_once XOOPS_ROOT_PATH . '/header.php';
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $myts = MyTextSanitizer::getInstance();
 global $xoopsUser, $xoopsModule;

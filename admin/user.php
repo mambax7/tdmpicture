@@ -152,11 +152,11 @@ switch ($op) {
                 echo $obj->getHtmlErrors();
             }
         } else {
-            xoops_confirm(array(
+            xoops_confirm([
                               'ok'      => 1,
                               'user_id' => $_REQUEST['user_id'],
                               'op'      => 'delete'
-                          ), $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDELuser, $obj->getVar('user_title')));
+                          ], $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDELuser, $obj->getVar('user_title')));
         }
         break;
 

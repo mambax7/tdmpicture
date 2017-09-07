@@ -83,24 +83,24 @@ switch ($option) {
         $pdf->AddCol('member_town', 25, $pdf_data['member_town'], 'L');
         $pdf->AddCol('member_phone', 24, $pdf_data['member_phone'], 'L');
         $pdf->AddCol('status_name', 32, $pdf_data['status_name'], 'L');
-        $prop = array(
-            'HeaderColor' => array(
+        $prop = [
+            'HeaderColor' => [
                 255,
                 150,
                 100
-            ),
-            'color1'      => array(
+            ],
+            'color1'      => [
                 210,
                 245,
                 255
-            ),
-            'color2'      => array(
+            ],
+            'color2'      => [
                 255,
                 255,
                 210
-            ),
+            ],
             'padding'     => 2
-        );
+        ];
 
         $pdf->Table('SELECT M.member_name, M.member_firstname, M.member_adress, M.member_zipcode, M.member_town, M.member_phone, S.status_name FROM ' . $xoopsDB->prefix('tdmassoc_member') . ' M, '
                     . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status AND M.member_office = "1" ORDER BY S.status_order LIMIT 0,10', $prop);
@@ -114,24 +114,24 @@ switch ($option) {
         $pdf->AddCol('member_town', 25, $pdf_data['member_town'], 'L');
         $pdf->AddCol('member_phone', 24, $pdf_data['member_phone'], 'L');
         $pdf->AddCol('status_name', 32, $pdf_data['status_name'], 'L');
-        $prop = array(
-            'HeaderColor' => array(
+        $prop = [
+            'HeaderColor' => [
                 255,
                 150,
                 100
-            ),
-            'color1'      => array(
+            ],
+            'color1'      => [
                 210,
                 245,
                 255
-            ),
-            'color2'      => array(
+            ],
+            'color2'      => [
                 255,
                 255,
                 210
-            ),
+            ],
             'padding'     => 2
-        );
+        ];
 
         /*$criteria = new CriteriaCompo();
         $criteria->add(new Criteria('member_waiting', 1,'='));
@@ -160,24 +160,24 @@ switch ($option) {
         $pdf->AddCol('member_town', 25, $pdf_data['member_town'], 'L');
         $pdf->AddCol('member_phone', 24, $pdf_data['member_phone'], 'L');
         $pdf->AddCol('status_name', 32, $pdf_data['status_name'], 'L');
-        $prop = array(
-            'HeaderColor' => array(
+        $prop = [
+            'HeaderColor' => [
                 255,
                 150,
                 100
-            ),
-            'color1'      => array(
+            ],
+            'color1'      => [
                 210,
                 245,
                 255
-            ),
-            'color2'      => array(
+            ],
+            'color2'      => [
                 255,
                 255,
                 210
-            ),
+            ],
             'padding'     => 1
-        );
+        ];
 
         $pdf->Table('SELECT M.member_name, M.member_firstname, M.member_adress, M.member_zipcode, M.member_town, M.member_phone, S.status_name FROM ' . $xoopsDB->prefix('tdmassoc_member') . ' M, '
                     . $xoopsDB->prefix('tdmassoc_status') . ' S WHERE S.status_id=M.member_status ORDER BY S.status_order LIMIT 0,10', $prop);
@@ -226,8 +226,13 @@ switch ($option) {
                             for ($j = 0; $ticket_width <= 210; ++$j) {
                                 if ((210 - $ticket_width) > $ticket_width_fixe) {
                                     ++$num_ticket;
-                                    $pdf->Image('' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '', $ticket_width, $ticket_height, $ticket_width_fixe,
-                                                $ticket_height_fixe);
+                                    $pdf->Image(
+                                        '' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '',
+                                        $ticket_width,
+                                        $ticket_height,
+                                        $ticket_width_fixe,
+                                                $ticket_height_fixe
+                                    );
                                     $pdf->SetFont('Arial', 'B', $text_size);
                                     $pdf->SetTextColor($text_color['r'], $text_color['v'], $text_color['b']);
                                     $pdf->Rotate(90, $ticket_num1_width, $ticket_num1_height);
@@ -265,8 +270,13 @@ switch ($option) {
                             for ($j = 0; $ticket_width <= 297; ++$j) {
                                 if ((297 - $ticket_width) > $ticket_width_fixe) {
                                     ++$num_ticket;
-                                    $pdf->Image('' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '', $ticket_width, $ticket_height, $ticket_width_fixe,
-                                                $ticket_height_fixe);
+                                    $pdf->Image(
+                                        '' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '',
+                                        $ticket_width,
+                                        $ticket_height,
+                                        $ticket_width_fixe,
+                                                $ticket_height_fixe
+                                    );
                                     $pdf->SetFont('Arial', 'B', $text_size);
                                     $pdf->SetTextColor($text_color['r'], $text_color['v'], $text_color['b']);
                                     $pdf->Rotate(90, $ticket_num1_width, $ticket_num1_height);
@@ -307,8 +317,13 @@ switch ($option) {
                             for ($j = 0; $ticket_width <= 297; ++$j) {
                                 if ((297 - $ticket_width) > $ticket_width_fixe) {
                                     ++$num_ticket;
-                                    $pdf->Image('' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '', $ticket_width, $ticket_height, $ticket_width_fixe,
-                                                $ticket_height_fixe);
+                                    $pdf->Image(
+                                        '' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '',
+                                        $ticket_width,
+                                        $ticket_height,
+                                        $ticket_width_fixe,
+                                                $ticket_height_fixe
+                                    );
                                     $pdf->SetFont('Arial', 'B', $text_size);
                                     $pdf->SetTextColor($text_color['r'], $text_color['v'], $text_color['b']);
                                     $pdf->Rotate(90, $ticket_num1_width, $ticket_num1_height);
@@ -347,8 +362,13 @@ switch ($option) {
                             for ($j = 0; $ticket_width <= 420; ++$j) {
                                 if ((420 - $ticket_width) > $ticket_width_fixe) {
                                     ++$num_ticket;
-                                    $pdf->Image('' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '', $ticket_width, $ticket_height, $ticket_width_fixe,
-                                                $ticket_height_fixe);
+                                    $pdf->Image(
+                                        '' . XOOPS_ROOT_PATH . '/uploads/' . $moduleDirName . '/images/ticket/' . $ticket_picture . '',
+                                        $ticket_width,
+                                        $ticket_height,
+                                        $ticket_width_fixe,
+                                                $ticket_height_fixe
+                                    );
                                     $pdf->SetFont('Arial', 'B', $text_size);
                                     $pdf->SetTextColor($text_color['r'], $text_color['v'], $text_color['b']);
                                     $pdf->Rotate(90, $ticket_num1_width, $ticket_num1_height);
@@ -429,24 +449,24 @@ switch ($option) {
 
         $titre = $newsletter->getVar('newsletter_title');
         $pdf->AddPage();
-        $prop = array(
-            'HeaderColor' => array(
+        $prop = [
+            'HeaderColor' => [
                 255,
                 150,
                 100
-            ),
-            'color1'      => array(
+            ],
+            'color1'      => [
                 210,
                 245,
                 255
-            ),
-            'color2'      => array(
+            ],
+            'color2'      => [
                 255,
                 255,
                 210
-            ),
+            ],
             'padding'     => 2
-        );
+        ];
         /*$criteria = new CriteriaCompo();
         $criteria->add(new Criteria('member_waiting', 1,'='));
         $criteria->setOrder('ASC');
@@ -467,14 +487,14 @@ switch ($option) {
         $product_text   = utf8_decode(Chars($product->getVar('product_text')));
         $product_indate = formatTimestamp($product->getVar('product_indate'), 'm');
         $num            = $product->getVar('product_cid');
-        $cat            = array(
+        $cat            = [
             '1' => _AM_TDMPICTURE_PRODUCTCAT_ACHAT,
             '2' => _AM_TDMPICTURE_PRODUCTCAT_VENTE,
             '3' => _AM_TDMPICTURE_PRODUCTCAT_LOCATION,
             '4' => _AM_TDMPICTURE_PRODUCTCAT_PRETS,
             '5' => _AM_TDMPICTURE_PRODUCTCAT_CADEAUX,
             '6' => _AM_TDMPICTURE_PRODUCTCAT_DIVERS
-        );
+        ];
 
         //calcul les stocks
         $criteria = new CriteriaCompo();
@@ -526,14 +546,14 @@ switch ($option) {
 
         $pdf->Ln(20);
         //Tableau Largeurs des colonnes
-        $w = array(
+        $w = [
             40,
             50,
             30,
             25,
             25,
             20
-        );
+        ];
 
         //En-tête
         $pdf->SetFont('Arial', '', 8);
@@ -620,14 +640,14 @@ switch ($option) {
         $stock_qte    = $stock->getVar('stock_qte');
         $stock_indate = formatTimestamp($stock->getVar('stock_indate'), 'm');
         $num          = $product->getVar('product_cid');
-        $cat          = array(
+        $cat          = [
             '1' => _AM_TDMPICTURE_PRODUCTCAT_ACHAT,
             '2' => _AM_TDMPICTURE_PRODUCTCAT_VENTE,
             '3' => _AM_TDMPICTURE_PRODUCTCAT_LOCATION,
             '4' => _AM_TDMPICTURE_PRODUCTCAT_PRETS,
             '5' => _AM_TDMPICTURE_PRODUCTCAT_CADEAUX,
             '6' => _AM_TDMPICTURE_PRODUCTCAT_DIVERS
-        );
+        ];
 
         $product_ht = $product->getVar('product_inht');
         $title_ht   = _AM_TDMPICTURE_FORMINHT;
@@ -665,14 +685,14 @@ switch ($option) {
 
         $pdf->Ln(20);
         //Tableau Largeurs des colonnes
-        $w = array(
+        $w = [
             40,
             50,
             30,
             25,
             25,
             20
-        );
+        ];
 
         //En-tête
         $pdf->SetFont('Arial', '', 8);
@@ -822,7 +842,7 @@ function Chars($text)
 {
     $myts = MyTextSanitizer:: getInstance();
 
-    return preg_replace(array(
+    return preg_replace([
                             '/&#039;/i',
                             '/&#233;/i',
                             '/&#232;/i',
@@ -831,7 +851,7 @@ function Chars($text)
                             '/<br>/i',
                             '/&agrave;/i',
                             '/&#8364;/i'
-                        ), array(
+                        ], [
                             "'",
                             'é',
                             'è',
@@ -840,5 +860,5 @@ function Chars($text)
                             "\n",
                             'à',
                             '€'
-                        ), $text);
+                        ], $text);
 }

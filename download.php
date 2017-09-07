@@ -45,7 +45,6 @@ if (file_exists($file_path['image_path'])) {
     $document_file = $file_path['image_url'];
 } else {
     redirect_header('index.php', 2, _AM_TDMPICTURE_BASEERROR);
-    exit();
 }
 
 $dl = $document->getVar('file_dl');

@@ -148,11 +148,11 @@ switch ($op) {
             //            $adminObject = \Xmf\Module\Admin::getInstance();
             $adminObject->displayNavigation(basename(__FILE__));
 
-            xoops_confirm(array(
+            xoops_confirm([
                               'ok'     => 1,
                               'cat_id' => $_REQUEST['cat_id'],
                               'op'     => 'delete'
-                          ), $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDELCAT, $obj->getVar('cat_title')));
+                          ], $_SERVER['REQUEST_URI'], sprintf(_AM_TDMPICTURE_FORMSUREDELCAT, $obj->getVar('cat_title')));
         }
         break;
 

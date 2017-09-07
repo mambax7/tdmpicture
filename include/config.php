@@ -40,35 +40,35 @@ if (!defined($upperDirName . '_DIRNAME')) {
 define($upperDirName . '_UPLOAD_PATH_CONFIG', XOOPS_UPLOAD_PATH . '/' . $moduleDirName); // WITHOUT Trailing slash
 
 //Configurator
-return array(
+return [
     'name'          => 'Module Configurator',
-    'uploadFolders' => array(
+    'uploadFolders' => [
         constant($upperDirName . '_UPLOAD_PATH_CONFIG'),
         constant($upperDirName . '_UPLOAD_PATH_CONFIG') . '/thumb',
         constant($upperDirName . '_UPLOAD_PATH_CONFIG') . '/cat',
-    ),
-    'copyFiles'     => array(
+    ],
+    'copyFiles'     => [
         constant($upperDirName . '_UPLOAD_PATH_CONFIG') . '/thumb',
         constant($upperDirName . '_UPLOAD_PATH_CONFIG') . '/cat',
-    ),
+    ],
 
-    'templateFolders' => array(
+    'templateFolders' => [
         '/templates/',
         '/templates/blocks/'
-    ),
-    'oldFiles'        => array(
+    ],
+    'oldFiles'        => [
         '/admin/admin.css',
         '/changelog.txt',
         '/include/update.php',
         '/include/functions.php',
-    ),
-    'oldFolders'      => array(
+    ],
+    'oldFolders'      => [
         '/css',
         '/fpdf',
         '/images',
         '/js',
-    ),
-);
+    ],
+];
 
 // module information
 $modCopyright

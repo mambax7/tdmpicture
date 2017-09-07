@@ -93,8 +93,10 @@ define('_AM_TDMPICTURE_WEIGHT', 'Weight');
 define('_AM_TDMPICTURE_CD', 'Number of CDs');
 define('_AM_TDMPICTURE_INDATE', 'Release Date');
 define('_AM_TDMPICTURE_UPLOAD', 'Upload');
-define('_AM_TDMPICTURE_UPLOAD_DESC',
-       'Some information may be automatic as the size or the height and width, If you see errors in the information, you can updated it all the information simply by editing the file.');
+define(
+    '_AM_TDMPICTURE_UPLOAD_DESC',
+       'Some information may be automatic as the size or the height and width, If you see errors in the information, you can updated it all the information simply by editing the file.'
+);
 
 define('_AM_TDMPICTURE_URL', 'URL file');
 define('_AM_TDMPICTURE_TYPE', 'Type');
@@ -118,8 +120,8 @@ define('_AM_TDMPICTURE_BASEERROR', 'Error: Your changes are not saved');
 define('_AM_TDMPICTURE_CATERROR', 'Error: You must create a Type');
 define('_AM_TDMPICTURE_ARTERROR', 'Error: You must create an Author');
 //suprime
-define('_AM_TDMPICTURE_FORMSUREDEL', "Are you sure to delete File: <span style='color: Red'>%s </span> </b>");
-define('_AM_TDMPICTURE_FORMSUREDELCAT', "Are you sure to delete Category:  <span style='color: Red'>%s </span> </b>, the children of the category will be deleted but the files will not be erased ");
+define('_AM_TDMPICTURE_FORMSUREDEL', "Are you sure to delete File: <span style='color: Red'> %s </span> </b>");
+define('_AM_TDMPICTURE_FORMSUREDELCAT', "Are you sure to delete Category:  <span style='color: Red'> %s </span> </b>, the children of the category will be deleted but the files will not be erased ");
 //About (about.php)
 define('_AM_ABOUT_RELEASEDATE', 'Release Date');
 define('_AM_ABOUT_AUTHOR', 'Author');
@@ -160,8 +162,10 @@ define('_AM_TDMPICTURE_BUTTON_FILES_WAITING', 'Files to Approve: ');
 
 //1.07
 define('_AM_TDMPICTURE_NOTE', 'Note');
-define('_AM_TDMPICTURE_NOTEDESC',
-       'It is possible that the application does not fault time, you will find a file with the sql queries in this module. <br> No image file will be moved, do not delete the files from your server. Import does not remove the database from your other module.');
+define(
+    '_AM_TDMPICTURE_NOTEDESC',
+       'It is possible that the application does not fault time, you will find a file with the sql queries in this module. <br> No image file will be moved, do not delete the files from your server. Import does not remove the database from your other module.'
+);
 define('_AM_TDMPICTURE_IMPORT', 'Import');
 
 define('_AM_TDMPICTURE_HIDDEN', 'Hidden');

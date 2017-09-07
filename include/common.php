@@ -22,7 +22,7 @@
 
 use Xmf\Module\Helper;
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 $moduleDirName = basename(dirname(__DIR__));
 $upperDirName  = strtoupper($moduleDirName);

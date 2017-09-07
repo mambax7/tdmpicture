@@ -17,12 +17,12 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
-$modversion = array(
+$modversion = [
     'version'             => 1.08,
     'module_status'       => 'RC 2',
     'release_date'        => '2017/02/25',
@@ -48,7 +48,7 @@ $modversion = array(
     'min_php'             => '5.5',
     'min_xoops'           => '2.5.9',
     'min_admin'           => '1.2',
-    'min_db'              => array('mysql' => '5.5'),
+    'min_db'              => ['mysql' => '5.5'],
     // images
     'image'               => 'assets/images/logoModule.png',
     'iconsmall'           => 'assets/images/iconsmall.png',
@@ -63,7 +63,7 @@ $modversion = array(
     'modicons32'          => 'assets/images/icons/32',
     'modimages'           => 'assets/images',
     //About
-    'demo_site_url'       => 'http://www.xoops.org',
+    'demo_site_url'       => 'https://xoops.org',
     'demo_site_name'      => 'XOOPS Demo Site',
     'support_url'         => 'https://xoops.org/modules/newbb/viewforum.php?forum=28/',
     'support_name'        => 'Support Forum',
@@ -76,7 +76,7 @@ $modversion = array(
     'adminmenu'           => 'admin/menu.php',
     // ------------------- Main Menu -------------------
     'hasMain'             => 1,
-    'sub'                 => array(
+    'sub'                 => [
         //        array(
         //            'name' => _MI_TDMPICTURE_SUB_SMNAME1,
         //            'url'  => 'movies.php'
@@ -85,35 +85,35 @@ $modversion = array(
         //            'name' => _MI_TDMPICTURE_SUB_SMNAME2,
         //            'url'  => 'clips.php'
         //        ),
-        array(
+        [
             'name' => _MI_TDMPICTURE_VIEWALBUM,
             'url'  => 'search.php'
-        ),
-    ),
+        ],
+    ],
     // -------------------  PayPal ---------------------------
-    'paypal'              => array(
+    'paypal'              => [
         'business'      => 'foundation@xoops.org',
         'item_name'     => 'Donation : ' . _MI_TDMPICTURE_NAME,
         'amount'        => 0,
         'currency_code' => 'USD'
-    ),
+    ],
     // ------------------- Search ---------------------------
     'hasSearch'           => 1,
-    'search'              => array(
+    'search'              => [
         'file' => 'include/search.inc.php',
         'func' => 'tdmpicture_search'
-    ),
+    ],
     // ------------------- Comments -------------------------
     'hasComments'         => 1,
-    'comments'            => array(
+    'comments'            => [
         'pageName'     => 'viewfile.php',
         'itemName'     => 'st',
         'callbackFile' => 'include/comment_functions.php',
-        'callback'     => array(
+        'callback'     => [
             'approve' => 'picture_comments_approve',
             'update'  => 'picture_comments_update'
-        ),
-    ),
+        ],
+    ],
     // ------------------- Notification ----------------------
     'hasNotification'     => 0,
     // ------------------- Install/Update -------------------
@@ -121,79 +121,79 @@ $modversion = array(
     'onUpdate'            => 'include/onupdate.php',
     'onUninstall'         => 'include/onuninstall.php',
     // ------------------- Mysql -----------------------------
-    'sqlfile'             => array('mysql' => 'sql/mysql.sql'),
+    'sqlfile'             => ['mysql' => 'sql/mysql.sql'],
     // ------------------- Tables ----------------------------
-    'tables'              => array(
+    'tables'              => [
         $moduleDirName . '_' . 'file',
         $moduleDirName . '_' . 'cat',
         $moduleDirName . '_' . 'pl',
         $moduleDirName . '_' . 'vote',
-    )
-);
+    ]
+];
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
-    array(
+$modversion['helpsection'] = [
+    [
         'name' => _MI_TDMPICTURE_OVERVIEW,
         'link' => 'page=help'
-    ),
-    array(
+    ],
+    [
         'name' => _MI_TDMPICTURE_DISCLAIMER,
         'link' => 'page=disclaimer'
-    ),
-    array(
+    ],
+    [
         'name' => _MI_TDMPICTURE_LICENSE,
         'link' => 'page=license'
-    ),
-    array(
+    ],
+    [
         'name' => _MI_TDMPICTURE_SUPPORT,
         'link' => 'page=support'
-    ),
-);
+    ],
+];
 // ------------------- Templates ------------------- //
-$modversion['templates'] = array(
-    array(
+$modversion['templates'] = [
+    [
         'file'        => 'tdmpicture_index.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_viewcat.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_tpfile.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_tplecteur.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_tpplaylist.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_viewfile.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_modfile.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_liste.tpl',
         'description' => ''
-    ),
-    array(
+    ],
+    [
         'file'        => 'tdmpicture_rss.tpl',
         'description' => 'RSS'
-    ),
+    ],
 
-);
+];
 
 // ------------------- Blocks ------------------- //
 //should blocks have have hardcoded numbers?
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'tdmpicture_minitable.php',
     'name'        => _AM_TDMPICTURE_BLOCK_DATE,
     'description' => '',
@@ -201,9 +201,9 @@ $modversion['blocks'][] = array(
     'edit_func'   => 'b_tdmpicture_edit',
     'options'     => 'file_indate|10|50|5|30|30|0',
     'template'    => 'tdmpicture_minitable.tpl'
-);
+];
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'tdmpicture_minitable.php',
     'name'        => _AM_TDMPICTURE_BLOCK_COUNTS,
     'description' => '',
@@ -211,9 +211,9 @@ $modversion['blocks'][] = array(
     'edit_func'   => 'b_tdmpicture_edit',
     'options'     => 'file_counts|10|50|5|30|30|0',
     'template'    => 'tdmpicture_minitable.tpl'
-);
+];
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'tdmpicture_minitable.php',
     'name'        => _AM_TDMPICTURE_BLOCK_HITS,
     'description' => '',
@@ -221,9 +221,9 @@ $modversion['blocks'][] = array(
     'edit_func'   => 'b_tdmpicture_edit',
     'options'     => 'file_hits|10|50|5|30|30|0',
     'template'    => 'tdmpicture_minitable.tpl'
-);
+];
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'tdmpicture_minitable.php',
     'name'        => _AM_TDMPICTURE_BLOCK_DL,
     'description' => '',
@@ -231,9 +231,9 @@ $modversion['blocks'][] = array(
     'edit_func'   => 'b_tdmpicture_edit',
     'options'     => 'file_dl|10|50|5|30|30|0',
     'template'    => 'tdmpicture_minitable.tpl'
-);
+];
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'tdmpicture_minitable.php',
     'name'        => _AM_TDMPICTURE_BLOCK_COMMENTS,
     'description' => '',
@@ -241,9 +241,9 @@ $modversion['blocks'][] = array(
     'edit_func'   => 'b_tdmpicture_edit',
     'options'     => 'file_comments|10|50|5|30|30|0',
     'template'    => 'tdmpicture_minitable.tpl'
-);
+];
 
-$modversion['blocks'][] = array(
+$modversion['blocks'][] = [
     'file'        => 'tdmpicture_minitable.php',
     'name'        => _AM_TDMPICTURE_BLOCK_RANDS,
     'description' => '',
@@ -251,7 +251,7 @@ $modversion['blocks'][] = array(
     'edit_func'   => 'b_tdmpicture_edit',
     'options'     => 'RAND()|10|50|5|30|30|0',
     'template'    => 'tdmpicture_minitable.tpl'
-);
+];
 
 global $xoopsUser;
 $gpermHandler = xoops_getHandler('groupperm');
@@ -287,7 +287,7 @@ if ($xoopsModule) {
 }
 
 // ------------------- Config Options ------------------- //
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdm_upload_path',
     'title'       => '_MI_TDMPICTURE_UPLOAD_PATH',
     'description' => '_MI_TDMPICTURE_UPLOAD_DESC',
@@ -295,9 +295,9 @@ $modversion['config'][] = array(
     'valuetype'   => 'text',
     //'default'     => '/modules/' . $modversion['dirname' . '/upload/',
     'default'     => '/uploads/' . $moduleDirName
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdm_upload_thumb',
     'title'       => '_MI_TDMPICTURE_UPLOAD_THUMB',
     'description' => '_MI_TDMPICTURE_UPLOAD_DESC',
@@ -305,18 +305,18 @@ $modversion['config'][] = array(
     'valuetype'   => 'text',
     //'default'     => '/modules/' . $modversion['dirname' . '/upload/thumb/',
     'default'     => '/uploads/' . $moduleDirName . '/thumb'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdm_myalbum_path',
     'title'       => '_MI_TDMPICTURE_MYALBUM_PATH',
     'description' => '_MI_TDMPICTURE_UPLOAD_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'text',
     'default'     => '/uploads/myalbum/photos'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdm_myalbum_thumb',
     'title'       => '_MI_TDMPICTURE_MYALBUM_THUMB',
     'description' => '_MI_TDMPICTURE_UPLOAD_DESC',
@@ -324,61 +324,61 @@ $modversion['config'][] = array(
     'valuetype'   => 'text',
     //'default'     => '/uploads/thumbs/',
     'default'     => '/uploads/myalbum/thumbs'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdm_extgallery_path',
     'title'       => '_MI_TDMPICTURE_EXTGALLERY_PATH',
     'description' => '_MI_TDMPICTURE_UPLOAD_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'text',
     'default'     => '/uploads/extgallery/public-photo/medium'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdm_extgallery_thumb',
     'title'       => '_MI_TDMPICTURE_EXTGALLERY_THUMB',
     'description' => '_MI_TDMPICTURE_UPLOAD_DESC',
     'formtype'    => 'textbox',
     'valuetype'   => 'text',
     'default'     => '/uploads/extgallery/public-photo/thumb'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_mimemax',
     'title'       => '_MI_TDMPICTURE_MIMEMAX',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => '10485760'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_upmax',
     'title'       => '_MI_TDMPICTURE_UPMAX',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => '5'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_mimetype',
     'title'       => '_MI_TDMPICTURE_MIMETYPE',
     'description' => '',
     'formtype'    => 'textarea',
     'valuetype'   => 'text',
     'default'     => 'image/png|image/bmp|image/gif|image/ief|image/jpeg|image/pipeg|image/tiff|image/x-portable-anymap|image/x-portable-bitmap|image/x-portable-graymap|image/x-portable-pixmap|image/x-rgb|image/x-xbitmap|image/x-xwindowdump'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_size',
     'title'       => '_MI_TDMPICTURE_SIZE',
     'description' => '_MI_TDMPICTURE_SIZEDESC',
     'formtype'    => 'textarea',
     'valuetype'   => 'text',
     'default'     => '100x75|150x112|320x240|640x480|800x600|1024x768|1280x1024|1600x1200'
-);
+];
 
 //$modversion['config'][] = array(
 //'name' => 'tdmpicture_java_width',
@@ -396,7 +396,7 @@ $modversion['config'][] = array(
 //'valuetype' => 'int',
 //'default' => 400);
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     require_once XOOPS_ROOT_PATH . '/class/xoopslists.php',
     'name'        => 'tdmpicture_editor',
     'title'       => '_MI_TDMPICTURE_EDITOR',
@@ -406,9 +406,9 @@ $modversion['config'][] = array(
     'default'     => 'dhtmltextarea',
     'options'     => XoopsLists::getDirListAsArray(XOOPS_ROOT_PATH . '/class/xoopseditor'),
     'category'    => 'global'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
 
     'name'        => 'tdmpicture_favourite',
     'title'       => '_MI_TDMPICTURE_FAVOURITE',
@@ -416,76 +416,76 @@ $modversion['config'][] = array(
     'formtype'    => 'text',
     'valuetype'   => 'int',
     'default'     => '10'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_page',
     'title'       => '_MI_TDMPICTURE_PAGE',
     'description' => '',
     'formtype'    => 'text',
     'valuetype'   => 'int',
     'default'     => '10'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_width',
     'title'       => '_MI_TDMPICTURE_WIDTH',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 600
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_heigth',
     'title'       => '_MI_TDMPICTURE_HEIGTH',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 400
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_thumb_style',
     'title'       => '_MI_TDMPICTURE_THUMB_STYLE',
     'description' => '',
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'default'     => 'limit-width-height',
-    'options'     => array(
+    'options'     => [
         _MI_TDMPICTURE_THUMB_STYLE_CENTER => 'center',
         _MI_TDMPICTURE_THUMB_STYLE_HW     => 'limit-width-height',
         _MI_TDMPICTURE_THUMB_STYLE_W      => 'limit-width',
         _MI_TDMPICTURE_THUMB_STYLE_H      => 'limit-height'
-    )
-);
+    ]
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_thumb_width',
     'title'       => '_MI_TDMPICTURE_THUMB_WIDTH',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 150
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_thumb_heigth',
     'title'       => '_MI_TDMPICTURE_THUMB_HEIGTH',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 150
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_thumb_quality',
     'title'       => '_MI_TDMPICTURE_THUMB_QUALITY',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 75
-);
+];
 
 //$modversion['config'][] = array(
 //'name' => 'tdmpicture_thumb_deco',
@@ -496,23 +496,23 @@ $modversion['config'][] = array(
 //'default' => 'paper-clip',
 //'options' => array('paper-clip' => 'paper-clip', 'tape' => 'tape', 'pin' => 'pin', 'None' => 'None'));
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_slide_width',
     'title'       => '_MI_TDMPICTURE_SLIDE_WIDTH',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 600
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_slide_height',
     'title'       => '_MI_TDMPICTURE_SLIDE_HEIGTH',
     'description' => '',
     'formtype'    => 'textbox',
     'valuetype'   => 'int',
     'default'     => 400
-);
+];
 
 //$modversion['config'][] = array(
 //'name' => 'tdmpicture_cat_cel',
@@ -529,60 +529,60 @@ $modversion['config'][] = array(
 //'valuetype' => 'int',
 //'default' => 10);
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_display',
     'title'       => '_MI_TDMPICTURE_DISPLAY',
     'description' => '',
     'formtype'    => 'select',
     'valuetype'   => 'text',
     'default'     => 'display thumb_view',
-    'options'     => array(
+    'options'     => [
         'minimal' => 'display thumb_view',
         'full'    => 'display'
-    )
-);
+    ]
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_social',
     'title'       => '_MI_TDMPICTURE_SOCIAL',
     'description' => '',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => '1'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_rss',
     'title'       => '_MI_TDMPICTURE_RSS',
     'description' => '',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => '1'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_pdf',
     'title'       => '_MI_TDMPICTURE_PDF',
     'description' => '',
     'formtype'    => 'yesno',
     'valuetype'   => 'int',
     'default'     => '1'
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_description',
     'title'       => '_MI_TDMPICTURE_DESCRIPTION',
     'description' => '',
     'formtype'    => 'textarea',
     'valuetype'   => 'text',
     'default'     => ''
-);
+];
 
-$modversion['config'][] = array(
+$modversion['config'][] = [
     'name'        => 'tdmpicture_keywords',
     'title'       => '_MI_TDMPICTURE_KEYWORDS',
     'description' => '',
     'formtype'    => 'textarea',
     'valuetype'   => 'text',
     'default'     => ''
-);
+];

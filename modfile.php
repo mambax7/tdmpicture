@@ -30,8 +30,10 @@ $xoopsTpl->assign('dirname', $moduleDirName);
 $op = Request::getVar('op', 'list'); //isset($_REQUEST['op']) ? $_REQUEST['op'] : 'list';
 
 //load class
+/** @var \TdmpictureFileHandler $fileHandler */
 $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
-$catHandler  = xoops_getModuleHandler('category', $moduleDirName);
+/** @var \TdmpictureCategoryHandler $catHandler */
+$catHandler = xoops_getModuleHandler('category', $moduleDirName);
 
 switch ($op) {
 
@@ -95,7 +97,7 @@ switch ($op) {
             redirect_header(XOOPS_URL, 2, _MD_TDMPICTURE_NOPERM);
         }
 
-        $obj = $fileHandler->get($_REQUEST['file_id']);
+        $obj = $fileHandler->get(Request::getInt('file_id', 0));
 
         if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
@@ -103,18 +105,18 @@ switch ($op) {
             }
 
             if ($xoopsUser->isAdmin() || (!empty($xoopsUser) && $xoopsUser->getVar('uid') == $obj->getVar('file_uid'))) {
-                if ($fileHandler->delete($_REQUEST['file_id'])) {
+                if ($fileHandler->delete($obj)) {
                     redirect_header('javascript:history.go(-2)', 2, _AM_TDMPICTURE_BASE);
                 } else {
                     redirect_header(TDMPICTURE_URL, 2, _AM_TDMPICTURE_BASEERROR);
                 }
             }
         } else {
-            xoops_confirm(array(
+            xoops_confirm([
                               'ok'      => 1,
                               'file_id' => $_REQUEST['file_id'],
                               'op'      => 'delete'
-                          ), $_SERVER['REQUEST_URI'], _MD_TDMPICTURE_FORMSUREDEL);
+                          ], $_SERVER['REQUEST_URI'], _MD_TDMPICTURE_FORMSUREDEL);
         }
         break;
 

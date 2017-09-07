@@ -39,7 +39,7 @@ $module_id = $xoopsModule->getVar('mid');
 $perm_name = 'tdmpicture_view';
 $perm_desc = _AM_TDMPICTURE_MANAGE_PERM;
 
-$global_perms_array = array(
+$global_perms_array = [
     '4'    => _AM_TDMPICTURE_PERM_4,
     '8'    => _AM_TDMPICTURE_PERM_8,
     '16'   => _AM_TDMPICTURE_PERM_16,
@@ -52,7 +52,7 @@ $global_perms_array = array(
     '2'  => _AM_TDMPICTURE_PERM_2,
     '32' => _AM_TDMPICTURE_PERM_32,
     '64' => _AM_TDMPICTURE_PERM_64
-);
+];
 
 $permform = new CalendarGroupPermForm('', $module_id, $perm_name, '', '');
 

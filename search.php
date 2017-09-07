@@ -89,7 +89,7 @@ $numrows = count($fileHandler->getCount($criteria_2));
 $xoopsTpl->assign('numrows', $numrows);
 
 $keywords = '';
-$file     = array();
+$file     = [];
 foreach (array_keys($file_arr) as $i) {
     // $tdmdownloads_tab['file_id'] = $tdmdownloads_arr[$i]->getVar('file_id');
     // $tdmdownloads_tab['file_cat'] = $tdmdownloads_arr[$i]->getVar('file_cat');

@@ -17,7 +17,7 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 global $xoopsModule;
 $moduleDirName = basename(dirname(__DIR__));
@@ -66,8 +66,8 @@ function b_tdmpicture($options)
 
     xoops_loadLanguage('main', $moduleDirName);
 
-    $blocks = array();
-    $block  = array();
+    $blocks = [];
+    $block  = [];
     // 1, _MB_TDMPICTURE_DISPLAY
     // 2, _MB_TDMPICTURE_TITLELENGTH
     // 3, _MB_TDMPICTURE_SLIDELENGTH
@@ -199,13 +199,13 @@ function b_tdmpicture_edit($options)
     $assoc_arr = $catHandler->getall($criteria);
     $form      = '<input type="hidden" name="options[0]" value="' . $options[0] . '">';
 
-    $array = array(
+    $array = [
         _AM_TDMPICTURE_SELECT_TEXT,
         _AM_TDMPICTURE_SELECT_IMAGE,
         _AM_TDMPICTURE_SELECT_IMAGE_DESC,
         _AM_TDMPICTURE_SELECT_SLIDE,
         _AM_TDMPICTURE_SELECT_MUR
-    );
+    ];
 
     $form .= tdmpicture_blocktext($options, 1, _MB_TDMPICTURE_DISPLAY, 5);
     $form .= tdmpicture_blocktext($options, 2, _MB_TDMPICTURE_TITLELENGTH, 5);

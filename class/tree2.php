@@ -16,7 +16,7 @@
  * @author          G. Mage (www.tdmxoops.net)
  *
  * ***************************************************************************/
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/class/tree.php';
 
@@ -57,7 +57,7 @@ class TdmCatObjectTree extends XoopsObjectTree
      */
     public function makeArrayTree($fieldName, $prefix = '-', $key = 0)
     {
-        $ret = array();
+        $ret = [];
         $this->_makeArrayTreeOptions($fieldName, $key, $ret, $prefix);
 
         return $ret;
@@ -127,8 +127,11 @@ class TdmCatObjectTree extends XoopsObjectTree
             }
 
             if ($this->tree[$key]['obj']->getVar('cat_pid') == $selected) {
-                $cat_title = (strlen($this->tree[$key]['obj']->getVar('cat_title')) > 30 ? substr($this->tree[$key]['obj']->getVar('cat_title'), 0,
-                                                                                                  30) : $this->tree[$key]['obj']->getVar('cat_title'));
+                $cat_title = (strlen($this->tree[$key]['obj']->getVar('cat_title')) > 30 ? substr(
+                    $this->tree[$key]['obj']->getVar('cat_title'),
+                    0,
+                                                                                                  30
+                ) : $this->tree[$key]['obj']->getVar('cat_title'));
                 $cat_text  = (strlen($this->tree[$key]['obj']->getVar('cat_text')) > 120 ? substr($this->tree[$key]['obj']->getVar('cat_text'), 0, 120)
                                                                                            . '...' : $this->tree[$key]['obj']->getVar('cat_text'));
 
@@ -271,14 +274,14 @@ class TdmCatObjectTree extends XoopsObjectTree
         global $start, $tris, $limit, $groups, $xoopsUser, $xoopsModule;
 
         //option du tris / nom de champ sql => nom afficher //
-        $option = array(
+        $option = [
             'file_title'    => _MD_TDMPICTURE_TRITITLE,
             'file_indate'   => _MD_TDMPICTURE_TRIDATE,
             'file_counts'   => _MD_TDMPICTURE_TRICOUNTS,
             'file_hits'     => _MD_TDMPICTURE_TRIHITS,
             'file_comments' => _MD_TDMPICTURE_TRICOMMENT,
             'file_dl'       => _MD_TDMPICTURE_TRIDL
-        );
+        ];
 
         $ret = '<select name="tris" onchange="window.document.location=this.options[this.selectedIndex].value;">';
 

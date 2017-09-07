@@ -20,7 +20,7 @@
  * @author          Kazumi Ono <onokazu@xoops.org>
  * @author          John Neill <catzwolf@xoops.org>
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_load('XoopsFormElement');
 xoops_load('XoopsFormHidden');
@@ -149,7 +149,7 @@ class CalendarGroupPermForm extends XoopsForm
     {
         // load all child ids for javascript codes
         foreach (array_keys($this->_itemTree) as $item_id) {
-            $this->_itemTree[$item_id]['allchild'] = array();
+            $this->_itemTree[$item_id]['allchild'] = [];
             $this->_loadAllChildItemIds($item_id, $this->_itemTree[$item_id]['allchild']);
         }
         $gpermHandler  = xoops_getHandler('groupperm');
@@ -214,7 +214,7 @@ class CalendarGroupFormCheckBox extends XoopsFormElement
      *
      * @var array ;
      */
-    public $_value = array();
+    public $_value = [];
     /**
      * Group ID
      *
@@ -296,7 +296,7 @@ class CalendarGroupFormCheckBox extends XoopsFormElement
             ++$cols;
         }
         $ret        .= '</tr></table></td><td class="even" valign="top">';
-        $option_ids = array();
+        $option_ids = [];
         foreach (array_keys($this->_optionTree) as $id) {
             if (!empty($id)) {
                 $option_ids[] = "'" . $ele_name . '[groups][' . $this->_groupId . '][' . $id . ']' . "'";
@@ -320,7 +320,7 @@ class CalendarGroupFormCheckBox extends XoopsFormElement
      * @param array  $parentIds
      * @access private
      */
-    public function _renderOptionTree(&$tree, $option, $prefix, $parentIds = array())
+    public function _renderOptionTree(&$tree, $option, $prefix, $parentIds = [])
     {
         $ele_name = $this->getName();
         $tree     .= $prefix . '<input type="checkbox" name="' . $ele_name . '[groups][' . $this->_groupId . '][' . $option['id'] . ']" id="' . $ele_name . '[groups][' . $this->_groupId . ']['

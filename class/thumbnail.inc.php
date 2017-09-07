@@ -109,10 +109,10 @@ class Thumbnail
         //initialize variables
         $this->errmsg            = '';
         $this->error             = false;
-        $this->currentDimensions = array();
-        $this->newDimensions     = array();
+        $this->currentDimensions = [];
+        $this->newDimensions     = [];
         $this->fileName          = $fileName;
-        $this->imageMeta         = array();
+        $this->imageMeta         = [];
         $this->percent           = 100;
         $this->maxWidth          = 0;
         $this->maxHeight         = 0;
@@ -161,10 +161,10 @@ class Thumbnail
             }
 
             $size                    = getimagesize($this->fileName);
-            $this->currentDimensions = array(
+            $this->currentDimensions = [
                 'width'  => $size[0],
                 'height' => $size[1]
-            );
+            ];
             $this->newImage          = $this->oldImage;
             $this->gatherImageMeta();
         }
@@ -245,10 +245,10 @@ class Thumbnail
         $newWp     = (100 * $this->maxWidth) / $width;
         $newHeight = ($height * $newWp) / 100;
 
-        return array(
+        return [
             'newWidth'  => (int)$this->maxWidth,
             'newHeight' => (int)$newHeight
-        );
+        ];
     }
 
     /**
@@ -263,10 +263,10 @@ class Thumbnail
         $newHp    = (100 * $this->maxHeight) / $height;
         $newWidth = ($width * $newHp) / 100;
 
-        return array(
+        return [
             'newWidth'  => (int)$newWidth,
             'newHeight' => (int)$this->maxHeight
-        );
+        ];
     }
 
     /**
@@ -281,10 +281,10 @@ class Thumbnail
         $newWidth  = ($width * $this->percent) / 100;
         $newHeight = ($height * $this->percent) / 100;
 
-        return array(
+        return [
             'newWidth'  => (int)$newWidth,
             'newHeight' => (int)$newHeight
-        );
+        ];
     }
 
     /**
@@ -295,10 +295,10 @@ class Thumbnail
      */
     private function calcImageSize($width, $height)
     {
-        $newSize = array(
+        $newSize = [
             'newWidth'  => $width,
             'newHeight' => $height
-        );
+        ];
 
         if ($this->maxWidth > 0) {
             $newSize = $this->calcWidth($width, $height);
@@ -415,8 +415,18 @@ class Thumbnail
             $this->workingImage = imagecreate($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
         }
 
-        imagecopyresampled($this->workingImage, $this->oldImage, 0, 0, 0, 0, $this->newDimensions['newWidth'], $this->newDimensions['newHeight'], $this->currentDimensions['width'],
-                           $this->currentDimensions['height']);
+        imagecopyresampled(
+            $this->workingImage,
+            $this->oldImage,
+            0,
+            0,
+            0,
+            0,
+            $this->newDimensions['newWidth'],
+            $this->newDimensions['newHeight'],
+            $this->currentDimensions['width'],
+                           $this->currentDimensions['height']
+        );
 
         $this->oldImage                    = $this->workingImage;
         $this->newImage                    = $this->workingImage;
@@ -441,8 +451,18 @@ class Thumbnail
             $this->workingImage = imagecreate($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
         }
 
-        imagecopyresampled($this->workingImage, $this->oldImage, 0, 0, 0, 0, $this->newDimensions['newWidth'], $this->newDimensions['newHeight'], $this->currentDimensions['width'],
-                           $this->currentDimensions['height']);
+        imagecopyresampled(
+            $this->workingImage,
+            $this->oldImage,
+            0,
+            0,
+            0,
+            0,
+            $this->newDimensions['newWidth'],
+            $this->newDimensions['newHeight'],
+            $this->currentDimensions['width'],
+                           $this->currentDimensions['height']
+        );
 
         $this->oldImage                    = $this->workingImage;
         $this->newImage                    = $this->workingImage;

@@ -20,7 +20,7 @@
 
 use Xmf\Module\Helper;
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class TdmpictureFile
@@ -85,12 +85,12 @@ class TdmpictureFile extends XoopsObject
             $thumb .= '/' . $force;
         }
 
-        return array(
+        return [
             'image_url'  => XOOPS_URL . $image,
             'image_path' => XOOPS_ROOT_PATH . $image,
             'thumb_url'  => XOOPS_URL . $thumb,
             'thumb_path' => XOOPS_ROOT_PATH . $thumb
-        );
+        ];
     }
 
     /**
@@ -129,8 +129,13 @@ class TdmpictureFile extends XoopsObject
         $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKDHUMB, '', 100, 255, TDMPICTURE_URL . '/get.php?st=' . $this->getVar('file_id')));
         $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKFORUM, '', 100, 255, '[url=' . $url . '][img]' . $file_path . '[/img][/url]'));
         $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKFORUM1, '', 100, 255, '[url=' . $url . '][img=' . $file_path . '][/url]'));
-        $form->addElement(new XoopsFormText(_MD_TDMPICTURE_LINKHTML, '', 100, 255,
-                                            '<a href="' . $url . '" target="_blank"><img src="' . $file_path . '" border="0" alt="' . $this->getVar('file_title') . '"></a>'));
+        $form->addElement(new XoopsFormText(
+            _MD_TDMPICTURE_LINKHTML,
+            '',
+            100,
+            255,
+                                            '<a href="' . $url . '" target="_blank"><img src="' . $file_path . '" border="0" alt="' . $this->getVar('file_title') . '"></a>'
+        ));
 
         return $form;
     }
@@ -192,7 +197,7 @@ class TdmpictureFile extends XoopsObject
 
             $arr    = $catHandler->getall($criteriaUser);
             $mytree = new TdmObjectTree($arr, 'cat_id', 'cat_pid');
-            if (TdmpictureUtility::checkVerXoops($module, '2.5.9')) {
+            if (TdmpictureUtility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
                 $catSelect = new XoopsFormLabel(_MD_TDMPICTURE_CAT, $mytree->makeSelectElement('file_cat', 'cat_title', '-', $this->getVar('file_cat'), true, 0, '', 'tdmpicture_catview'));
                 $form->addElement($catSelect);
             } else {
@@ -201,7 +206,7 @@ class TdmpictureFile extends XoopsObject
             //
 
             //editor
-            $editor_configs           = array();
+            $editor_configs           = [];
             $editor_configs['name']   = 'file_text';
             $editor_configs['value']  = $this->getVar('file_text', 'e');
             $editor_configs['rows']   = 20;
@@ -260,7 +265,7 @@ class TdmpictureFile extends XoopsObject
             //$form->addElement(new XoopsFormLabel(_MD_TDMPICTURE_CAT, $mytree->makeSelBox('file_cat', 'cat_title','-', $this->getVar('cat_pid'), true)), true);
 
             $mytree = new TdmObjectTree($arr, 'cat_id', 'cat_pid');
-            if (TdmpictureUtility::checkVerXoops($module, '2.5.9')) {
+            if (TdmpictureUtility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
                 $catSelect = new XoopsFormLabel(_MD_TDMPICTURE_CAT, $mytree->makeSelectElement('file_cat', 'cat_title', '-', $this->getVar('cat_pid'), true, 0, '', 'tdmpicture_catview'));
                 $form->addElement($catSelect);
             } else {
@@ -429,7 +434,7 @@ class TdmpictureFileHandler extends XoopsPersistableObjectHandler
             $sql .= " ORDER BY `{$this->keyName}` DESC";
         }
         $result = $this->db->query($sql, $limit, $start);
-        $ret    = array();
+        $ret    = [];
         if ($asObject) {
             while ($myrow = $this->db->fetchArray($result)) {
                 $object = $this->create(false);
@@ -464,36 +469,37 @@ class TdmpictureFileHandler extends XoopsPersistableObjectHandler
     public function deletes($ids)
     {
         foreach ($ids as $lid) {
-            $this->delete($lid, true);
+            $obj = $this->get($lid);
+            $this->delete($obj, true);
         }
 
         return true;
     }
 
     /**
-     * @param XoopsObject $photo
+     * @param \XoopsObject|int $photo
      * @param bool        $force
      * @return bool
      */
-    public function delete(XoopsObject $photo, $force = true)
+    public function delete($photo, $force = true)
     {
         global $xoopsUser, $xoopsDB, $xoopsModule;
 
         if (is_numeric($photo)) {
-            $obj = $this->get($photo);
+            $photo = $this->get($photo);
         }
 
         //$file_thumb = $obj->getFileThumb().$obj->getVar("file_file");
         //$file_path = $obj->getFilePath().$obj->getVar("file_file");
-        $file_path = $obj->getFilePath($obj->getVar('file_file'));
+        $file_path = $photo->getFilePath($photo->getVar('file_file'));
 
-        xoops_comment_delete($xoopsModule->getVar('mid'), $obj->getVar('file_id'));
+        xoops_comment_delete($xoopsModule->getVar('mid'), $photo->getVar('file_id'));
         //xoops_notification_deletebyitem( $xoopsModule->getVar('mid') , 'tdmpicture' , $obj->getVar('file_id') ) ;
 
         @unlink($file_path['image_path']);
         @unlink($file_path['thumb_path']);
 
-        return parent::delete($obj, $force);
+        return parent::delete($photo, $force);
     }
 
     /**

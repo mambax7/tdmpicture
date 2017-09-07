@@ -20,8 +20,7 @@ use Xmf\Module\Helper;
  * ****************************************************************************
  */
 
-require_once __DIR__ . '/../../include/cp_header.php';
-//require_once __DIR__ . '/../../mainfile.php';
+require_once __DIR__ . '/../../mainfile.php';
 
 $moduleDirName = basename(__DIR__);
 $moduleHelper  = Helper::getHelper($moduleDirName);

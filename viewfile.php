@@ -206,8 +206,8 @@ switch ($op) {
         $file_arr = $fileHandler->getObjects($criteria2);
         $numfile  = $fileHandler->getCount($criteria2);
         $xoopsTpl->assign('numfile', $numfile);
-        $file  = array();
-        $files = array();
+        $file  = [];
+        $files = [];
 
         foreach (array_keys($file_arr) as $f) {
 

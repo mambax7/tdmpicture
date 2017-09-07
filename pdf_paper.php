@@ -300,7 +300,7 @@ function Chars($text)
 {
     $myts = MyTextSanitizer:: getInstance();
 
-    return preg_replace(array(
+    return preg_replace([
                             '/&#039;/i',
                             '/&#233;/i',
                             '/&#232;/i',
@@ -309,7 +309,7 @@ function Chars($text)
                             '/<br \>/i',
                             '/&agrave;/i',
                             '/&#8364;/i'
-                        ), array(
+                        ], [
                             "'",
                             'é',
                             'è',
@@ -318,5 +318,5 @@ function Chars($text)
                             "\n",
                             'à',
                             '€'
-                        ), $text);
+                        ], $text);
 }

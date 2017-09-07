@@ -20,7 +20,7 @@
 
 use Xmf\Module\Helper;
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class TdmpictureCategory
@@ -96,7 +96,7 @@ class TdmpictureCategory extends XoopsObject
 
         $arr    = $catHandler->getall($criteriaUser);
         $mytree = new XoopsObjectTree($arr, 'cat_id', 'cat_pid');
-        if (TdmpictureUtility::checkVerXoops($module, '2.5.9')) {
+        if (TdmpictureUtility::checkVerXoops($GLOBALS['xoopsModule'], '2.5.9')) {
             $catSelect = new XoopsFormLabel(_MD_TDMPICTURE_PARENT, $mytree->makeSelectElement('cat_pid', 'cat_title', '-', $this->getVar('cat_pid'), true, 0, '', ''));
             $form->addElement($catSelect);
         } else {
@@ -104,7 +104,7 @@ class TdmpictureCategory extends XoopsObject
         }
 
         //editor
-        $editor_configs           = array();
+        $editor_configs           = [];
         $editor_configs['name']   = 'cat_text';
         $editor_configs['value']  = $this->getVar('cat_text', 'e');
         $editor_configs['rows']   = 20;

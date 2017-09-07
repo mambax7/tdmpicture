@@ -124,8 +124,8 @@ switch ($op) {
         $xoopsTpl->assign('numfile', $numfile);
 
         if ($numfile > 0) {
-            $file  = array();
-            $files = array();
+            $file  = [];
+            $files = [];
             foreach (array_keys($file_arr) as $f) {
 
                 //perm

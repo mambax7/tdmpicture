@@ -17,7 +17,7 @@
  * ****************************************************************************
  */
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $global_perms = 0;
 if (is_object($xoopsDB)) {

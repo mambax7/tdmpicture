@@ -25,16 +25,16 @@
  * @return array
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 function tdmpicture_search($queryarray, $andor, $limit, $offset, $userid)
 {
     global $xoopsDB;
-
+    $moduleDirName = basename(dirname(__DIR__));
     //load class
     $fileHandler = xoops_getModuleHandler('file', $moduleDirName);
 
-    $ret = array();
+    $ret = [];
     //cherche le fichier
     $criteria = new CriteriaCompo();
     $criteria->setSort('file_title');

@@ -19,31 +19,31 @@
  */
 class TDMPictureMenu
 {
-    public  $Width              = 100;
-    public  $Height             = 100;
-    public  $BgColor            = 'transparent';
-    public  $OverBgColor        = '#FFF6C1';
-    public  $BorderWidth        = 1;
-    public  $BorderColor        = '#CCCCCC';
-    public  $OverBorderColor    = '#FF9900';
-    public  $BorderStyle        = 'solid';
-    public  $OverBorderStyle    = 'solid';
-    public  $Font               = 'Tahoma, Arial, Helvetica';
-    public  $FontColor          = '#666666';
-    public  $OverFontColor      = '#1E90FF';
-    public  $FontDeco           = 'none';
-    public  $OverFontDeco       = 'none';
-    public  $FontSize           = 11;
-    public  $FontWeight         = 'bold';
-    public  $FontExtra          = 'Tahoma, Arial, Helvetica';
-    public  $FontExtraColor     = '#A98952';
-    public  $OverFontExtraColor = '#0033FF';
-    public  $FontExtraDeco      = 'underline';
-    public  $OverFontExtraDeco  = 'underline';
-    public  $FontExtraSize      = 9;
-    public  $FontExtraWeight    = 'normal';
-    public  $TextAlign          = 'center';
-    private $_items             = array();
+    public $Width              = 100;
+    public $Height             = 100;
+    public $BgColor            = 'transparent';
+    public $OverBgColor        = '#FFF6C1';
+    public $BorderWidth        = 1;
+    public $BorderColor        = '#CCCCCC';
+    public $OverBorderColor    = '#FF9900';
+    public $BorderStyle        = 'solid';
+    public $OverBorderStyle    = 'solid';
+    public $Font               = 'Tahoma, Arial, Helvetica';
+    public $FontColor          = '#666666';
+    public $OverFontColor      = '#1E90FF';
+    public $FontDeco           = 'none';
+    public $OverFontDeco       = 'none';
+    public $FontSize           = 11;
+    public $FontWeight         = 'bold';
+    public $FontExtra          = 'Tahoma, Arial, Helvetica';
+    public $FontExtraColor     = '#A98952';
+    public $OverFontExtraColor = '#0033FF';
+    public $FontExtraDeco      = 'underline';
+    public $OverFontExtraDeco  = 'underline';
+    public $FontExtraSize      = 9;
+    public $FontExtraWeight    = 'normal';
+    public $TextAlign          = 'center';
+    private $_items             = [];
 
     /**
      * @param        $id

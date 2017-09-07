@@ -67,7 +67,7 @@ if (!$tpl->is_cached('db:tdmpicture_rss.tpl')) {
     $criteria->setSort('file_indate');
     $criteria->setOrder('ASC');
     $item_arr = $fileHandler->getall($criteria);
-    $tpitem   = array();
+    $tpitem   = [];
     foreach (array_keys($item_arr) as $i) {
         $tpitem['id']    = $item_arr[$i]->getVar('file_id');
         $tpitem['title'] = $item_arr[$i]->getVar('file_title');

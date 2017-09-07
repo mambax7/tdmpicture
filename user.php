@@ -107,8 +107,8 @@ switch ($op) {
         $file_arr = $fileHandler->getObjects($criteria3);
         $numfile  = $fileHandler->getCount($criteria3);
         $xoopsTpl->assign('numfile', $numfile);
-        $file  = array();
-        $files = array();
+        $file  = [];
+        $files = [];
         foreach (array_keys($file_arr) as $f) {
 
             //perm
