@@ -179,7 +179,7 @@ class TdmpictureUtility
         $dir = opendir($src);
         //    @mkdir($dst);
         while (false !== ($file = readdir($dir))) {
-            if (($file !== '.') && ($file !== '..')) {
+            if (('.' !== $file) && ('..' !== $file)) {
                 if (is_dir($src . '/' . $file)) {
                     self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
                 } else {
@@ -447,8 +447,8 @@ class TdmpictureUtility
         $select_view = '<form name="form_switch" id="form_switch" action="' . $_SERVER['REQUEST_URI'] . '" method="post"><span style="font-weight: bold;">' . $text . '</span>';
         //$sorts =  $sort ==  'asc' ? 'desc' : 'asc';
         if ($form_sort == $sort) {
-            $sel1 = $order === 'asc' ? 'selasc.png' : 'asc.png';
-            $sel2 = $order === 'desc' ? 'seldesc.png' : 'desc.png';
+            $sel1 = 'asc' === $order ? 'selasc.png' : 'asc.png';
+            $sel2 = 'desc' === $order ? 'seldesc.png' : 'desc.png';
         } else {
             $sel1 = 'asc.png';
             $sel2 = 'desc.png';
@@ -548,7 +548,7 @@ class TdmpictureUtility
         $criteria->add(new Criteria('file_uid', $uid));
         $numalb = $fileHandler->getCount($criteria);
 
-        if ($numalb != 0) {
+        if (0 != $numalb) {
             return true;
         } else {
             return false;

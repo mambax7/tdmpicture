@@ -129,7 +129,7 @@ class Thumbnail
         }
 
         //if there are no errors, determine the file format
-        if ($this->error === false) {
+        if (false === $this->error) {
             //check if gif
             if (stristr(strtolower($this->fileName), '.gif')) {
                 $this->format = 'GIF';
@@ -147,7 +147,7 @@ class Thumbnail
         }
 
         //initialize resources if no errors
-        if ($this->error === false) {
+        if (false === $this->error) {
             switch ($this->format) {
                 case 'GIF':
                     $this->oldImage = imagecreatefromgif($this->fileName);
@@ -169,7 +169,7 @@ class Thumbnail
             $this->gatherImageMeta();
         }
 
-        if ($this->error === true) {
+        if (true === $this->error) {
             $this->showErrorImage();
             exit();
         }
@@ -555,11 +555,11 @@ class Thumbnail
     public function adaptiveResize($width, $height)
     {
         // make sure our arguments are valid
-        if (!is_numeric($width) || $width == 0) {
+        if (!is_numeric($width) || 0 == $width) {
             throw new InvalidArgumentException('$width must be numeric and greater than zero');
         }
 
-        if (!is_numeric($height) || $height == 0) {
+        if (!is_numeric($height) || 0 == $height) {
             throw new InvalidArgumentException('$height must be numeric and greater than zero');
         }
 
@@ -598,7 +598,7 @@ class Thumbnail
     {
         switch ($this->format) {
             case 'GIF':
-                if ($name != '') {
+                if ('' != $name) {
                     imagegif($this->newImage, $name);
                 } else {
                     header('Content-type: image/gif');
@@ -606,7 +606,7 @@ class Thumbnail
                 }
                 break;
             case 'JPG':
-                if ($name != '') {
+                if ('' != $name) {
                     imagejpeg($this->newImage, $name, $quality);
                 } else {
                     header('Content-type: image/jpeg');
@@ -614,7 +614,7 @@ class Thumbnail
                 }
                 break;
             case 'PNG':
-                if ($name != '') {
+                if ('' != $name) {
                     imagepng($this->newImage, $name);
                 } else {
                     header('Content-type: image/png');
@@ -672,7 +672,7 @@ class Thumbnail
             imagefilledrectangle($this->workingImage, 0, $height + $i, $width, $height + $i, $colorToPaint);
         }
 
-        if ($border === true) {
+        if (true === $border) {
             $rgb          = $this->hex2rgb($borderColor, false);
             $colorToPaint = imagecolorallocate($this->workingImage, $rgb[0], $rgb[1], $rgb[2]);
             imageline($this->workingImage, 0, 0, $width, 0, $colorToPaint); //top line
@@ -738,7 +738,7 @@ class Thumbnail
     public function gatherImageMeta()
     {
         //only attempt to retrieve info if exif exists
-        if (function_exists('exif_read_data') && $this->format === 'JPG') {
+        if (function_exists('exif_read_data') && 'JPG' === $this->format) {
             $imageData = exif_read_data($this->fileName);
             if (isset($imageData['Make'])) {
                 $this->imageMeta['make'] = ucwords(strtolower($imageData['Make']));
@@ -782,7 +782,7 @@ class Thumbnail
      */
     public function rotateImage($direction = 'CW')
     {
-        if ($direction === 'CW') {
+        if ('CW' === $direction) {
             $this->workingImage = imagerotate($this->workingImage, -90, 0);
         } else {
             $this->workingImage = imagerotate($this->workingImage, 90, 0);

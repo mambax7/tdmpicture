@@ -124,7 +124,7 @@ switch ($op) {
     case 'delete':
         $obj = $catHandler->get(Request::getVar('cat_id'));
 
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('cat.php', 2, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -158,7 +158,7 @@ switch ($op) {
 
     case 'update':
         $obj = $catHandler->get(Request::getVar('cat_id'));
-        $obj->getVar('cat_display') == 1 ? $obj->setVar('cat_display', 0) : $obj->setVar('cat_display', 1);
+        1 == $obj->getVar('cat_display') ? $obj->setVar('cat_display', 0) : $obj->setVar('cat_display', 1);
         if ($catHandler->insert($obj)) {
             redirect_header('cat.php', 2, _AM_TDMPICTURE_BASE);
         }
@@ -170,7 +170,7 @@ switch ($op) {
         //menu admin
         //        $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation(basename(__FILE__));
-        if ($cat_waiting != 0 && !isset($_REQUEST['cat_display'])) {
+        if (0 != $cat_waiting && !isset($_REQUEST['cat_display'])) {
             $waitString = _AM_TDMPICTURE_BUTTON_CAT_WAITING . $cat_waiting;
             echo $waitString;
             $adminObject->addItemButton($waitString, 'cat.php?op=list&cat_display=0', 'update');
@@ -224,16 +224,16 @@ switch ($op) {
             $mytree             = new TdmObjectTree($assoc_cat, 'cat_id', 'cat_pid');
             $category_ArrayTree = $mytree->makeArrayTree('', '<img src="' . TDMPICTURE_IMAGES_URL . '/decos/arrow.gif">');
             foreach (array_keys($category_ArrayTree) as $i) {
-                $class     = ($class === 'even') ? 'odd' : 'even';
+                $class     = ('even' === $class) ? 'odd' : 'even';
                 $cat_id    = $assoc_cat[$i]->getVar('cat_id');
                 $cat_uid   = XoopsUser::getUnameFromId($assoc_cat[$i]->getVar('cat_uid'));
                 $cat_pid   = $assoc_cat[$i]->getVar('cat_pid');
                 $cat_title = $myts->displayTarea($assoc_cat[$i]->getVar('cat_title'));
 
-                $display   = $assoc_cat[$i]->getVar('cat_display') == 1 ? "<a href='cat.php?op=update&cat_id=" . $cat_id . "'><img src='" . $pathIcon16
+                $display   = 1 == $assoc_cat[$i]->getVar('cat_display') ? "<a href='cat.php?op=update&cat_id=" . $cat_id . "'><img src='" . $pathIcon16
                                                                           . "/1.png' border='0'></a>" : "<a href='cat.php?op=update&cat_id=" . $cat_id . "'><img alt='" . _AM_TDMPICTURE_UPDATE
                                                                                                         . "' title='" . _AM_TDMPICTURE_UPDATE . "' src='" . $pathIcon16 . "/0.png' border='0'></a>";
-                $principal = $assoc_cat[$i]->getVar('cat_index') == 1 ? "<img src='" . $pathIcon16 . "/1.png' border='0'>" : "<img src='" . $pathIcon16 . "/0.png' border='0'>";
+                $principal = 1 == $assoc_cat[$i]->getVar('cat_index') ? "<img src='" . $pathIcon16 . "/1.png' border='0'>" : "<img src='" . $pathIcon16 . "/0.png' border='0'>";
                 //on test l'existance de l'image
                 $imgpath = TDMPICTURE_CAT_PATH . $assoc_cat[$i]->getVar('cat_img');
                 if (file_exists($imgpath)) {

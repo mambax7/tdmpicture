@@ -223,7 +223,7 @@ class TdmCatObjectTree extends XoopsObjectTree
             $uid    = 0;
         }
         //
-        if ($key > 0 && $this->tree[$key]['obj']->getVar('cat_pid') != 0) {
+        if ($key > 0 && 0 != $this->tree[$key]['obj']->getVar('cat_pid')) {
             $value = $this->tree[$key]['obj']->getVar($this->myId);
             $url   = 'viewcat.php?ct=' . $this->tree[$key]['obj']->getVar($this->myId) . '&tris=' . $tris . '&limit=' . $limit;
             //$value = tdmspot_generateSeoUrl( $moduleHelper->getConfig('tdmspot_seo_cat'), $this->tree[$key]['obj']->getVar('id'), $this->tree[$key]['obj']->getVar('title'), $start, $limit, $tris );
@@ -291,7 +291,7 @@ class TdmCatObjectTree extends XoopsObjectTree
             $ret      .= '<option ' . $select . ' value="' . $cat_link . '">' . $value . '</option>';
         }
         $ret .= '</select>';
-        if ($order === 'desc') {
+        if ('desc' === $order) {
             $ret .= '<a href=' . $url . '?' . $cat . '&tris=' . $tris . '&order=asc title=' . _MD_TDMPICTURE_ASC . '><img src=' . TDMPICTURE_IMAGES_URL . '/asc.png></a>';
         } else {
             $ret .= '<a href=' . $url . '?' . $cat . '&tris=' . $tris . '&order=desc title=' . _MD_TDMPICTURE_DESC . ' ><img src=' . TDMPICTURE_IMAGES_URL . '/desc.png></a>';

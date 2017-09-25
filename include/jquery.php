@@ -148,7 +148,7 @@ switch ($op) {
                     $msgError = $uploader->getErrors();
                 } else {
                     $bSuccess = true;
-                    if (strrpos($uploader->getMediaName(), '.') !== false) {
+                    if (false !== strrpos($uploader->getMediaName(), '.')) {
                         $ext = substr($uploader->getMediaName(), 0, strrpos($uploader->getMediaName(), '.'));
                     } else {
                         $ext = $uploader->getMediaName();

@@ -59,7 +59,7 @@ class TdmpicturePlaylist extends XoopsObject
         $moduleDirName = basename(dirname(__DIR__));
         $moduleHelper  = Helper::getHelper($moduleDirName);
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         $title = $this->isNew() ? sprintf(_AM_TDMPICTURE_ADD) : sprintf(_AM_TDMPICTURE_EDIT);

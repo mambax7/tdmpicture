@@ -79,11 +79,11 @@ switch ($op) {
         function parcourirArborescence($repertoire)
         {
             if (@ $dh = opendir($repertoire)) {
-                while (($fichier = readdir($dh)) !== false) {
-                    if ($fichier === '.') {
+                while (false !== ($fichier = readdir($dh))) {
+                    if ('.' === $fichier) {
                         continue; // Skip it
                     }
-                    if ($fichier === '..') {
+                    if ('..' === $fichier) {
                         continue; // Skip it
                     }
                     if (is_dir($repertoire . $fichier)) {

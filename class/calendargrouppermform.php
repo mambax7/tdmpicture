@@ -92,7 +92,7 @@ class CalendarGroupPermForm extends XoopsForm
         $this->_permDesc = $permdesc;
         $this->addElement(new XoopsFormHidden('modid', $this->_modid));
         $this->addElement(new XoopsFormHiddenToken($permname));
-        if ($url != '') {
+        if ('' != $url) {
             $this->addElement(new XoopsFormHidden('redirect_url', $url));
         }
         $this->_showAnonymous = $anonymous;
@@ -156,7 +156,7 @@ class CalendarGroupPermForm extends XoopsForm
         $memberHandler = xoops_getHandler('member');
         $glist         = $memberHandler->getGroupList();
         foreach (array_keys($glist) as $i) {
-            if ($i == XOOPS_GROUP_ANONYMOUS && !$this->_showAnonymous) {
+            if (XOOPS_GROUP_ANONYMOUS == $i && !$this->_showAnonymous) {
                 continue;
             }
             // get selected item id(s) for each group
@@ -184,7 +184,7 @@ class CalendarGroupPermForm extends XoopsForm
                 $ret .= $elements[$i];
             } elseif (!$elements[$i]->isHidden()) {
                 $ret .= '<tr valign="top" align="left"><td class="head">' . $elements[$i]->getCaption();
-                if ($elements[$i]->getDescription() != '') {
+                if ('' != $elements[$i]->getDescription()) {
                     $ret .= "<br><br><span style='font-weight: normal;'>" . $elements[$i]->getDescription() . '</span>';
                 }
                 $ret .= '</td>' . '<td class="even">' . $elements[$i]->render() . '</td></tr>' . '';
@@ -347,7 +347,7 @@ class CalendarGroupFormCheckBox extends XoopsFormElement
         $tree .= '>' . $option['name'] . '<input type="hidden" name="' . $ele_name . '[parents][' . $option['id'] . ']" value="' . implode(':', $parentIds) . '"><input type="hidden" name="'
                  . $ele_name . '[itemname][' . $option['id'] . ']" value="' . htmlspecialchars($option['name']) . "\"><br>\n";
 
-        if ($this->_groupId == XOOPS_GROUP_ANONYMOUS && $option['anonymous']) {
+        if (XOOPS_GROUP_ANONYMOUS == $this->_groupId && $option['anonymous']) {
             $tree = '';
         }
 

@@ -46,7 +46,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         $this->table     = $db->prefix($tablename);
         $this->keyName   = $keyname;
         $this->className = $classname;
-        if ($idenfierName !== false) {
+        if (false !== $idenfierName) {
             $this->identifierName = $idenfierName;
         }
     }
@@ -61,7 +61,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
     public function create($isNew = true)
     {
         $obj = new $this->className();
-        if ($isNew === true) {
+        if (true === $isNew) {
             $obj->setNew();
         }
 
@@ -87,7 +87,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         }
         $criteria->setLimit(1);
         $obj_array = $this->getObjects($criteria, false, $as_object);
-        if (count($obj_array) != 1) {
+        if (1 != count($obj_array)) {
             $obj = $this->create();
 
             return $obj;
@@ -112,7 +112,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         $sql   = 'SELECT * FROM ' . $this->table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->getSort() != '') {
+            if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();
@@ -182,11 +182,11 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0)
     {
         $ret = [];
-        if ($criteria === null) {
+        if (null === $criteria) {
             $criteria = new CriteriaCompo();
         }
 
-        if ($criteria->getSort() == '') {
+        if ('' == $criteria->getSort()) {
             $criteria->setSort($this->identifierName);
         }
 
@@ -197,7 +197,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         $sql .= ' FROM ' . $this->table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->getSort() != '') {
+            if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();
@@ -227,7 +227,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         $field   = '';
         $groupby = false;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-            if ($criteria->groupby != '') {
+            if ('' != $criteria->groupby) {
                 $groupby = true;
                 $field   = $criteria->groupby . ', '; //Not entirely secure unless you KNOW that no criteria's groupby clause is going to be mis-used
             }
@@ -235,7 +235,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         $sql = 'SELECT ' . $field . 'COUNT(*) FROM ' . $this->table;
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
-            if ($criteria->groupby != '') {
+            if ('' != $criteria->groupby) {
                 $sql .= $criteria->getGroupby();
             }
         }
@@ -243,7 +243,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         if (!$result) {
             return 0;
         }
-        if ($groupby === false) {
+        if (false === $groupby) {
             list($count) = $this->db->fetchRow($result);
 
             return $count;
@@ -299,7 +299,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
 
     public function insert(XoopsObject $obj, $force = false, $checkObject = true)
     {
-        if ($checkObject !== false) {
+        if (false !== $checkObject) {
             if (!is_object($obj)) {
                 var_dump($obj);
 
@@ -324,7 +324,7 @@ class TdmpictureXoopsPersistableObjectHandler extends XoopsObjectHandler
         }
 
         foreach ($obj->cleanVars as $k => $v) {
-            if ($obj->vars[$k]['data_type'] == XOBJ_DTYPE_INT) {
+            if (XOBJ_DTYPE_INT == $obj->vars[$k]['data_type']) {
                 $cleanvars[$k] = (int)$v;
             } elseif (is_array($v)) {
                 $cleanvars[$k] = $this->db->quoteString(implode(',', $v));

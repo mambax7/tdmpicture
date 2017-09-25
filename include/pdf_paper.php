@@ -210,9 +210,9 @@ switch ($option) {
         $num_ticket              = $ticket->getVar('ticket_nbticket');
 
         //Quel format ?
-        if ($type_page == 1) {
+        if (1 == $type_page) {
             //A4
-            if ($method1 == 1) {
+            if (1 == $method1) {
                 $pdf = new PDF('P', 'mm', 'A4');
                 for ($l = 0; $l < $ticket_nb_pages; ++$l) {
                     $pdf->AddPage();
@@ -302,7 +302,7 @@ switch ($option) {
                 }
             }
         } else {
-            if ($method2 == 1) {
+            if (1 == $method2) {
                 $pdf = new PDF('P', 'mm', 'A3');
                 for ($l = 0; $l < $ticket_nb_pages; ++$l) {
                     $pdf->AddPage();
@@ -677,7 +677,7 @@ switch ($option) {
         $pdf->Cell(30, 10, Chars(_AM_TDMPICTURE_FORMDATE) . ' : ' . $stock_indate, 0, 0, 'L');
         $pdf->Ln(5);
         //mini date sortis
-        if ($num == 3 || $num == 4 || $num == 6) {
+        if (3 == $num || 4 == $num || 6 == $num) {
             $stock_outregdate = formatTimestamp($stock->getVar('stock_outregdate'), 'm');
             $pdf->Cell(130);
             $pdf->Cell(30, 10, Chars(_AM_TDMPICTURE_FORMOUTREGDATE) . ' : ' . $stock_outregdate, 0, 0, 'L');

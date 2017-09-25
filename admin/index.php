@@ -59,7 +59,7 @@ $folder = [
 //$adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->addInfoBox(_AM_TDMPICTURE_MANAGE_CAT);
 $adminObject->addInfoBoxLine(sprintf(_AM_TDMPICTURE_THEREARE_CAT, $numcat));
-if ($cat_waiting == 0) {
+if (0 == $cat_waiting) {
     $adminObject->addInfoBoxLine(sprintf(_AM_TDMPICTURE_THEREARE_CAT_WAITING, '<span class="green">' . 0 . '</span>'), '', 'green');
 } else {
     $adminObject->addInfoBoxLine(sprintf(_AM_TDMPICTURE_THEREARE_CAT_WAITING, '<span class="red">' . $cat_waiting . '</span>'), '', 'red');
@@ -67,7 +67,7 @@ if ($cat_waiting == 0) {
 
 $adminObject->addInfoBox(_AM_TDMPICTURE_MANAGE_FILE);
 $adminObject->addInfoBoxLine(sprintf(_AM_TDMPICTURE_THEREARE_FILE, $numfile));
-if ($file_waiting == 0) {
+if (0 == $file_waiting) {
     $adminObject->addInfoBoxLine(sprintf(_AM_TDMPICTURE_THEREARE_FILE_WAITING, '<span class="green">' . 0 . '</span>'), '', 'green');
 } else {
     $adminObject->addInfoBoxLine(sprintf(_AM_TDMPICTURE_THEREARE_FILE_WAITING, '<span class="red">' . $file_waiting . '</span>'), '', 'red');

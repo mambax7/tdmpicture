@@ -413,7 +413,7 @@ class AudioFile
         $v1tag  = 0;
         $fp     = fopen($this->wave_filename, 'r');
         $tmp    = fread($fp, 3);
-        if ($tmp === 'ID3') {
+        if ('ID3' === $tmp) {
             // id3v2 tag is present
             $this->getId3v2($fp);
 
@@ -433,7 +433,7 @@ class AudioFile
 
         //id tag?-------------------------------
 
-        if (substr($TAG, 0, 3) === 'TAG') {
+        if ('TAG' === substr($TAG, 0, 3)) {
             $v1tag                             = 128;
             $info['mpeg_id3v1_tag']['title']   = rtrim(substr($TAG, 3, 30));
             $info['mpeg_id3v1_tag']['artist']  = rtrim(substr($TAG, 33, 30));
@@ -522,13 +522,13 @@ class AudioFile
 
         //framelenght---------------------------
 
-        if ($info['mpeg_bitrate'] === 'free' || $info['mpeg_bitrate'] === 'bad' || !$info['mpeg_bitrate'] || !$info['mpeg_sampling_rate']) {
+        if ('free' === $info['mpeg_bitrate'] || 'bad' === $info['mpeg_bitrate'] || !$info['mpeg_bitrate'] || !$info['mpeg_sampling_rate']) {
             $info['mpeg_framelength'] = 0;
         } else {
-            if ($byte_len == 0) {
+            if (0 == $byte_len) {
                 $rate_tmp                 = $info['mpeg_bitrate'] * 1000;
                 $info['mpeg_framelength'] = (12 * $rate_tmp / $info['mpeg_sampling_rate'] + $byte_pad) * 4;
-            } elseif ($byte_len == 1) {
+            } elseif (1 == $byte_len) {
                 $rate_tmp                 = $info['mpeg_bitrate'] * 1000;
                 $info['mpeg_framelength'] = 144 * $rate_tmp / $info['mpeg_sampling_rate'] + $byte_pad;
             }
@@ -542,15 +542,15 @@ class AudioFile
         $tmp2                  = 0;
         $info['mpeg_frames']   = '';
         $info['mpeg_playtime'] = '';
-        if (!$info['mpeg_bitrate'] || $info['mpeg_bitrate'] === 'bad' || !$info['mpeg_sampling_rate']) {
+        if (!$info['mpeg_bitrate'] || 'bad' === $info['mpeg_bitrate'] || !$info['mpeg_sampling_rate']) {
             $info['mpeg_playtime'] = -1;
-        } elseif ($info['mpeg_bitrate'] === 'free') {
+        } elseif ('free' === $info['mpeg_bitrate']) {
             $info['mpeg_playtime'] = -1;
         } else {
             $tmp2                = ((8 * $tmp) / 1000) / $info['mpeg_bitrate'];
             $info['mpeg_frames'] = floor($tmp / $info['mpeg_framelength']);
             $tmp                 = $tmp * 8;
-            if ($rate_tmp <> 0) {
+            if (0 <> $rate_tmp) {
                 $info['mpeg_playtime'] = $tmp / $rate_tmp;
             }
             $info['mpeg_playtime'] = $tmp2;
@@ -606,7 +606,7 @@ class AudioFile
         $b2 = hexdec(bin2hex($b2));
         $b3 = hexdec(bin2hex($b3));
         $b4 = hexdec(bin2hex($b4));
-        if ($mode == 0) {
+        if (0 == $mode) {
             return ($b1 + ($b2 * 256) + ($b3 * 65536) + ($b4 * 16777216));
         } else {
             return ($b4 + ($b3 * 256) + ($b2 * 65536) + ($b1 * 16777216));
@@ -629,7 +629,7 @@ class AudioFile
     {
         $b1 = hexdec(bin2hex($b1));
         $b2 = hexdec(bin2hex($b2));
-        if ($mode == 0) {
+        if (0 == $mode) {
             return ($b1 + ($b2 * 256));
         } else {
             return ($b2 + ($b1 * 256));
@@ -647,7 +647,7 @@ class AudioFile
      */
     public function getCompression($id)
     {
-        if ($this->wave_id !== 'MPEG' && $this->wave_id !== 'OGG') {
+        if ('MPEG' !== $this->wave_id && 'OGG' !== $this->wave_id) {
             $append = "($id)";
             switch ($id) {
                 case 0:
@@ -707,9 +707,9 @@ class AudioFile
         $width          = $this->visual_width;
         $height         = $this->visual_height;
         $height_channel = $height / $this->wave_channels;
-        if ($this->wave_filename <> '' && $this->wave_id === 'RIFF' && $this->wave_type === 'WAVE'
+        if ('' <> $this->wave_filename && 'RIFF' === $this->wave_id && 'WAVE' === $this->wave_type
             && ($this->wave_channels >= 1 && $this->wave_channels <= 2)
-            && $this->wave_bits % 8 == 0) {
+            && 0 == $this->wave_bits % 8) {
             $file = fopen($this->wave_filename, 'r');
 
             // read the first 12 bytes (RIFF- & WAVE-chunk)
@@ -721,7 +721,7 @@ class AudioFile
             // Read the next chunk-id, supposed to be "fmt "
 
             $chunk_id_3 = fgetc($file) . fgetc($file) . fgetc($file) . fgetc($file);
-            if ($chunk_id_3 === 'fmt ') {
+            if ('fmt ' === $chunk_id_3) {
                 $chunk_size_3 = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
                 for ($i = 0; $i < $chunk_size_3; ++$i) {
                     $null = fgetc($file);
@@ -729,16 +729,16 @@ class AudioFile
 
                 // Read the next chunk-id, supposed to be "data"
                 $chunk_id_4 = '';
-                while ($chunk_id_4 !== 'data' && !feof($file)) {
+                while ('data' !== $chunk_id_4 && !feof($file)) {
                     $chunk_id_4 = fgetc($file) . fgetc($file) . fgetc($file) . fgetc($file);
-                    if ($chunk_id_4 !== 'data') {
+                    if ('data' !== $chunk_id_4) {
                         $chunk_size_4 = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
                         for ($i = 0; $i < $chunk_size_4; ++$i) {
                             $null = fgetc($file);
                         }
                     }
                 }
-                if ($chunk_id_4 === 'data') {
+                if ('data' === $chunk_id_4) {
                     $chunk_size_4      = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
                     $visualData        = [];
                     $bytes_per_frame   = ($this->wave_bits / 8) * $this->wave_channels;
@@ -834,7 +834,7 @@ class AudioFile
                         for ($i = 1, $iMax = count($visualData[$j]); $i < $iMax; ++$i) {
                             $faktor = 128 / ($height_channel / 2);
                             $val    = $visualData[$j][$i] / $faktor;
-                            if ($this->visual_graph_mode == 0) {
+                            if (0 == $this->visual_graph_mode) {
                                 imageline($im, $last_x, $last_y + ($j * $height_channel), $i, $val + ($j * $height_channel), $cGreen);
                             } else {
                                 imageline($im, $i, ($height_channel / 2) + ($j * $height_channel), $i, $val + ($j * $height_channel), $cGreen);
@@ -845,7 +845,7 @@ class AudioFile
                     }
 
                     // change this to generate JPG or direct output to browser
-                    if (strtolower($this->visual_fileformat) === 'jpeg') {
+                    if ('jpeg' === strtolower($this->visual_fileformat)) {
                         imagejpeg($im, $output);
                     } else {
                         imagepng($im, $output);
@@ -871,7 +871,7 @@ class AudioFile
 
         if (false !== strpos(strtoupper($this->wave_filename), 'MP3')) {
             $this->mp3info();
-        } elseif (substr(strtoupper($this->wave_filename), -3) === 'OGG') {
+        } elseif ('OGG' === substr(strtoupper($this->wave_filename), -3)) {
             $this->ogginfo();
         } else {
             $this->wave_size = filesize($this->wave_filename);
@@ -882,19 +882,19 @@ class AudioFile
                 $chunk_id_2      = fgetc($file) . fgetc($file) . fgetc($file) . fgetc($file);
                 $this->wave_id   = $chunk_id;
                 $this->wave_type = $chunk_id_2;
-                if (substr($chunk_id, 0, 2) === 'PK') {
+                if ('PK' === substr($chunk_id, 0, 2)) {
                     // it's a ZIP-file
 
                     $this->wave_id   = 'ZIP';
                     $this->wave_type = 'ZIP';
                     $this->valid     = true;
                 } else {
-                    if ($this->wave_id === 'RIFF' && $this->wave_type === 'WAVE') {
+                    if ('RIFF' === $this->wave_id && 'WAVE' === $this->wave_type) {
                         // it's a Wave-File
 
                         $chunk_id   = fgetc($file) . fgetc($file) . fgetc($file) . fgetc($file);
                         $chunk_size = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
-                        if ($chunk_id === 'fmt ') {
+                        if ('fmt ' === $chunk_id) {
                             $format_len             = $chunk_size;
                             $this->wave_compression = $this->shortCalc(fgetc($file), fgetc($file), 0);
                             $this->wave_channels    = $this->shortCalc(fgetc($file), fgetc($file), 0);
@@ -913,10 +913,10 @@ class AudioFile
                             }
                             $chunk_id   = fgetc($file) . fgetc($file) . fgetc($file) . fgetc($file);
                             $chunk_size = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
-                            if ($chunk_id === 'data') {
+                            if ('data' === $chunk_id) {
                                 $this->wave_length = (($chunk_size / $this->wave_channels) / ($this->wave_bits / 8)) / $this->wave_framerate;
                             } else {
-                                while ($chunk_id !== 'data' && !feof($file)) {
+                                while ('data' !== $chunk_id && !feof($file)) {
                                     $j = 1;
                                     while ($j <= $chunk_size && !feof($file)) {
                                         $null = fgetc($file);
@@ -926,7 +926,7 @@ class AudioFile
                                     //print "<br>$chunk_id*";
                                     $chunk_size = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
                                 }
-                                if ($chunk_id === 'data') {
+                                if ('data' === $chunk_id) {
                                     $this->wave_length = (($chunk_size / $this->wave_channels) / ($this->wave_bits / 8)) / $this->wave_framerate;
                                 }
                             }
@@ -934,12 +934,12 @@ class AudioFile
                             $valid = false;
                         }
                     } else {
-                        if ($this->wave_id === 'FORM' && $this->wave_type === 'AIFF') {
+                        if ('FORM' === $this->wave_id && 'AIFF' === $this->wave_type) {
                             // we have a AIFF file here
 
                             $chunk_id   = fgetc($file) . fgetc($file) . fgetc($file) . fgetc($file);
                             $chunk_size = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 0);
-                            if ($chunk_id === 'COMM') {
+                            if ('COMM' === $chunk_id) {
                                 $format_len           = $chunk_size;
                                 $this->wave_channels  = $this->shortCalc(fgetc($file), fgetc($file), 1);
                                 $null                 = $this->longCalc(fgetc($file), fgetc($file), fgetc($file), fgetc($file), 1);
@@ -1091,7 +1091,7 @@ class AudioFile
         while (ftell($fp) < ($tagsize + 10)) {
             // get next frame header
             $frameid = fread($fp, 4);
-            if (trim($frameid) == '') {
+            if ('' == trim($frameid)) {
                 break;
             }
             $framesize   = $this->get32bitSynchsafe($fp);

@@ -100,7 +100,7 @@ class TdmObjectTree extends XoopsObjectTree
             $cat_link = TDMPICTURE_URL . '/viewcat.php?ct=' . $this->tree[$key]['obj']->getVar('cat_id') . '&tris=' . $tris . '&limit=' . $limit;
             //recherche image
             $imgpath = TDMPICTURE_CAT_PATH . $this->tree[$key]['obj']->getVar('cat_img');
-            if (file_exists($imgpath) && $this->tree[$key]['obj']->getVar('cat_img') !== 'blank.png') {
+            if (file_exists($imgpath) && 'blank.png' !== $this->tree[$key]['obj']->getVar('cat_img')) {
                 $picture = '<a href ="' . $cat_link . '" title="' . $this->tree[$key]['obj']->getVar('cat_title') . '"><img src="' . TDMPICTURE_CAT_URL . $this->tree[$key]['obj']->getVar('cat_img')
                            . '" class="img" width="' . $moduleHelper->getConfig('tdmpicture_cat_width') . '"  height="' . $moduleHelper->getConfig('tdmpicture_cat_height') . '"></a>';
             } else {
@@ -177,7 +177,7 @@ class TdmObjectTree extends XoopsObjectTree
         }
         if (isset($this->tree[$key]['child']) && !empty($this->tree[$key]['child'])) {
             foreach ($this->tree[$key]['child'] as $childkey) {
-                $GLOBALS['class'] = ($GLOBALS['class'] === 'even') ? 'odd' : 'even';
+                $GLOBALS['class'] = ('even' === $GLOBALS['class']) ? 'odd' : 'even';
                 $this->_makeCatBoxOptions($itemHandler, $fieldName, $selected, $childkey, $ret, $prefix_orig, $prefix_curr, $ret2, $chcount);
             }
         }

@@ -109,7 +109,7 @@ switch ($op) {
                     redirect_header('files.php', 2, $errors);
                 } else {
                     $erreur = true;
-                    if (strrpos($uploader->getMediaName(), '.') !== false) {
+                    if (false !== strrpos($uploader->getMediaName(), '.')) {
                         $ext = substr($uploader->getMediaName(), 0, strrpos($uploader->getMediaName(), '.'));
                     } else {
                         $ext = $uploader->getMediaName();
@@ -197,7 +197,7 @@ switch ($op) {
 
     case 'delete':
 
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('files.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -224,7 +224,7 @@ switch ($op) {
 
     case _AM_TDMPICTURE_DELETE:
 
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('files.php', 2, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -326,7 +326,7 @@ switch ($op) {
         //menu admin
         $adminObject = \Xmf\Module\Admin::getInstance();
         $adminObject->displayNavigation(basename(__FILE__));
-        if ($file_waiting != 0 && !isset($_REQUEST['file_display'])) {
+        if (0 != $file_waiting && !isset($_REQUEST['file_display'])) {
             $waitString = _AM_TDMPICTURE_BUTTON_FILES_WAITING . $file_waiting;
             //$adminObject->addItemButton(sprintf(_AM_TDMPICTURE_THEREARE_FILE_WAITING,$file_waiting), 'files.php?op=list&file_display=0', 'update');
             $adminObject->addItemButton($waitString, 'files.php?op=list&file_display=0', 'update');
@@ -372,11 +372,11 @@ switch ($op) {
             $criteria->add(new Criteria('file_display', $file_display));
         }
 
-        if (isset($_REQUEST['file_cat']) && $_REQUEST['file_cat'] != 0) {
+        if (isset($_REQUEST['file_cat']) && 0 != $_REQUEST['file_cat']) {
             $criteria->add(new Criteria('file_cat', $_REQUEST['file_cat']));
         }
 
-        if (isset($file_id) && $file_id != 0) {
+        if (isset($file_id) && 0 != $file_id) {
             $criteria->add(new Criteria('file_id', $file_id));
         }
 
@@ -417,14 +417,14 @@ switch ($op) {
                 $ret           = $catHandler->get($arr[$i]->getVar('file_cat'));
                 $file_cattitle = $ret->getVar('cat_title');
                 //info file
-                $class      = ($class === 'even') ? 'odd' : 'even';
+                $class      = ('even' === $class) ? 'odd' : 'even';
                 $file_id    = $arr[$i]->getVar('file_id');
                 $file_title = $myts->displayTarea($arr[$i]->getVar('file_title'));
                 $file_type  = $arr[$i]->getVar('file_type');
                 $file_size  = $arr[$i]->getVar('file_size');
                 $file_hits  = $arr[$i]->getVar('file_hits');
 
-                $display = $arr[$i]->getVar('file_display') == 1 ? "<a href='files.php?op=display&file_id=" . $file_id . "'><img src='" . $pathIcon16 . "/1.png' border='0'></a>" : "<a href='files.php?op=display&file_id="
+                $display = 1 == $arr[$i]->getVar('file_display') ? "<a href='files.php?op=display&file_id=" . $file_id . "'><img src='" . $pathIcon16 . "/1.png' border='0'></a>" : "<a href='files.php?op=display&file_id="
                                                                                                                                                                                     . $file_id
                                                                                                                                                                                     . "'><img alt='"
                                                                                                                                                                                     . _AM_TDMPICTURE_DISPLAY

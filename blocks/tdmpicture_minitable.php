@@ -170,7 +170,7 @@ function b_tdmpicture($options)
         ++$e;
     }
 
-    if ($style_block == 4) {
+    if (4 == $style_block) {
         $block['block_name'] = $i;
     }
 
@@ -218,9 +218,9 @@ function b_tdmpicture_edit($options)
     print_r($options);
     $selectedid = explode(',', $options[7]);
     $form       .= _MB_TDMPICTURE_CATTODISPLAY . '<br><select name="options[7][]" multiple="multiple" size="5">';
-    $form       .= '<option value="0" ' . (array_search(0, $selectedid) === false ? '' : 'selected') . '>' . _MB_TDMPICTURE_ALLCAT . '</option>';
+    $form       .= '<option value="0" ' . (false === array_search(0, $selectedid) ? '' : 'selected') . '>' . _MB_TDMPICTURE_ALLCAT . '</option>';
     foreach (array_keys($assoc_arr) as $i) {
-        $form .= '<option value="' . $assoc_arr[$i]->getVar('cat_id') . '" ' . (array_search($assoc_arr[$i]->getVar('cat_id'), $selectedid) === false ? '' : 'selected') . '>'
+        $form .= '<option value="' . $assoc_arr[$i]->getVar('cat_id') . '" ' . (false === array_search($assoc_arr[$i]->getVar('cat_id'), $selectedid) ? '' : 'selected') . '>'
                  . $assoc_arr[$i]->getVar('cat_title') . '</option>';
     }
     $form .= '</select><br>';
@@ -257,7 +257,7 @@ function tdmpicture_blockselect($options, $number, $lang, $array)
     $select = $lang . ': ';
     $select .= "<select name='options[{$number}]'>";
     foreach ($array as $key => $value) {
-        $select .= '<option value="' . $key . '" ' . (($key == $options[$number]) === false ? '' : 'selected') . '>' . $value . '</option>';
+        $select .= '<option value="' . $key . '" ' . (false === ($key == $options[$number]) ? '' : 'selected') . '>' . $value . '</option>';
     }
 
     $select .= '</select><br>';

@@ -57,8 +57,8 @@ $global_perms_array = [
 $permform = new CalendarGroupPermForm('', $module_id, $perm_name, '', '');
 
 foreach ($global_perms_array as $perm_id => $perm_name) {
-    if ($perm_name == _AM_TDMPICTURE_PERM_2 || $perm_name == _AM_TDMPICTURE_PERM_32
-        || $perm_name == _AM_TDMPICTURE_PERM_64) {
+    if (_AM_TDMPICTURE_PERM_2 == $perm_name || _AM_TDMPICTURE_PERM_32 == $perm_name
+        || _AM_TDMPICTURE_PERM_64 == $perm_name) {
         $permform->addItem($perm_id, $perm_name);
     } else {
         $permform->addItem($perm_id, $perm_name, 0, true);

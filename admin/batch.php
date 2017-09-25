@@ -38,7 +38,7 @@ switch ($op) {
     case 'batch':
         global $xoopsConfig, $xoopsDB, $xoopsUser, $xoopsModule;
 
-        if (get_cfg_var('max_execution_time') === null) {
+        if (null === get_cfg_var('max_execution_time')) {
             $maxExecTime = 10;
         } else {
             $maxExecTime = get_cfg_var('max_execution_time');

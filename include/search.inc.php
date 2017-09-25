@@ -39,7 +39,7 @@ function tdmpicture_search($queryarray, $andor, $limit, $offset, $userid)
     $criteria = new CriteriaCompo();
     $criteria->setSort('file_title');
     $criteria->setOrder('ASC');
-    if ($userid != 0) {
+    if (0 != $userid) {
         $criteria->add(new Criteria('file_uid', $userid));
     }
     $criteria->add(new Criteria('file_display', 1));

@@ -65,7 +65,7 @@ class TdmpictureCategory extends XoopsObject
             $groups = XOOPS_GROUP_ANONYMOUS;
             $uid    = 0;
         }
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         $title = $this->isNew() ? sprintf(_MD_TDMPICTURE_ADD) : sprintf(_MD_TDMPICTURE_EDIT);

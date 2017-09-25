@@ -150,7 +150,7 @@ class TdmpictureFile extends XoopsObject
         $moduleDirName = basename(dirname(__DIR__));
         $moduleHelper  = Helper::getHelper($moduleDirName);
 
-        if ($action === false) {
+        if (false === $action) {
             $action = $_SERVER['REQUEST_URI'];
         }
         $title = $this->isNew() ? sprintf(_MD_TDMPICTURE_ADD) : sprintf(_MD_TDMPICTURE_EDIT);
@@ -528,7 +528,7 @@ class TdmpictureFileHandler extends XoopsPersistableObjectHandler
             $obj = $this->get($photo);
         }
 
-        $obj->getVar('file_display') == 1 ? $obj->setVar('file_display', 0) : $obj->setVar('file_display', 1);
+        1 == $obj->getVar('file_display') ? $obj->setVar('file_display', 0) : $obj->setVar('file_display', 1);
         $this->insert($obj);
 
         return true;

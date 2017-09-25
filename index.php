@@ -173,7 +173,7 @@ switch ($op) {
 
                 //moyen des votes
                 @$moyen = ceil($file['votes'] / $file['counts']);
-                if (@$moyen == 0) {
+                if (0 == @$moyen) {
                     $file['moyen'] = '';
                 } else {
                     $file['moyen'] = "<img src='" . TDMPICTURE_IMAGES_URL . '/rate' . $moyen . ".png'>";

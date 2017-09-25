@@ -11,7 +11,7 @@ require_once __DIR__ . '/header.php';
 $itemid       = \Xmf\Request::getInt('st', 0, 'GET');
 $item_page_id = \Xmf\Request::getInt('page', -1, 'GET');
 
-if ($itemid == 0) {
+if (0 == $itemid) {
     redirect_header('javascript:history.go(-1)', 1, _MD_AMREVIEWS_NOITEMSELECTED);
 }
 
@@ -49,7 +49,7 @@ $sender_inform = sprintf(_MD_AMREVIEWS_WHO_WHEN, $itemObj->posterName(), $itemOb
 $mainImage     = $itemObj->getMainImage();
 
 $content = '';
-if ($mainImage['image_path'] != '') {
+if ('' != $mainImage['image_path']) {
     $content .= '<img src="' . $mainImage['image_path'] . '" alt="' . $myts->undoHtmlSpecialChars($mainImage['image_name']) . '"><br>';
 }
 $content .= '<a href="' . AMREVIEWS_URL . '/item.php?itemid=' . $itemid . '" style="text-decoration: none; color: black; font-size: 120%;" title="' . $myts->undoHtmlSpecialChars($itemObj->getTitle())

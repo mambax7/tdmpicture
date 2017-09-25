@@ -53,7 +53,7 @@ $user_waiting = $userHandler->getCount($criteria);
 echo '<div class="CPbigTitle" style="background-image: url(../assets/images/decos/user.png); background-repeat: no-repeat; background-position: left; padding-left: 60px; padding-top:20px; padding-bottom:15px;"><h3><strong>'
      . _AM_TDMPICTURE_MANAGE_user . '</strong></h3>';
 echo '</div><br><div class="head" align="center">';
-echo !isset($_REQUEST['user_display']) || $_REQUEST['user_display'] == 1 ? '<a href="user.php?op=list&user_display=0">' . sprintf(_AM_TDMPICTURE_THEREARE_user_WAITING, $user_waiting)
+echo !isset($_REQUEST['user_display']) || 1 == $_REQUEST['user_display'] ? '<a href="user.php?op=list&user_display=0">' . sprintf(_AM_TDMPICTURE_THEREARE_user_WAITING, $user_waiting)
                                                                            . '</a>' : '<a href="user.php?op=list&user_display=1">' . sprintf(_AM_TDMPICTURE_THEREARE_user, $numuser) . '</a>';
 echo '</div><br>';
 switch ($op) {
@@ -131,7 +131,7 @@ switch ($op) {
     case 'delete':
         $obj = $userHandler->get($_REQUEST['user_id']);
 
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('user.php', 2, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }
@@ -213,13 +213,13 @@ switch ($op) {
             $mytree              = new TdmObjectTree($assoc_user, 'user_id', 'user_pid');
             $useregory_ArrayTree = $mytree->makeArrayTree('', '<img src="' . TDMPICTURE_IMAGES_URL . '/decos/arrow.gif">');
             foreach (array_keys($useregory_ArrayTree) as $i) {
-                $class      = ($class === 'even') ? 'odd' : 'even';
+                $class      = ('even' === $class) ? 'odd' : 'even';
                 $user_id    = $assoc_user[$i]->getVar('user_id');
                 $user_uid   = XoopsUser::getUnameFromId($assoc_user[$i]->getVar('user_uid'));
                 $user_pid   = $assoc_user[$i]->getVar('user_pid');
                 $user_title = $myts->displayTarea($assoc_user[$i]->getVar('user_title'));
 
-                $display = $assoc_user[$i]->getVar('user_display') == 1 ? "<img src='./../assets/images/on.gif' border='0'>" : "<a href='user.php?op=update&user_id=" . $user_id . "'><img alt='"
+                $display = 1 == $assoc_user[$i]->getVar('user_display') ? "<img src='./../assets/images/on.gif' border='0'>" : "<a href='user.php?op=update&user_id=" . $user_id . "'><img alt='"
                                                                                                                                . _AM_TDMPICTURE_UPDATE . "' title='" . _AM_TDMPICTURE_UPDATE
                                                                                                                                . "' src='./../assets/images/off.gif' border='0'></a>";
 

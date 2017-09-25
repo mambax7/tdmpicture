@@ -99,7 +99,7 @@ switch ($op) {
 
         $obj = $fileHandler->get(Request::getInt('file_id', 0));
 
-        if (isset($_REQUEST['ok']) && $_REQUEST['ok'] == 1) {
+        if (isset($_REQUEST['ok']) && 1 == $_REQUEST['ok']) {
             if (!$GLOBALS['xoopsSecurity']->check()) {
                 redirect_header('index.php', 3, implode(',', $GLOBALS['xoopsSecurity']->getErrors()));
             }

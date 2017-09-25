@@ -169,7 +169,7 @@ switch ($op) {
         $pos     = array_search($st, $array_ids);
 
         $nav_page = '';
-        if ($pos != 0) {
+        if (0 != $pos) {
             if (file_exists($array_thumbs_path[$pos - 1])) {
                 $previmg = '<img src=' . $array_thumbs[$pos - 1] . " class='detail_img'>";
                 if (!empty($post_ut)) {
@@ -259,8 +259,8 @@ switch ($op) {
             //poster
             $poster       = new XoopsUser($file_arr[$f]->getVar('file_uid'));
             $poster_image = XOOPS_ROOT_PATH . '/uploads/' . $poster->getVar('user_avatar');
-            if (file_exists($poster_image) && $poster->getVar('user_avatar') != ''
-                && $poster->getVar('user_avatar') !== 'blank.png') {
+            if (file_exists($poster_image) && '' != $poster->getVar('user_avatar')
+                && 'blank.png' !== $poster->getVar('user_avatar')) {
                 $file['userimg'] = "<img class='img'src='" . XOOPS_URL . '/uploads/' . $poster->getVar('user_avatar') . "' height='60px' title=" . $poster->getVar('uname')
                                    . " style='border: 1px solid #CCC;' alt=" . $poster->getVar('uname') . '>';
             } else {

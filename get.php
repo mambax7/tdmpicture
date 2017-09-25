@@ -38,7 +38,7 @@ if (!$document) {
 //apelle lien image
 $filePaths = $document->getFilePath($document->getVar('file_file'));
 
-if ($post_size === 'full') {
+if ('full' === $post_size) {
     $imagePath = $filePaths['image_path'];
 } else {
     $imagePath = $filePaths['thumb_path'];
@@ -48,7 +48,7 @@ if ($post_size === 'full') {
 if (file_exists($imagePath)) {
     //$document_file = TDMPICTURE_UPLOADS_URL.$document->getVar("file_file");
     //    $document_file = $filePath2;
-    if ($post_size === 'full') {
+    if ('full' === $post_size) {
         $imageUrl = $filePaths['image_url'];
     } else {
         $imageUrl = $filePaths['thumb_url'];
